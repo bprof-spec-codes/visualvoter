@@ -26,5 +26,20 @@ namespace Models
         /// </summary>
         public bool isClosed { get; set; }
 
+        /// <summary>
+        /// Number of 'yes' choices for this vote
+        /// </summary>
+        public int YesVotes { get; set; }
+
+        /// <summary>
+        /// Number of 'no' choices for this vote
+        /// </summary>
+        public int NoVotes { get; set; }
+
+        /// <summary>
+        /// Number of 'absention' choices for this vote
+        /// </summary>
+        public int AbsentionVotes { get; set; }
+
     }
 }
