@@ -1,0 +1,51 @@
+.sidebar {
+  display: flex;
+  height: 100vh;
+  width: 15vw;
+  margin: 10px;
+}
+
+.sidebar_container {
+  width: 100%;
+}
+
+.sidebar_container > h1 {
+  font-size: 60px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  margin-left: 20px;
+}
+
+.sidebar_option {
+  display: flex;
+  justify-content: space-between;
+  height: 50px;
+  width: 100%;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.sidebar_option:hover{
+    background: rgb(226, 222, 222);
+    border-radius: 8px;
+}
+
+.sidebar_option > p {
+  font-size: 20px;
+  font-weight: 400;
+  margin-left: 20px;
+}
+
+.sidebar_option > label {
+  margin-right: 20px;
+  border-radius: 5px;
+  background-color: #bdd4e7;
+  background-image: linear-gradient(315deg, #bdd4e7 0%, #8693ab 74%);
+  padding: 5px;
+
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+}
