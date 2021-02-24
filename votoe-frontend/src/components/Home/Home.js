@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '../Header';
 import './Home.css';
+import Right from './Right';
 import Sidebar from './Sidebar';
 
 function Home() {
@@ -10,7 +11,7 @@ function Home() {
             <div className="home_container">
             <Sidebar />
             {/*<Feed />*/}
-            {/*<Right />*/}
+            <Right />
             </div>
         </div>
     )
