@@ -60,7 +60,7 @@ function Sidebar() {
           >
             <h1>Invites</h1>
             <div className="modal_close" onClick={() => setModalOpen(false)}>
-              <CloseOutlinedIcon fontSize="large" />
+              <CloseOutlinedIcon fontSize="large" style={{cursor:'pointer'}}/>
             </div>
           </div>
         </Modal>
