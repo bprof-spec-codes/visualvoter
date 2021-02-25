@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -35,6 +36,15 @@ namespace VotoeBackend
                 app.UseDeveloperExceptionPage();
             }
 
+            if (env.IsProduction())
+            {
+                var config =
+                new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.prodcution.json", true)
+                    .AddEnvironmentVariables()
+                    .Build();
+            }
             app.UseRouting();
 
             app.UseAuthorization();
