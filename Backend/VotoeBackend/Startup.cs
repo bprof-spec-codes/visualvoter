@@ -42,7 +42,6 @@ namespace VotoeBackend
                 new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile("appsettings.prodcution.json", true)
-                    .AddEnvironmentVariables()
                     .Build();
             }
             app.UseRouting();
