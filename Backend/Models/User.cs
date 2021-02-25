@@ -1,24 +1,25 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Models
 {
-    public class User
+    public class Users
     {
-
+        [Key]
         /// <summary>
         /// Unique id for each user
         /// </summary>
-        public string UserID { get; set; }
+        public int UserID { get; set; }
 
         /// <summary>
         /// Indicataes if the user is an admin or not
         /// </summary>
-        public bool IsAdmin { get; set; }
+        public int IsAdmin { get; set; }
 
         /// <summary>
         /// Gets or sets if the user's title (Hallgató, hökös, szenátor stb..
         /// </summary>
-        public string UserType { get; set; }
+        public int UserType { get; set; }
 
         /// <summary>
         /// Gets or sets the user's email address

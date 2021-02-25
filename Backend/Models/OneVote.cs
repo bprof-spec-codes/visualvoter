@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Models
 {
-    class OneVote
+    public class OneVote
     {
         /// <summary>
         /// Unique id for each specific vote

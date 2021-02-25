@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Models
 {
-    class AllVotes
+    public class AllVotes
     {
         /// <summary>
         /// Unique id for this voting "session"
