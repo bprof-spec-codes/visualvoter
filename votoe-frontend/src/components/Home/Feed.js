@@ -11,7 +11,7 @@ function Feed() {
       const res=response.data;
       //console.log(res);
       setResults(res);
-      console.log(results);
+      //console.log(results);
     }).catch(error=>{
         console.log(error.message);
     });

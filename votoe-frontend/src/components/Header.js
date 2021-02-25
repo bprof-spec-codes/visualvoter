@@ -26,7 +26,7 @@ function Header() {
         </div>
 
         <div className="header_right">
-          <p>Username</p>
+          <p>Log In</p>
         </div>
       </div>
     </div>
