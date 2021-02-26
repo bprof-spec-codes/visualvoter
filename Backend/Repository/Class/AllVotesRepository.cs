@@ -19,27 +19,40 @@ namespace Repository.Class
 
         public void Add(AllVotes element)
         {
-            throw new NotImplementedException();
+            db.Add(element);
+            db.SaveChanges();
         }
 
         public void Delete(AllVotes element)
         {
-            throw new NotImplementedException();
+            db.Remove(element);
+            db.SaveChanges();
         }
 
         public IQueryable<AllVotes> GetAll()
         {
-            throw new NotImplementedException();
+            return db.AllVotes;
         }
 
         public AllVotes GetOne(string key)
         {
-            throw new NotImplementedException();
+            var output = db.AllVotes.Where(x => x.VoteID == key).SingleOrDefault();
+            return output;
         }
 
-        public void Update(AllVotes element)
+        public void Update(AllVotes element) //Might not work, untested TODO_lux
         {
             throw new NotImplementedException();
+            var temp = GetOne(element.VoteID);
+            if (temp != null)
+            {
+                temp = element;
+                db.SaveChanges();
+            }
+            else
+            {
+                throw new InvalidOperationException();
+            }
         }
     }
 }
