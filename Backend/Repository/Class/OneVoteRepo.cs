@@ -7,14 +7,14 @@ using System.Text;
 
 namespace Repository.Class
 {
-    class AllVotesRepository : IAllVotesRepository
+    class OneVoteRepo : IOneVoteRepo
     {
-        public IQueryable<AllVotes> GetAll()
+        public IQueryable<OneVote> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public AllVotes GetOne(string id)
+        public OneVote GetOne(string input)
         {
             throw new NotImplementedException();
         }
