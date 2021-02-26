@@ -14,10 +14,15 @@ namespace Repository
             this.db = new VotoeDbContext(dbPassword);
         }
 
-        public void CreateUser(Users user)
+        public void Add(Users user)
         {
             this.db.Users.Add(user);
             this.db.SaveChanges();
+        }
+
+        public void Delete(Users element)
+        {
+            throw new NotImplementedException();
         }
 
         public IQueryable<Users> GetAll()
@@ -28,6 +33,11 @@ namespace Repository
         public Users GetOne(int userId)
         {
             return this.db.Users.Where(x => x.UserID == userId).FirstOrDefault();
+        }
+
+        public void Update(Users element)
+        {
+            throw new NotImplementedException();
         }
     }
 }

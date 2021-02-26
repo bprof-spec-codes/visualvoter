@@ -16,7 +16,7 @@ namespace Logic
 
         public void CreateUser(Users user)
         {
-            this.usersRepo.CreateUser(user);
+            this.usersRepo.Add(user);
         }
 
         public bool DeleteUser(int userId)

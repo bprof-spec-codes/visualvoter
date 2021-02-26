@@ -6,10 +6,8 @@ using System.Text;
 
 namespace Repository.Interface
 {
-    public interface IOneVoteRepo : IRepository<OneVote, string>
+    public interface IOneVoteRepository : IRepository<OneVote, string>
     {
-        OneVote GetOne(string input);
 
-        IQueryable<OneVote> GetAll();
     }
 }

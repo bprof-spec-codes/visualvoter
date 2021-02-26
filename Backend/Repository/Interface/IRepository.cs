@@ -9,5 +9,11 @@ namespace Repository
     {
         TReturnType GetOne(TKeyType key);
         IQueryable<TReturnType> GetAll();
+
+        void Add(TReturnType element);
+
+        void Delete(TReturnType element);
+
+        void Update(TReturnType element);
     }
 }
