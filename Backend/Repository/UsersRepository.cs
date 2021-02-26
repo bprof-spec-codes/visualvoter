@@ -16,17 +16,18 @@ namespace Repository
 
         public void CreateUser(Users user)
         {
-            throw new NotImplementedException();
+            this.db.Users.Add(user);
+            this.db.SaveChanges();
         }
 
         public IQueryable<Users> GetAll()
         {
-            throw new NotImplementedException();
+            return this.db.Users;
         }
 
-        public Users GetOne(int UserId)
+        public Users GetOne(int userId)
         {
-            throw new NotImplementedException();
+            return this.db.Users.Where(x => x.UserID == userId).FirstOrDefault();
         }
     }
 }
