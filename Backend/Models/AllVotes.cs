@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
 
 namespace Models
 {
@@ -9,6 +10,8 @@ namespace Models
         /// <summary>
         /// Unique id for this voting "session"
         /// </summary>
+        /// 
+        [Key]
         public string VoteID { get; set; }
 
         /// <summary>

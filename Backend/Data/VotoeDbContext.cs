@@ -31,12 +31,7 @@ namespace Data
         public virtual DbSet<Models.Users> Users { get; set; }
         //public virtual DbSet<Models.OneVote> OneVote { get; set; }
         //public virtual DbSet<Models.AllVotes> AllVotes { get; set; }
-
-
-        public static IEnumerable<Users> Test(string pw)
-        {
-            VotoeDbContext db = new VotoeDbContext(pw);
-            return db.Users;
-        }
+        public IQueryable<AllVotes> AllVotes { get; set; } //TODO: Delete when db is updated with AllVotes
+        public IQueryable<OneVote> OneVote { get; set; } //TODO: Delete when db is updated with OneVote
     }
 }
