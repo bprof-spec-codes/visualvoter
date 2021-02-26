@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Logic
 {
-    interface IUsersLogic
+    public interface IUsersLogic
     {
         Users GetOneUser(int userId);
         IQueryable<Users> GetAllUsers();

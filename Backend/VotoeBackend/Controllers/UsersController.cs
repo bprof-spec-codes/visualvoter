@@ -4,32 +4,36 @@ using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
 using Models;
+using Logic;
 
 namespace VotoeBackend.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class UsersController : ControllerBase
     {
         private readonly IConfiguration _config;
+
+        private IUsersLogic usersLogic;
 
         private static readonly string[] Summaries = new[]
         {
             "Test3", "Test4"
         };
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<UsersController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IConfiguration config)
+        public UsersController(ILogger<UsersController> logger, IConfiguration config, IUsersLogic logic)
         {
             this._config = config;
+            this.usersLogic = logic;
             _logger = logger;
         }
 
         [HttpGet]
         public IEnumerable<Users> Get()
         {
-            return Data.VotoeDbContext.Test(_config["DBPassword"]).ToList();
+            return this.usersLogic.GetAllUsers();
         }
     }
 }

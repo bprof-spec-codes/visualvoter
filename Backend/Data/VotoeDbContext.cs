@@ -31,12 +31,5 @@ namespace Data
         public virtual DbSet<Models.Users> Users { get; set; }
         //public virtual DbSet<Models.OneVote> OneVote { get; set; }
         //public virtual DbSet<Models.AllVotes> AllVotes { get; set; }
-
-
-        public static IEnumerable<Users> Test(string pw)
-        {
-            VotoeDbContext db = new VotoeDbContext(pw);
-            return db.Users;
-        }
     }
 }
