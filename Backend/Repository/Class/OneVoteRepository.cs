@@ -1,4 +1,5 @@
-﻿using Models;
+﻿using Data;
+using Models;
 using Repository.Interface;
 using System;
 using System.Collections.Generic;
@@ -6,27 +7,36 @@ using System.Linq;
 using System.Text;
 
 namespace Repository.Class
-{
+{  
     class OneVoteRepository : IOneVoteRepository
     {
+        private VotoeDbContext db;
+        public OneVoteRepository(VotoeDbContext db)
+        {
+            this.db = db;
+        }
+
         public void Add(OneVote element)
         {
-            throw new NotImplementedException();
+            db.Add(element);
+            db.SaveChanges();
         }
 
         public void Delete(OneVote element)
         {
-            throw new NotImplementedException();
+            db.Remove(element);
+            db.SaveChanges();
         }
 
         public IQueryable<OneVote> GetAll()
         {
-            throw new NotImplementedException();
+            return this.db.OneVote;
         }
 
         public OneVote GetOne(string key)
         {
-            throw new NotImplementedException();
+            var output = GetAll().Where(x => x.OneVoteID == key).SingleOrDefault();
+            return output;
         }
 
         public void Update(OneVote element)
