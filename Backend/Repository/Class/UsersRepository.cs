@@ -9,9 +9,9 @@ namespace Repository
     {
         private VotoeDbContext db;
 
-        public UsersRepository()
+        public UsersRepository(string dbPassword)
         {
-            this.db = new VotoeDbContext();
+            this.db = new VotoeDbContext(dbPassword);
         }
 
         public void CreateUser(Users user)

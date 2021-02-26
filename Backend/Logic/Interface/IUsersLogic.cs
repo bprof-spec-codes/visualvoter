@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Logic.Interface
+namespace Logic
 {
     interface IUsersLogic
     {
