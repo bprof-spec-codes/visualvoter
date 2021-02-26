@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Repository
 {
-    interface IUsersRepository : IRepository<Users,int>
+    public interface IUsersRepository : IRepository<Users,int>
     {
         void CreateUser(Users user);
         new Users GetOne(int UserId);
