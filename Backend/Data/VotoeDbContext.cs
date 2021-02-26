@@ -28,7 +28,7 @@ namespace Data
         }
 
 
-        public virtual DbSet<Models.Users> Users { get; set; }
+        public virtual DbSet<Models.User> Users { get; set; }
         //public virtual DbSet<Models.OneVote> OneVote { get; set; }
         //public virtual DbSet<Models.AllVotes> AllVotes { get; set; }
     }

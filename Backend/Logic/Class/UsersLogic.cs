@@ -14,7 +14,7 @@ namespace Logic
             this.usersRepo = new UsersRepository(dbPassword);
         }
 
-        public void CreateUser(Users user)
+        public void CreateUser(User user)
         {
             this.usersRepo.CreateUser(user);
         }
@@ -24,12 +24,12 @@ namespace Logic
             throw new NotImplementedException();
         }
 
-        public IQueryable<Users> GetAllUsers()
+        public IQueryable<User> GetAllUsers()
         {
             return this.usersRepo.GetAll();
         }
 
-        public Users GetOneUser(int userId)
+        public User GetOneUser(int userId)
         {
             return this.usersRepo.GetOne(userId);
         }

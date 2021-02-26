@@ -6,10 +6,10 @@ using System.Text;
 
 namespace Repository
 {
-    public interface IUsersRepository : IRepository<Users,int>
+    public interface IUsersRepository : IRepository<User,int>
     {
-        void CreateUser(Users user);
-        new Users GetOne(int UserId);
-        new IQueryable<Users> GetAll();
+        void CreateUser(User user);
+        new User GetOne(int UserId);
+        new IQueryable<User> GetAll();
     }
 }

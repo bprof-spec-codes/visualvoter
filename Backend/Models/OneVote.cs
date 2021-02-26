@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Models
@@ -9,6 +10,8 @@ namespace Models
         /// <summary>
         /// Unique id for each specific vote
         /// </summary>
+        /// 
+        [Key]
         public string OneVoteID { get; set; }
 
         /// <summary>

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Models
 {
-    public class Users
+    public class User
     {
         [Key]
         /// <summary>
