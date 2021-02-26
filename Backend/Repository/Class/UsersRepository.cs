@@ -14,18 +14,18 @@ namespace Repository
             this.db = new VotoeDbContext(dbPassword);
         }
 
-        public void CreateUser(User user)
+        public void CreateUser(Users user)
         {
             this.db.Users.Add(user);
             this.db.SaveChanges();
         }
 
-        public IQueryable<User> GetAll()
+        public IQueryable<Users> GetAll()
         {
             return this.db.Users;
         }
 
-        public User GetOne(int userId)
+        public Users GetOne(int userId)
         {
             return this.db.Users.Where(x => x.UserID == userId).FirstOrDefault();
         }

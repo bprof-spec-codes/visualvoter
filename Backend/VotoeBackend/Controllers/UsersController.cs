@@ -31,7 +31,7 @@ namespace VotoeBackend.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<User> Get()
+        public IEnumerable<Users> Get()
         {
             return this.usersLogic.GetAllUsers();
         }

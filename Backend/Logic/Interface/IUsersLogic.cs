@@ -8,9 +8,9 @@ namespace Logic
 {
     public interface IUsersLogic
     {
-        User GetOneUser(int userId);
-        IQueryable<User> GetAllUsers();
-        void CreateUser(User user);
+        Users GetOneUser(int userId);
+        IQueryable<Users> GetAllUsers();
+        void CreateUser(Users user);
         bool DeleteUser(int userId);
     }
 }
