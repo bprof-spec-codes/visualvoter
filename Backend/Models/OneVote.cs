@@ -13,19 +13,19 @@ namespace Models
         /// </summary>
         /// 
         [Key]
-        public int OneVoteId { get; set; }
+        public int OneVoteID { get; set; }
 
         /// <summary>
         /// Gets or sets which voting event does this specific vote belong to.
         /// </summary>
         [ForeignKey("AllVotes")]
-        public int VoteId { get; set; }
+        public int VoteID { get; set; }
 
         /// <summary>
         /// Gets or sets which user submitted this vote
         /// </summary>
         [ForeignKey("Users")]
-        public int UserId { get; set; }
+        public int UserID { get; set; }
 
         /// <summary>
         /// (Nullable bool!)

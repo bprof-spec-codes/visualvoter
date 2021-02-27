@@ -33,7 +33,7 @@ namespace Repository.Class
             return this.db.OneVote;
         }
 
-        public OneVote GetOne(string key)
+        public OneVote GetOne(int key)
         {
             var output = GetAll().Where(x => x.OneVoteID == key).SingleOrDefault();
             return output;

@@ -12,7 +12,7 @@ namespace Models
         /// </summary>
         /// 
         [Key]
-        public int VoteId { get; set; }
+        public int VoteID { get; set; }
 
         /// <summary>
         /// User readable name of the vote

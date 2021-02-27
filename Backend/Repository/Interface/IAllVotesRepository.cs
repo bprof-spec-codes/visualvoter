@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Repository.Interface
 {
-    public interface IAllVotesRepository : IRepository<AllVotes, string>
+    public interface IAllVotesRepository : IRepository<AllVotes, int>
     {
         
 
