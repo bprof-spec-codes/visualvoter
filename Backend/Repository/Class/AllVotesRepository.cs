@@ -1,20 +1,21 @@
 ﻿using Data;
 using Models;
-using Repository.Interface;
+using Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Data;
 using System.Text;
 
-namespace Repository.Class
+namespace Repository
 {
-    class AllVotesRepository : IAllVotesRepository
+    public class AllVotesRepository : IAllVotesRepository
     {
         private VotoeDbContext db;
 
-        public AllVotesRepository(VotoeDbContext db)
+        public AllVotesRepository(string dbPassword)
         {
-            this.db = db;
+            this.db = new VotoeDbContext(dbPassword);
         }
 
         public void Add(AllVotes element)
@@ -23,9 +24,9 @@ namespace Repository.Class
             db.SaveChanges();
         }
 
-        public void Delete(AllVotes element)
+        public void Delete(int key)
         {
-            db.Remove(element);
+            db.Remove(this.GetOne(key));
             db.SaveChanges();
         }
 
@@ -53,6 +54,13 @@ namespace Repository.Class
             {
                 throw new InvalidOperationException();
             }
+        }
+
+        public void Update(int oldKey, AllVotes element)
+        {
+            var oldVote = this.GetOne(oldKey);
+            oldVote = element;
+            this.db.SaveChanges();
         }
     }
 }

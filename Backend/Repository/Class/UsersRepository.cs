@@ -20,9 +20,10 @@ namespace Repository
             this.db.SaveChanges();
         }
 
-        public void Delete(Users element)
+        public void Delete(int Id)
         {
-            throw new NotImplementedException();
+            this.db.Users.Remove(this.GetOne(Id));
+            this.db.SaveChanges();
         }
 
         public IQueryable<Users> GetAll()
@@ -35,9 +36,11 @@ namespace Repository
             return this.db.Users.Where(x => x.UserID == userId).FirstOrDefault();
         }
 
-        public void Update(Users element)
+        public void Update(int oldId, Users element)
         {
-            throw new NotImplementedException();
+            var oldUser = this.GetOne(oldId);
+            oldUser = element;
+            this.db.SaveChanges();
         }
     }
 }

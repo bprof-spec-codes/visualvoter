@@ -12,8 +12,8 @@ namespace Repository
 
         void Add(TReturnType element);
 
-        void Delete(TReturnType element);
+        void Delete(TKeyType element);
 
-        void Update(TReturnType element);
+        void Update(TKeyType oldKey ,TReturnType element);
     }
 }

@@ -19,9 +19,9 @@ namespace Logic
             this.usersRepo.Add(user);
         }
 
-        public bool DeleteUser(int userId)
+        public void DeleteUser(int userId)
         {
-            throw new NotImplementedException();
+            this.usersRepo.Delete(userId);
         }
 
         public IQueryable<Users> GetAllUsers()
@@ -32,6 +32,11 @@ namespace Logic
         public Users GetOneUser(int userId)
         {
             return this.usersRepo.GetOne(userId);
+        }
+
+        public void UpdateUser(int oldId, Users newUser)
+        {
+            this.usersRepo.Update(oldId, newUser);
         }
     }
 }

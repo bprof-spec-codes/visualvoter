@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Models
 {
@@ -33,7 +34,7 @@ namespace Models
         /// Gets or sets the hashed password of the user, for login purposes. (Hashing method TBD)
         /// </summary>
         public string UserPassword { get; set; }
-
+        [JsonIgnore]
         public virtual ICollection<OneVote> OneVote { get; set; }
     }
 }

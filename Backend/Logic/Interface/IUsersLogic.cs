@@ -11,6 +11,8 @@ namespace Logic
         Users GetOneUser(int userId);
         IQueryable<Users> GetAllUsers();
         void CreateUser(Users user);
-        bool DeleteUser(int userId);
+        void DeleteUser(int userId);
+
+        void UpdateUser(int oldId, Users newUser);
     }
 }

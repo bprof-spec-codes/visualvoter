@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace Models
 {
@@ -32,9 +33,9 @@ namespace Models
         /// Gets or sets what this user's choice was. true = yes; false = no, NULL = absention (vagy tartózkodott, fene se tudja hogy van árgyélusul)
         /// </summary>
         public bool? Choice { get; set; }
-
+        [JsonIgnore]
         public virtual Users Users { get; set; }
-
+        [JsonIgnore]
         public virtual AllVotes AllVotes { get; set; }
 
     }
