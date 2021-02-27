@@ -28,6 +28,8 @@ namespace VotoeBackend
         {
             services.AddControllers();
             services.AddTransient<IUsersLogic>(x => new UsersLogic(Configuration["DBPassword"]));
+            services.AddTransient<IOneVoteLogic>(x => new OneVoteLogic(Configuration["DBPassword"]));
+            services.AddTransient<IAllVotesLogic>(x => new AllVotesLogic(Configuration["DBPassword"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
