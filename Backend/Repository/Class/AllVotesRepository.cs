@@ -1,12 +1,12 @@
 ﻿using Data;
 using Models;
-using Repository.Interface;
+using Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Repository.Class
+namespace Repository
 {
     class AllVotesRepository : IAllVotesRepository
     {
