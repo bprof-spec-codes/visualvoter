@@ -4,17 +4,18 @@ using Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Data;
 using System.Text;
 
 namespace Repository
 {
-    class AllVotesRepository : IAllVotesRepository
+    public class AllVotesRepository : IAllVotesRepository
     {
         private VotoeDbContext db;
 
-        public AllVotesRepository(VotoeDbContext db)
+        public AllVotesRepository(string dbPassword)
         {
-            this.db = db;
+            this.db = new VotoeDbContext(dbPassword);
         }
 
         public void Add(AllVotes element)
@@ -57,7 +58,9 @@ namespace Repository
 
         public void Update(int oldKey, AllVotes element)
         {
-            throw new NotImplementedException();
+            var oldVote = this.GetOne(oldKey);
+            oldVote = element;
+            this.db.SaveChanges();
         }
     }
 }

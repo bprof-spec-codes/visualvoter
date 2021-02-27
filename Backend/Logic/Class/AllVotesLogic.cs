@@ -5,11 +5,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Logic.Class
+namespace Logic
 {
     class AllVotesLogic : IAllVotesLogic
     {
         public IAllVotesRepository allVotesRepo;
+
+        public AllVotesLogic(string dbPassword)
+        {
+            this.allVotesRepo = new AllVotesRepository(dbPassword);
+        }
 
         public void CreateUser(AllVotes vote)
         {

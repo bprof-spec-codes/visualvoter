@@ -1,6 +1,6 @@
 ﻿using Data;
 using Models;
-using Repository.Interface;
+using Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,12 +8,12 @@ using System.Text;
 
 namespace Repository
 {  
-    class OneVoteRepository : IOneVoteRepository
+    public class OneVoteRepository : IOneVoteRepository
     {
         private VotoeDbContext db;
-        public OneVoteRepository(VotoeDbContext db)
+        public OneVoteRepository(string dbPassword)
         {
-            this.db = db;
+            this.db = new VotoeDbContext(dbPassword);
         }
 
         public void Add(OneVote element)
@@ -46,7 +46,9 @@ namespace Repository
 
         public void Update(int oldKey, OneVote element)
         {
-            throw new NotImplementedException();
+            var oldVote = this.GetOne(oldKey);
+            oldVote = element;
+            this.db.SaveChanges();
         }
     }
 }
