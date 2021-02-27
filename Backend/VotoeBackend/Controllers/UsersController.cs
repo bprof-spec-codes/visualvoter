@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Models;
 using Logic;
+using System;
 
 namespace VotoeBackend.Controllers
 {
@@ -34,6 +35,12 @@ namespace VotoeBackend.Controllers
         public IEnumerable<Users> Get()
         {
             return this.usersLogic.GetAllUsers();
+        }
+
+        [HttpGet("{id}")]
+        public Users GetOne(int id)
+        {
+            return this.usersLogic.GetOneUser(id);
         }
     }
 }
