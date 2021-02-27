@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Models
 {
@@ -43,7 +44,7 @@ namespace Models
         /// Number of 'absention' choices for this vote
         /// </summary>
         public int AbsentionVotes { get; set; }
-
+        [JsonIgnore]
         public virtual ICollection<OneVote> OneVote { get; set; }
 
     }
