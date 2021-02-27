@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Logic.Class
 {
-    class OneVoteLogic : IOneVoteLogic
+    public class OneVoteLogic : IOneVoteLogic
     {
         public IOneVoteRepository oneVoteRepo;
 
@@ -15,27 +15,27 @@ namespace Logic.Class
         {
             this.oneVoteRepo = new OneVoteRepository(dbPassword);
         }
-        public void CreateUser(OneVote vote)
+        public void CreateOneVote(OneVote vote)
         {
             this.oneVoteRepo.Add(vote);
         }
 
-        public void DeleteUser(int voteId)
+        public void DeleteOneVote(int voteId)
         {
             this.oneVoteRepo.Delete(voteId);
         }
 
-        public IQueryable<OneVote> GetAllUsers()
+        public IQueryable<OneVote> GetAllOneVote()
         {
             return this.oneVoteRepo.GetAll();
         }
 
-        public OneVote GetOneUser(int userId)
+        public OneVote GetOneVote(int userId)
         {
             return this.oneVoteRepo.GetOne(userId);
         }
 
-        public void UpdateUser(int oldId, OneVote newVote)
+        public void UpdateOneVote(int oldId, OneVote newVote)
         {
             this.oneVoteRepo.Update(oldId, newVote);
         }

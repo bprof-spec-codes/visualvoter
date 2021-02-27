@@ -6,13 +6,13 @@ using System.Text;
 
 namespace Logic
 {
-    interface IOneVoteLogic
+    public interface IOneVoteLogic
     {
-        OneVote GetOneUser(int userId);
-        IQueryable<OneVote> GetAllUsers();
-        void CreateUser(OneVote vote);
-        void DeleteUser(int voteId);
+        OneVote GetOneVote(int userId);
+        IQueryable<OneVote> GetAllOneVote();
+        void CreateOneVote(OneVote vote);
+        void DeleteOneVote(int voteId);
 
-        void UpdateUser(int oldId, OneVote newVote);
+        void UpdateOneVote(int oldId, OneVote newVote);
     }
 }

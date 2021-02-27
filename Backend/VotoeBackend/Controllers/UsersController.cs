@@ -13,20 +13,11 @@ namespace VotoeBackend.Controllers
     [Route("[controller]")]
     public class UsersController : ControllerBase
     {
-        private readonly IConfiguration _config;
-
         private IUsersLogic usersLogic;
-
-        private static readonly string[] Summaries = new[]
-        {
-            "Test3", "Test4"
-        };
-
         private readonly ILogger<UsersController> _logger;
 
-        public UsersController(ILogger<UsersController> logger, IConfiguration config, IUsersLogic logic)
+        public UsersController(ILogger<UsersController> logger, IUsersLogic logic)
         {
-            this._config = config;
             this.usersLogic = logic;
             _logger = logger;
         }
