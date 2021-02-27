@@ -34,7 +34,7 @@ namespace Repository.Class
             return db.AllVotes;
         }
 
-        public AllVotes GetOne(string key)
+        public AllVotes GetOne(int key)
         {
             var output = db.AllVotes.Where(x => x.VoteID == key).SingleOrDefault();
             return output;

@@ -10,7 +10,7 @@ namespace Models
         /// <summary>
         /// Unique id for each user
         /// </summary>
-        public int UserId { get; set; }
+        public int UserID { get; set; }
 
         /// <summary>
         /// Indicataes if the user is an admin or not
