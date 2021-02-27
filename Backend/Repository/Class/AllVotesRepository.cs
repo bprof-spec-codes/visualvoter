@@ -23,9 +23,9 @@ namespace Repository.Class
             db.SaveChanges();
         }
 
-        public void Delete(AllVotes element)
+        public void Delete(int key)
         {
-            db.Remove(element);
+            db.Remove(this.GetOne(key));
             db.SaveChanges();
         }
 

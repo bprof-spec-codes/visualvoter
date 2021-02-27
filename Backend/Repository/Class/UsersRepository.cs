@@ -20,9 +20,10 @@ namespace Repository
             this.db.SaveChanges();
         }
 
-        public void Delete(Users element)
+        public void Delete(int Id)
         {
-            throw new NotImplementedException();
+            this.db.Users.Remove(this.GetOne(Id));
+            this.db.SaveChanges();
         }
 
         public IQueryable<Users> GetAll()

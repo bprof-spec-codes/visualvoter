@@ -22,9 +22,9 @@ namespace Repository.Class
             db.SaveChanges();
         }
 
-        public void Delete(OneVote element)
+        public void Delete(int Id)
         {
-            db.Remove(element);
+            this.db.Remove(this.GetOne(Id));
             db.SaveChanges();
         }
 
