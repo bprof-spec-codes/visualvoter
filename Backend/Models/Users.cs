@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Models
@@ -9,7 +10,7 @@ namespace Models
         /// <summary>
         /// Unique id for each user
         /// </summary>
-        public int UserID { get; set; }
+        public int UserId { get; set; }
 
         /// <summary>
         /// Indicataes if the user is an admin or not
@@ -26,9 +27,13 @@ namespace Models
         /// </summary>
         public string Email { get; set; }
 
+        public string UserName { get; set; }
+
         /// <summary>
         /// Gets or sets the hashed password of the user, for login purposes. (Hashing method TBD)
         /// </summary>
-        public string Pwd_hashed { get; set; }
+        public string UserPassword { get; set; }
+
+        public virtual ICollection<OneVote> OneVote { get; set; }
     }
 }

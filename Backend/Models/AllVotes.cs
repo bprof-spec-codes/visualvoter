@@ -12,7 +12,7 @@ namespace Models
         /// </summary>
         /// 
         [Key]
-        public string VoteID { get; set; }
+        public int VoteId { get; set; }
 
         /// <summary>
         /// User readable name of the vote
@@ -27,7 +27,7 @@ namespace Models
         /// <summary>
         /// Used to check if this specific vote is still active
         /// </summary>
-        public bool isClosed { get; set; }
+        public int IsClosed { get; set; }
 
         /// <summary>
         /// Number of 'yes' choices for this vote
@@ -43,6 +43,8 @@ namespace Models
         /// Number of 'absention' choices for this vote
         /// </summary>
         public int AbsentionVotes { get; set; }
+
+        public virtual ICollection<OneVote> OneVote { get; set; }
 
     }
 }
