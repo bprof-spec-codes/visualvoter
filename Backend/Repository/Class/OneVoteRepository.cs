@@ -43,5 +43,10 @@ namespace Repository.Class
         {
             throw new NotImplementedException();
         }
+
+        public void Update(int oldKey, OneVote element)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

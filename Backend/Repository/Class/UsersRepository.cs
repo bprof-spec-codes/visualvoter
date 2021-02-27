@@ -35,9 +35,11 @@ namespace Repository
             return this.db.Users.Where(x => x.UserID == userId).FirstOrDefault();
         }
 
-        public void Update(Users element)
+        public void Update(int oldId, Users element)
         {
-            throw new NotImplementedException();
+            var oldUser = this.GetOne(oldId);
+            oldUser = element;
+            this.db.SaveChanges();
         }
     }
 }

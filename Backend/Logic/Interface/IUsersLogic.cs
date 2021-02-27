@@ -12,5 +12,7 @@ namespace Logic
         IQueryable<Users> GetAllUsers();
         void CreateUser(Users user);
         bool DeleteUser(int userId);
+
+        void UpdateUser(int oldId, Users newUser);
     }
 }

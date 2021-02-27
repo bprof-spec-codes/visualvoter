@@ -33,5 +33,10 @@ namespace Logic
         {
             return this.usersRepo.GetOne(userId);
         }
+
+        public void UpdateUser(int oldId, Users newUser)
+        {
+            this.usersRepo.Update(oldId, newUser);
+        }
     }
 }

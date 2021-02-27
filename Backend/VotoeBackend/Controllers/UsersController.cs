@@ -32,15 +32,33 @@ namespace VotoeBackend.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Users> Get()
+        public IEnumerable<Users> GetAllUser()
         {
             return this.usersLogic.GetAllUsers();
         }
 
         [HttpGet("{id}")]
-        public Users GetOne(int id)
+        public Users GetUser(int id)
         {
             return this.usersLogic.GetOneUser(id);
+        }
+
+        [HttpDelete("{id}")]
+        public void DeleteUser(int id)
+        {
+            this.usersLogic.DeleteUser(id);
+        }
+
+        [HttpPost]
+        public void CreateUser([FromBody]Users user)
+        {
+            this.usersLogic.CreateUser(user);
+        }
+
+        [HttpPut("{oldId}")]
+        public void UpdateUser(int oldId, [FromBody] Users user)
+        {
+            this.usersLogic.UpdateUser(oldId, user);
         }
     }
 }
