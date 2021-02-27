@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Models
@@ -12,23 +13,29 @@ namespace Models
         /// </summary>
         /// 
         [Key]
-        public string OneVoteID { get; set; }
+        public int OneVoteId { get; set; }
 
         /// <summary>
         /// Gets or sets which voting event does this specific vote belong to.
         /// </summary>
-        public string VoteID { get; set; }
+        [ForeignKey("AllVotes")]
+        public int VoteId { get; set; }
 
         /// <summary>
         /// Gets or sets which user submitted this vote
         /// </summary>
-        public string UserID { get; set; }
+        [ForeignKey("Users")]
+        public int UserId { get; set; }
 
         /// <summary>
         /// (Nullable bool!)
         /// Gets or sets what this user's choice was. true = yes; false = no, NULL = absention (vagy tartózkodott, fene se tudja hogy van árgyélusul)
         /// </summary>
         public bool? Choice { get; set; }
+
+        public virtual Users Users { get; set; }
+
+        public virtual AllVotes AllVotes { get; set; }
 
     }
 }
