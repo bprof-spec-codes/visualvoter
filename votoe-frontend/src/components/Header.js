@@ -8,16 +8,19 @@ import Modal from "react-modal";
 import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
 import { Button, TextField } from "@material-ui/core";
 import axios from "../axios";
+import { Link, useHistory } from "react-router-dom";
 
 Modal.setAppElement("#root");
 function Header() {
+  const history = useHistory();
+
   const [modalOpen, setModalOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const loginHandler = (e) => {
     e.preventDefault();
-    
+
     const data = {
       email: email,
       password: password,
@@ -25,6 +28,9 @@ function Header() {
     axios
       .post("/posts", data)
       .then((response) => {
+        if (response) {
+          history.push("/");
+        }
         //console.log(response);
       })
       .catch((error) => {
@@ -36,7 +42,9 @@ function Header() {
     <div className="header">
       <div className="header_container">
         <div className="header_left">
-          <img src={logo} alt="logo" />
+          <Link to="/">
+            <img style={{ width: 200 }} src={logo} alt="logo" />
+          </Link>
         </div>
 
         <div className="header_middle">
