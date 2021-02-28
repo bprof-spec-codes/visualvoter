@@ -63,9 +63,10 @@ namespace VotoeBackend.Controllers
 
         [Route("[controller]/login")]
         [HttpPost]
-        public void Login([FromBody] Login login)
+        public IActionResult Login([FromBody] Login login)
         {
-            this.usersLogic.Login();
+            if (this.usersLogic.Login(login)) return Ok();
+            return BadRequest();
         }
     }
 }

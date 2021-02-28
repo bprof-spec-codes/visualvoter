@@ -83,7 +83,7 @@ namespace Logic
         public string hashPw(string input) //TODO: Should salt, needs one more db field to store salt
         {
 
-            var sha = new SHA1Managed();
+            var sha = new SHA256Managed();
             var bytes = UTF8Encoding.UTF8.GetBytes(input);
             var hash = sha.ComputeHash(bytes);
             return Convert.ToBase64String(hash);

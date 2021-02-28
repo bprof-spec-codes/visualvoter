@@ -15,5 +15,7 @@ namespace Logic
 
         bool UpdateUser(int oldId, Users newUser);
         string hashPw(string input);
+        public bool Login(Login login);
+
     }
 }
