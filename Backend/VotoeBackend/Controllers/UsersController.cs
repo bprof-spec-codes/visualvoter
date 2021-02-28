@@ -6,6 +6,7 @@ using System.Linq;
 using Models;
 using Logic;
 using System;
+using Microsoft.AspNetCore.Cors;
 
 namespace VotoeBackend.Controllers
 {
@@ -62,7 +63,8 @@ namespace VotoeBackend.Controllers
         }
 
         [Route("login")]
-        [HttpGet]
+        [HttpPost]
+        [DisableCors]
         public IActionResult Login([FromBody] Login login)
         {
             if (this.usersLogic.Login(login)) return Ok();
