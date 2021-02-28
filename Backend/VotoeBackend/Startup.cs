@@ -61,7 +61,7 @@ namespace VotoeBackend
             }
             app.UseRouting();
             app.UseAuthorization();
-
+            app.UseCors();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
