@@ -16,14 +16,33 @@ namespace Logic
             this.allVotesRepo = new AllVotesRepository(dbPassword);
         }
 
-        public void CreateVote(AllVotes vote)
+        public bool CreateVote(AllVotes vote)
         {
-            this.allVotesRepo.Add(vote);
+            //this.allVotesRepo.Add(vote);
+            try
+            {
+                this.allVotesRepo.Add(vote);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
-        public void DeleteVote(int voteId)
+        public bool DeleteVote(int voteId)
         {
-            this.allVotesRepo.Delete(voteId);
+
+            //this.allVotesRepo.Delete(voteId);
+            try
+            {
+                this.allVotesRepo.Delete(voteId);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public IQueryable<AllVotes> GetAllVotes()
@@ -36,9 +55,18 @@ namespace Logic
             return this.allVotesRepo.GetOne(voteId);
         }
 
-        public void UpdateVote(int oldId, AllVotes newVote)
+        public bool UpdateVote(int oldId, AllVotes newVote)
         {
-            this.allVotesRepo.Update(oldId, newVote);
+            //this.allVotesRepo.Update(oldId, newVote);
+            try
+            {
+                this.allVotesRepo.Update(oldId, newVote);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

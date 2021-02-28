@@ -42,5 +42,10 @@ namespace Repository
             oldUser = element;
             this.db.SaveChanges();
         }
+
+        public Users GetOneByEmail(string email)
+        {
+            return this.db.Users.Where(x => x.Email == email).First();
+        }
     }
 }

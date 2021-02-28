@@ -41,21 +41,6 @@ namespace Repository
             return output;
         }
 
-        public void Update(AllVotes element) //Might not work, untested TODO_lux
-        {
-            throw new NotImplementedException();
-            var temp = GetOne(element.VoteID);
-            if (temp != null)
-            {
-                temp = element;
-                db.SaveChanges();
-            }
-            else
-            {
-                throw new InvalidOperationException();
-            }
-        }
-
         public void Update(int oldKey, AllVotes element)
         {
             var oldVote = this.GetOne(oldKey);

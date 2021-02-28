@@ -15,14 +15,32 @@ namespace Logic
         {
             this.oneVoteRepo = new OneVoteRepository(dbPassword);
         }
-        public void CreateOneVote(OneVote vote)
+        public bool CreateOneVote(OneVote vote)
         {
-            this.oneVoteRepo.Add(vote);
+            //this.oneVoteRepo.Add(vote);
+            try
+            {
+                this.oneVoteRepo.Add(vote);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
-        public void DeleteOneVote(int voteId)
+        public bool DeleteOneVote(int voteId)
         {
-            this.oneVoteRepo.Delete(voteId);
+            //this.oneVoteRepo.Delete(voteId);
+            try
+            {
+                this.oneVoteRepo.Delete(voteId);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public IQueryable<OneVote> GetAllOneVote()
@@ -35,9 +53,18 @@ namespace Logic
             return this.oneVoteRepo.GetOne(userId);
         }
 
-        public void UpdateOneVote(int oldId, OneVote newVote)
+        public bool UpdateOneVote(int oldId, OneVote newVote)
         {
-            this.oneVoteRepo.Update(oldId, newVote);
+            //this.oneVoteRepo.Update(oldId, newVote);
+            try
+            {
+                this.oneVoteRepo.Update(oldId, newVote);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

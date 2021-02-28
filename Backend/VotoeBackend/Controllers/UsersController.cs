@@ -25,13 +25,20 @@ namespace VotoeBackend.Controllers
         [HttpGet]
         public IEnumerable<Users> GetAllUser()
         {
-            return this.usersLogic.GetAllUsers();
+            var output = this.usersLogic.GetAllUsers();
+            foreach (var item in output)
+            {
+                item.UserPassword = null;
+            }
+            return output;
         }
 
         [HttpGet("{id}")]
         public Users GetUser(int id)
         {
-            return this.usersLogic.GetOneUser(id);
+            var output = this.usersLogic.GetOneUser(id);
+            output.UserPassword = null;
+            return output;        
         }
 
         [HttpDelete("{id}")]
@@ -43,13 +50,23 @@ namespace VotoeBackend.Controllers
         [HttpPost]
         public void CreateUser([FromBody]Users user)
         {
+            
             this.usersLogic.CreateUser(user);
         }
 
         [HttpPut("{oldId}")]
         public void UpdateUser(int oldId, [FromBody] Users user)
         {
+            
             this.usersLogic.UpdateUser(oldId, user);
+        }
+
+        [Route("[controller]/login")]
+        [HttpPost]
+        public IActionResult Login([FromBody] Login login)
+        {
+            if (this.usersLogic.Login(login)) return Ok();
+            return BadRequest();
         }
     }
 }
