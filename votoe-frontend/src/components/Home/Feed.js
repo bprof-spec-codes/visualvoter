@@ -7,11 +7,11 @@ function Feed() {
   const [results, setResults] = useState([]);
 
   useEffect(() => {
-    axios.get("/posts").then((response) => {
+    axios.get("/allvotes").then((response) => {
       const res=response.data;
-      //console.log(res);
+      console.log(res);
       setResults(res);
-      //console.log(results);
+      console.log(results);
     }).catch(error=>{
         console.log(error.message);
     });

@@ -28,7 +28,7 @@ function Header() {
       Password: password,
     };
     axios
-      .post("/posts", data)
+      .post("/users/login", data)
       .then((response) => {
         console.log(response);
       })
