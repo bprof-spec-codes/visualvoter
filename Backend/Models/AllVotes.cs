@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Models
 {
-    class AllVotes
+    public class AllVotes
     {
         /// <summary>
         /// Unique id for this voting "session"
         /// </summary>
-        public string VoteID { get; set; }
+        /// 
+        [Key]
+        public int VoteID { get; set; }
 
         /// <summary>
         /// User readable name of the vote
@@ -24,7 +28,7 @@ namespace Models
         /// <summary>
         /// Used to check if this specific vote is still active
         /// </summary>
-        public bool isClosed { get; set; }
+        public int IsClosed { get; set; }
 
         /// <summary>
         /// Number of 'yes' choices for this vote
@@ -40,6 +44,8 @@ namespace Models
         /// Number of 'absention' choices for this vote
         /// </summary>
         public int AbsentionVotes { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<OneVote> OneVote { get; set; }
 
     }
 }
