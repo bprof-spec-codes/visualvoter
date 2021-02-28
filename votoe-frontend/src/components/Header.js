@@ -9,11 +9,13 @@ import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
 import { Button, TextField } from "@material-ui/core";
 import axios from "../axios";
 import { Link, useHistory } from "react-router-dom";
+import { useStateValue } from "../StateProvider";
 
 Modal.setAppElement("#root");
 function Header() {
-  const history = useHistory();
+  const [{ user }, dispatch] = useStateValue();
 
+  const history = useHistory();
   const [modalOpen, setModalOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -150,10 +152,15 @@ function Header() {
             </div>
           </Modal>
         </div>
-
-        <div className="header_right" onClick={() => setModalOpen(true)}>
-          <p>Log In</p>
-        </div>
+        {user ? (
+          <div className="header_right" >
+            <p>Sign Out</p>
+          </div>
+        ) : (
+          <div className="header_right" onClick={() => setModalOpen(true)}>
+            <p>Sign In</p>
+          </div>
+        )}
       </div>
     </div>
   );
