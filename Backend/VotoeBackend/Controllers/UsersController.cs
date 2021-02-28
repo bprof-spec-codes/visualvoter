@@ -43,12 +43,14 @@ namespace VotoeBackend.Controllers
         [HttpPost]
         public void CreateUser([FromBody]Users user)
         {
+            
             this.usersLogic.CreateUser(user);
         }
 
         [HttpPut("{oldId}")]
         public void UpdateUser(int oldId, [FromBody] Users user)
         {
+            
             this.usersLogic.UpdateUser(oldId, user);
         }
     }

@@ -14,5 +14,6 @@ namespace Logic
         void DeleteUser(int userId);
 
         void UpdateUser(int oldId, Users newUser);
+        string hashPw(string input);
     }
 }
