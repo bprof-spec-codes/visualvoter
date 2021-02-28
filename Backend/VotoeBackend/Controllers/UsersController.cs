@@ -25,13 +25,20 @@ namespace VotoeBackend.Controllers
         [HttpGet]
         public IEnumerable<Users> GetAllUser()
         {
-            return this.usersLogic.GetAllUsers();
+            var output = this.usersLogic.GetAllUsers();
+            foreach (var item in output)
+            {
+                item.UserPassword = null;
+            }
+            return output;
         }
 
         [HttpGet("{id}")]
         public Users GetUser(int id)
         {
-            return this.usersLogic.GetOneUser(id);
+            var output = this.usersLogic.GetOneUser(id);
+            output.UserPassword = null;
+            return output;        
         }
 
         [HttpDelete("{id}")]

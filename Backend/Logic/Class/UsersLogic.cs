@@ -40,7 +40,7 @@ namespace Logic
         public void UpdateUser(int oldId, Users newUser)
         {
             var oldUserPwdHash = GetOneUser(oldId).UserPassword;
-            if (newUser.UserPassword != oldUserPwdHash)// if pass was changed..
+            if (newUser.UserPassword != oldUserPwdHash && String.IsNullOrWhiteSpace(newUser.UserPassword))// if pass was changed..
             {
                 newUser.UserPassword = hashPw(newUser.UserPassword); //..use new hashed pass
             }
