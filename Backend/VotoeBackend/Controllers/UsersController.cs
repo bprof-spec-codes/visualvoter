@@ -62,7 +62,7 @@ namespace VotoeBackend.Controllers
         }
 
         [Route("login")]
-        [HttpPost]
+        [HttpGet]
         public IActionResult Login([FromBody] Login login)
         {
             if (this.usersLogic.Login(login)) return Ok();
