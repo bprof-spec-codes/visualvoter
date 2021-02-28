@@ -89,5 +89,13 @@ namespace Logic
             return Convert.ToBase64String(hash);
 
         }
+
+        public bool Login(Login login)
+        {
+            var user = this.usersRepo.GetOneByEmail(login.Email);
+            string loginHash = this.hashPw(login.Password);
+            if (loginHash == user.UserPassword) return true;
+            return false;
+        }
     }
 }
