@@ -2,10 +2,12 @@ import { SportsRugbySharp } from "@material-ui/icons";
 import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
 import React, { useState } from "react";
 import Modal from "react-modal";
+import { useStateValue } from "../../StateProvider";
 import "./Sidebar.css";
 
 Modal.setAppElement("#root");
 function Sidebar() {
+  const [{ user }, dispatch] = useStateValue();
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
@@ -16,10 +18,12 @@ function Sidebar() {
           <p>Profile</p>
         </div>
 
-        <div className="sidebar_option" onClick={() => setModalOpen(true)}>
-          <p>Invites</p>
-          <label>0</label>
-        </div>
+        {user ? (
+          <div className="sidebar_option" onClick={() => setModalOpen(true)}>
+            <p>Invites</p>
+            <label>0</label>
+          </div>
+        ) : null}
 
         <div className="sidebar_option">
           <p>News</p>
@@ -53,14 +57,17 @@ function Sidebar() {
           <div
             className="modal_top"
             style={{
-                display: "flex",
-                justifyContent: "space-between",
-                width:'100%'
+              display: "flex",
+              justifyContent: "space-between",
+              width: "100%",
             }}
           >
             <h1>Invites</h1>
             <div className="modal_close" onClick={() => setModalOpen(false)}>
-              <CloseOutlinedIcon fontSize="large" style={{cursor:'pointer'}}/>
+              <CloseOutlinedIcon
+                fontSize="large"
+                style={{ cursor: "pointer" }}
+              />
             </div>
           </div>
         </Modal>
