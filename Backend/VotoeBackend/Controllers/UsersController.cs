@@ -61,7 +61,7 @@ namespace VotoeBackend.Controllers
             this.usersLogic.UpdateUser(oldId, user);
         }
 
-        [Route("[controller]/login")]
+        [Route("login")]
         [HttpPost]
         public IActionResult Login([FromBody] Login login)
         {
