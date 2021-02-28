@@ -24,16 +24,13 @@ function Header() {
     e.preventDefault();
 
     const data = {
-      email: email,
-      password: password,
+      Email: email,
+      Password: password,
     };
     axios
       .post("/posts", data)
       .then((response) => {
-        if (response) {
-          history.push("/");
-        }
-        //console.log(response);
+        console.log(response);
       })
       .catch((error) => {
         //console.log(error.message);
