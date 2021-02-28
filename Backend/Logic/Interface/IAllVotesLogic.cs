@@ -10,9 +10,9 @@ namespace Logic
     {
         AllVotes GetOneVote(int voteId);
         IQueryable<AllVotes> GetAllVotes();
-        void CreateVote(AllVotes vote);
-        void DeleteVote(int voteId);
+        bool CreateVote(AllVotes vote);
+        bool DeleteVote(int voteId);
 
-        void UpdateVote(int oldId, AllVotes newVote);
+        bool UpdateVote(int oldId, AllVotes newVote);
     }
 }

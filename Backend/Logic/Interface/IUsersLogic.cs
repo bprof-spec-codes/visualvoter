@@ -10,10 +10,10 @@ namespace Logic
     {
         Users GetOneUser(int userId);
         IQueryable<Users> GetAllUsers();
-        void CreateUser(Users user);
-        void DeleteUser(int userId);
+        bool CreateUser(Users user);
+        bool DeleteUser(int userId);
 
-        void UpdateUser(int oldId, Users newUser);
+        bool UpdateUser(int oldId, Users newUser);
         string hashPw(string input);
     }
 }

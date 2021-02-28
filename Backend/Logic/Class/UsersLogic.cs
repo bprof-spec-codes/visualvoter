@@ -16,15 +16,34 @@ namespace Logic
             this.usersRepo = new UsersRepository(dbPassword);
         }
 
-        public void CreateUser(Users user)
+        public bool CreateUser(Users user)
         {
             user.UserPassword = hashPw(user.UserPassword);
-            this.usersRepo.Add(user);
+            try
+            {
+                this.usersRepo.Add(user);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            //this.usersRepo.Add(user);
         }
 
-        public void DeleteUser(int userId)
+        public bool DeleteUser(int userId)
         {
-            this.usersRepo.Delete(userId);
+            
+            try
+            {
+                this.usersRepo.Delete(userId);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            //this.usersRepo.Delete(userId);
         }
 
         public IQueryable<Users> GetAllUsers()
@@ -37,10 +56,10 @@ namespace Logic
             return this.usersRepo.GetOne(userId);
         }
 
-        public void UpdateUser(int oldId, Users newUser)
+        public bool UpdateUser(int oldId, Users newUser)
         {
             var oldUserPwdHash = GetOneUser(oldId).UserPassword;
-            if (newUser.UserPassword != oldUserPwdHash && String.IsNullOrWhiteSpace(newUser.UserPassword))// if pass was changed..
+            if (newUser.UserPassword != oldUserPwdHash && !String.IsNullOrWhiteSpace(newUser.UserPassword))// if pass was changed&is not null..
             {
                 newUser.UserPassword = hashPw(newUser.UserPassword); //..use new hashed pass
             }
@@ -48,15 +67,25 @@ namespace Logic
             {
                 newUser.UserPassword = oldUserPwdHash; // else keep the old hash
             }
-            this.usersRepo.Update(oldId, newUser);
+            
+            try
+            {
+                this.usersRepo.Update(oldId, newUser);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            //this.usersRepo.Update(oldId, newUser);
         }
 
         public string hashPw(string input) //TODO: Should salt, needs one more db field to store salt
         {
 
-            var sha512 = new SHA512Managed();
+            var sha = new SHA1Managed();
             var bytes = UTF8Encoding.UTF8.GetBytes(input);
-            var hash = sha512.ComputeHash(bytes);
+            var hash = sha.ComputeHash(bytes);
             return Convert.ToBase64String(hash);
 
         }
