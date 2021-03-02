@@ -18,7 +18,7 @@ namespace Logic
 
         public bool CreateUser(Users user)
         {
-            user.UserPassword = hashPw(user.UserPassword);
+            user.UserPassword = sha256_hash(user.UserPassword);
             try
             {
                 this.usersRepo.Add(user);
@@ -61,7 +61,7 @@ namespace Logic
             var oldUserPwdHash = GetOneUser(oldId).UserPassword;
             if (newUser.UserPassword != oldUserPwdHash && !String.IsNullOrWhiteSpace(newUser.UserPassword))// if pass was changed&is not null..
             {
-                newUser.UserPassword = hashPw(newUser.UserPassword); //..use new hashed pass
+                newUser.UserPassword = sha256_hash(newUser.UserPassword); //..use new hashed pass
             }
             else
             {
@@ -78,16 +78,6 @@ namespace Logic
                 return false;
             }
             //this.usersRepo.Update(oldId, newUser);
-        }
-
-        public string hashPw(string input) //TODO: Should salt, needs one more db field to store salt
-        {
-
-            var sha = new SHA256Managed();
-            var bytes = UTF8Encoding.UTF8.GetBytes(input);
-            var hash = sha.ComputeHash(bytes);
-            return Convert.ToBase64String(hash);
-
         }
 
         public bool Login(Login login)
