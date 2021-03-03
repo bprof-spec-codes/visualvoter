@@ -1,6 +1,6 @@
 # VotÓE &nbsp;&nbsp; - &nbsp;&nbsp;[![N|Solid](https://i.imgur.com/DF1phUJ.png)](https://votoe.hu)
 ###### team visualvoter
-<br/>
+
 ### Csapatok:
 - #### Frontend (React):
      - Papp Bence

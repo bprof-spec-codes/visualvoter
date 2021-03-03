@@ -36,5 +36,9 @@ namespace Models
         public string UserPassword { get; set; }
         [JsonIgnore]
         public virtual ICollection<OneVote> OneVote { get; set; }
+
+        //public string Token { get; set; }
+
+        //public DateTime TokenDate { get; set; }
     }
 }

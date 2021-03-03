@@ -48,11 +48,20 @@ namespace Logic
 
         public IQueryable<Users> GetAllUsers()
         {
-            return this.usersRepo.GetAll();
+            var output = this.usersRepo.GetAll();
+            foreach (var item in output)
+            {
+                item.UserPassword = null;
+
+            }
+            return output;
         }
 
         public Users GetOneUser(int userId)
         {
+            var output = this.usersRepo.GetOne(userId);
+            output.UserPassword = null;
+            return output;
             return this.usersRepo.GetOne(userId);
         }
 
