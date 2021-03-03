@@ -21,6 +21,7 @@ namespace Logic
             user.UserPassword = sha256_hash(user.UserPassword);
             try
             {
+                //user.Token = null;
                 this.usersRepo.Add(user);
                 return true;
             }
@@ -28,7 +29,6 @@ namespace Logic
             {
                 return false;
             }
-            //this.usersRepo.Add(user);
         }
 
         public bool DeleteUser(int userId)
@@ -43,17 +43,25 @@ namespace Logic
             {
                 return false;
             }
-            //this.usersRepo.Delete(userId);
         }
 
         public IQueryable<Users> GetAllUsers()
         {
-            return this.usersRepo.GetAll();
+            var output = this.usersRepo.GetAll();
+            foreach (var item in output)
+            {
+                item.UserPassword = null;
+                //item.Token = null;
+            }
+            return output;
         }
 
         public Users GetOneUser(int userId)
         {
-            return this.usersRepo.GetOne(userId);
+            var output = this.usersRepo.GetOne(userId);
+            output.UserPassword = null; //Don't want to send password has/token, only recieve them
+            //output.Token = null;
+            return output;
         }
 
         public bool UpdateUser(int oldId, Users newUser)
@@ -70,6 +78,7 @@ namespace Logic
             
             try
             {
+                //newUser.Token = null; //Token should never be updateable, only by login method.
                 this.usersRepo.Update(oldId, newUser);
                 return true;
             }
@@ -77,16 +86,28 @@ namespace Logic
             {
                 return false;
             }
-            //this.usersRepo.Update(oldId, newUser);
         }
 
         public bool Login(Login login)
         {
             var user = this.usersRepo.GetOneByEmail(login.Email);
             string loginHash = sha256_hash(login.Password);
-            if (loginHash == user.UserPassword.ToLower()) return true;
+            if (loginHash == user.UserPassword.ToLower()) return true;//TODO: Isn't this a risk if 'var user' is null? What if user's querry returns is null, and the api endpoint recieves a null password to hash? I think this will pass as true.
             return false;
         }
+        //public Users LoginToken(Login login)
+        //{
+        //    Guid g = Guid.NewGuid();
+        //    var user = this.usersRepo.GetOneByEmail(login.Email);
+        //    string loginHash = sha256_hash(login.Password);
+        //    if (loginHash == user.UserPassword.ToLower()) 
+        //    {
+        //        user.Token = g;
+        //        user.TokenDate = DateTime.Now;
+        //        return user; //This user object's Token property is not null, unlike the user objects returned by getOne/getAll
+        //    }
+        //    return null;
+        //}
 
         public static String sha256_hash(string value)
         {
