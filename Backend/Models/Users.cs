@@ -33,10 +33,12 @@ namespace Models
         /// <summary>
         /// Gets or sets the hashed password of the user, for login purposes. (Hashing method TBD)
         /// </summary>
+        [JsonIgnore]
         public string UserPassword { get; set; }
         [JsonIgnore]
         public virtual ICollection<OneVote> OneVote { get; set; }
 
+        //[JsonIgnore]
         //public string Token { get; set; }
 
         //public DateTime TokenDate { get; set; }

@@ -47,21 +47,12 @@ namespace Logic
 
         public IQueryable<Users> GetAllUsers()
         {
-            var output = this.usersRepo.GetAll();
-            foreach (var item in output)
-            {
-                item.UserPassword = null;
-                //item.Token = null;
-            }
-            return output;
+            return this.usersRepo.GetAll();
         }
 
         public Users GetOneUser(int userId)
         {
-            var output = this.usersRepo.GetOne(userId);
-            output.UserPassword = null; //Don't want to send password has/token, only recieve them
-            //output.Token = null;
-            return output;
+            return this.usersRepo.GetOne(userId);
         }
 
         public bool UpdateUser(int oldId, Users newUser)
