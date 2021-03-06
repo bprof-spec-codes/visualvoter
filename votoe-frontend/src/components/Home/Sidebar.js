@@ -14,16 +14,18 @@ function Sidebar() {
     <div className="sidebar">
       <div className="sidebar_container">
         <h1>Options</h1>
+        {user ? (
+          <>
         <div className="sidebar_option">
           <p>Profile</p>
         </div>
 
-        {user ? (
+        
           <div className="sidebar_option" onClick={() => setModalOpen(true)}>
             <p>Invites</p>
             <label>0</label>
           </div>
-        ) : null}
+        </>) : null}
 
         <div className="sidebar_option">
           <p>News</p>

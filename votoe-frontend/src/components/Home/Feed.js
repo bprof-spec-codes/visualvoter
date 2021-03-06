@@ -9,7 +9,7 @@ function Feed() {
   useEffect(() => {
     axios.get("/allvotes").then((response) => {
       const res=response.data;
-      console.log(res);
+      //console.log(res);
       setResults(res);
       console.log(results);
     }).catch(error=>{
