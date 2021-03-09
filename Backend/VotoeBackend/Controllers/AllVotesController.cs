@@ -53,5 +53,12 @@ namespace VotOEApi.Controllers
         {
             this.allVotesLogic.UpdateVote(oldId, vote);
         }
+
+        [Route("create")]
+        [HttpPost]
+        public AllVotes CreateNewVote([FromBody] VoteCreation voteCreation)
+        {
+            return voteCreation.NewVote;
+        }
     }
 }

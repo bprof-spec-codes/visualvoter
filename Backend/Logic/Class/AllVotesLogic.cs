@@ -68,5 +68,10 @@ namespace Logic
                 return false;
             }
         }
+
+        public void CreateNewVote(VoteCreation)
+        {
+
+        }
     }
 }
