@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace Models
@@ -21,7 +22,8 @@ namespace Models
         /// <summary>
         /// Gets or sets if the user's title (Hallgató, hökös, szenátor stb..
         /// </summary>
-        public int UserType { get; set; }
+        [ForeignKey("UserType")]
+        public UserType UserType { get; set; }
 
         /// <summary>
         /// Gets or sets the user's email address
