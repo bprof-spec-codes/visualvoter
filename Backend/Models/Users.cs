@@ -23,7 +23,7 @@ namespace Models
         /// Gets or sets if the user's title (Hallgató, hökös, szenátor stb..
         /// </summary>
         [ForeignKey("UserType")]
-        public UserType UserType { get; set; }
+        public int UserTypeID { get; set; }
 
         /// <summary>
         /// Gets or sets the user's email address
@@ -39,6 +39,8 @@ namespace Models
         public string UserPassword { get; set; }
         [JsonIgnore]
         public virtual ICollection<OneVote> OneVote { get; set; }
+        [JsonIgnore]
+        public virtual UserType UserType { get; set; }
 
         //[JsonIgnore]
         //public string Token { get; set; }
