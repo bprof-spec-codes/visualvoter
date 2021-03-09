@@ -13,12 +13,11 @@ namespace Models
         public int VRId { get; set; }
         [ForeignKey("Allvotes")]
         public int VoteID { get; set; }
-        [ForeignKey("Users")]
-        public int UserType { get; set; }
+        [ForeignKey("UserType")]
+        public int UserTypeID { get; set; }
         [JsonIgnore]
-        public virtual Users Users { get; set; }
+        public virtual ICollection<UserType> UserType { get; set; }
         [JsonIgnore]
-        public virtual AllVotes AllVotes { get; set; }
-
+        public virtual ICollection<AllVotes> AllVotes { get; set; }
     }
 }

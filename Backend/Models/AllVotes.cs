@@ -23,7 +23,7 @@ namespace Models
         /// <summary>
         /// When will the current vote expire
         /// </summary>
-        public DateTime ExpirationDate { get; set; }
+        //public DateTime ExpirationDate { get; set; }
 
         /// <summary>
         /// Used to check if this specific vote is still active
