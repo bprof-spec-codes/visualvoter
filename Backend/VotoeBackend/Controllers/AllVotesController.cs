@@ -56,9 +56,9 @@ namespace VotOEApi.Controllers
 
         [Route("create")]
         [HttpPost]
-        public AllVotes CreateNewVote([FromBody] VoteCreation voteCreation)
+        public void CreateNewVote([FromBody] VoteCreation voteCreation)
         {
-            return voteCreation.NewVote;
+            this.allVotesLogic.CreateNewVote(voteCreation);
         }
     }
 }
