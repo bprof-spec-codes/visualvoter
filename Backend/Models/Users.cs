@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace Models
@@ -21,7 +22,8 @@ namespace Models
         /// <summary>
         /// Gets or sets if the user's title (Hallgató, hökös, szenátor stb..
         /// </summary>
-        public int UserType { get; set; }
+        [ForeignKey("UserType")]
+        public int UserTypeID { get; set; }
 
         /// <summary>
         /// Gets or sets the user's email address
@@ -33,10 +35,14 @@ namespace Models
         /// <summary>
         /// Gets or sets the hashed password of the user, for login purposes. (Hashing method TBD)
         /// </summary>
+        [JsonIgnore]
         public string UserPassword { get; set; }
         [JsonIgnore]
         public virtual ICollection<OneVote> OneVote { get; set; }
+        [JsonIgnore]
+        public virtual UserType UserType { get; set; }
 
+        //[JsonIgnore]
         //public string Token { get; set; }
 
         //public DateTime TokenDate { get; set; }

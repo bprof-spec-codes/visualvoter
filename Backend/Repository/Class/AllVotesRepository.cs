@@ -47,5 +47,10 @@ namespace Repository
             oldVote = element;
             this.db.SaveChanges();
         }
+
+        public int GetLastVote()
+        {
+            return this.db.AllVotes.Max(x => x.VoteID);
+        }
     }
 }

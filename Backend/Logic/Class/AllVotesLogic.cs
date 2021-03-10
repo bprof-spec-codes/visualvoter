@@ -10,10 +10,12 @@ namespace Logic
     public class AllVotesLogic : IAllVotesLogic
     {
         public IAllVotesRepository allVotesRepo;
+        public IVotingRightLogic vrLogic;
 
         public AllVotesLogic(string dbPassword)
         {
             this.allVotesRepo = new AllVotesRepository(dbPassword);
+            this.vrLogic = new VotingRightLogic(dbPassword);
         }
 
         public bool CreateVote(AllVotes vote)
@@ -66,6 +68,23 @@ namespace Logic
             catch (Exception)
             {
                 return false;
+            }
+        }
+
+        public void CreateNewVote(VoteCreation newVote)
+        {
+            if (CreateVote(newVote.NewVote))
+            {
+                int lastVoteID = this.allVotesRepo.GetLastVote();
+                foreach (int userTypeID in newVote.WhoCanVote)
+                {
+                    VotingRight tempVR = new VotingRight()
+                    {
+                        UserTypeID = userTypeID,
+                        VoteID = lastVoteID,
+                    };
+                    this.vrLogic.CreateVotingRight(tempVR);
+                }
             }
         }
     }
