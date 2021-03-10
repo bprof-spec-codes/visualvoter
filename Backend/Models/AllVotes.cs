@@ -26,9 +26,14 @@ namespace Models
         //public DateTime ExpirationDate { get; set; }
 
         /// <summary>
-        /// Used to check if this specific vote is still active
+        /// Used to check if this specific vote is closed
         /// </summary>
         public int IsClosed { get; set; }
+
+        /// <summary>
+        /// Used to check if this specific vote is finished
+        /// </summary>
+        public int IsFinished { get; set; }
 
         /// <summary>
         /// Number of 'yes' choices for this vote
