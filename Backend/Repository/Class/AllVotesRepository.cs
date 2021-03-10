@@ -48,9 +48,9 @@ namespace Repository
             this.db.SaveChanges();
         }
 
-        public AllVotes GetLastVote()
+        public int GetLastVote()
         {
-            return this.db.AllVotes.Last();
+            return this.db.AllVotes.Max(x => x.VoteID);
         }
     }
 }

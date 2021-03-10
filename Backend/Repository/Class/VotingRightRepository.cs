@@ -18,13 +18,13 @@ namespace Repository
 
         public void Add(VotingRight element)
         {
-            this.db.Add(element);
+            this.db.VotingRight.Add(element);
             this.db.SaveChanges();
         }
 
         public void Delete(int element)
         {
-            this.db.Remove(element);
+            this.db.VotingRight.Remove(this.db.VotingRight.Where(x=> x.VRId == element).FirstOrDefault());
             this.db.SaveChanges();
         }
 

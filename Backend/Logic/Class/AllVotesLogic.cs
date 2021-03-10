@@ -75,13 +75,13 @@ namespace Logic
         {
             if (CreateVote(newVote.NewVote))
             {
-                int lastVoteID = this.allVotesRepo.GetLastVote().VoteID;
+                int lastVoteID = this.allVotesRepo.GetLastVote();
                 foreach (int userTypeID in newVote.WhoCanVote)
                 {
                     VotingRight tempVR = new VotingRight()
                     {
                         UserTypeID = userTypeID,
-                        VoteID = lastVoteID
+                        VoteID = lastVoteID,
                     };
                     this.vrLogic.CreateVotingRight(tempVR);
                 }

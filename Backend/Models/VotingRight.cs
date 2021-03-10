@@ -16,8 +16,8 @@ namespace Models
         [ForeignKey("UserType")]
         public int UserTypeID { get; set; }
         [JsonIgnore]
-        public virtual ICollection<UserType> UserType { get; set; }
+        public virtual UserType UserType { get; set; }
         [JsonIgnore]
-        public virtual ICollection<AllVotes> AllVotes { get; set; }
+        public virtual AllVotes AllVotes { get; set; }
     }
 }

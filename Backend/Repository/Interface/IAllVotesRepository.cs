@@ -9,6 +9,6 @@ namespace Repository
 {
     public interface IAllVotesRepository : IRepository<AllVotes, int>
     {
-        public AllVotes GetLastVote();
+        public int GetLastVote();
     }
 }

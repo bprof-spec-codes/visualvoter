@@ -10,6 +10,7 @@ namespace Models
         [Key]
         public int UserTypeID { get; set; } //auto generated
         public string UserTypeName { get; set; }
-        public virtual IList<Users> Users { get; set; }
+        public virtual ICollection<Users> Users { get; set; }
+        public virtual ICollection<VotingRight> VotingRight { get; set; }
     }
 }

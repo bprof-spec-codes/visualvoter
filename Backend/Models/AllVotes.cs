@@ -51,6 +51,8 @@ namespace Models
         public int AbsentionVotes { get; set; }
         [JsonIgnore]
         public virtual ICollection<OneVote> OneVote { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<VotingRight> VotingRight { get; set; }
 
     }
 }
