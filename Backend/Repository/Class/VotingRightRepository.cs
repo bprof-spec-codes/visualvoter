@@ -18,7 +18,7 @@ namespace Repository
 
         public void Add(VotingRight element)
         {
-            this.db.VotingRight.Add(element);
+             this.db.VotingRight.Add(element);
             this.db.SaveChanges();
         }
 

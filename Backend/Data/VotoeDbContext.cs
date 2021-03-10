@@ -15,6 +15,7 @@ namespace Data
         public VotoeDbContext(string connectpw)
         {
             this.ConnectionStrinPassword = connectpw;
+            this.Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
