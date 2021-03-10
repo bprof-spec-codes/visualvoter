@@ -71,10 +71,13 @@ namespace Logic
 
         public void CreateNewVote(VoteCreation newVote)
         {
-            CreateVote(newVote.NewVote); //get back the new votes generated ID to use in foreach! -> get the table's last row?
-            foreach(int UserTypeID in newVote.WhoCanVote)
+            if (CreateVote(newVote.NewVote))
             {
-                //CreateNewVotingRight(userTypeID, THEGENERATEDID OF THE NEW VOTE)
+                var lastVote = this.allVotesRepo.GetLastVote();
+                foreach (int UserTypeID in newVote.WhoCanVote)
+                {
+                    //CreateNewVotingRight(userTypeID, THEGENERATEDID OF THE NEW VOTE)
+                }
             }
         }
     }
