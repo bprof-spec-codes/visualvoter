@@ -114,7 +114,7 @@ namespace Logic
             var query = from x in oneVoteRepo.GetAll()
                         where x.UserID == userID && x.VoteID == voteID
                         select x;
-            return query == null;
+            return query.Count() == 0;
         }
     }
 }
