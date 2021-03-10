@@ -49,9 +49,10 @@ namespace VotOEApi.Controllers
         }
 
         [HttpPut("{oldId}")]
-        public void UpdateVote(int oldId, [FromBody] OneVote vote)
+        public IActionResult UpdateVote(int oldId, [FromBody] OneVote vote)
         {
-            this.oneVoteLogic.UpdateOneVote(oldId, vote);
+            if (this.oneVoteLogic.UpdateOneVote(oldId, vote)) return Ok();
+            else return BadRequest();
         }
     }
 }

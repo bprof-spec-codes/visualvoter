@@ -32,7 +32,7 @@ namespace Models
         /// (Nullable bool!)
         /// Gets or sets what this user's choice was. true = yes; false = no, NULL = absention (vagy tartózkodott, fene se tudja hogy van árgyélusul)
         /// </summary>
-        public bool? Choice { get; set; }
+        public int Choice { get; set; }
         [JsonIgnore]
         public virtual Users Users { get; set; }
         [JsonIgnore]
