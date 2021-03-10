@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Repository.Class
+namespace Repository
 {
-    class VotingRightRepository : IVotingRightRepository
+    public class VotingRightRepository : IVotingRightRepository
     {
         private VotoeDbContext db;
 
