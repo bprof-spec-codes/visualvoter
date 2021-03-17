@@ -1,20 +1,36 @@
 import {
-    Button,
+  Button,
+  Checkbox,
   FormControl,
   InputLabel,
-  MenuItem,
   Select,
-  TextField
+  TextField,
 } from "@material-ui/core";
+import axios from "../../axios";
 import React, { useState } from "react";
 import "./CreateNewVote.css";
 
 function CreateNewVote() {
   const [voteType, setVoteType] = useState("");
+  const [voteName, setVoteName] = useState("");
 
-  const createHandler=()=>{
-
-  }
+  const createHandler = () => {
+    const data = {
+      NewVote: {
+        IsClosed: 0,
+        VoteName: "KIspista hök elnöknek",
+      },
+      WhoCanVote: [1, 2, 3],
+    };
+    axios
+      .post("/allvotes/create", data)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
 
   return (
     <div className="createNewVote">
@@ -23,22 +39,45 @@ function CreateNewVote() {
           <h1>Create New</h1>
         </div>
         <div className="container_content">
-          <TextField label="Name" />
-          <FormControl>
-            <InputLabel>Ch</InputLabel>
-            <Select
-              native
-              value={voteType}
-              onChange={(e) => {
-                setVoteType(e.target.value);
-              }}
-            >
-              <option value=""></option>
-              <option value="hokelnok">HÖK</option>
-              <option value="hokelnok">Kancellária</option>
-            </Select>
-          </FormControl>
-          <Button onClick={createHandler}>Create New</Button>
+          <div className="container_textfield">
+            <TextField
+              label="A szavazás neve"
+              style={{ width: "80%", marginBottom: "20px" }}
+            />
+          </div>
+
+          <div className="checkbox_item">
+            <Checkbox
+              checked={false}
+              color="primary"
+              inputProps={{ "aria-label": "secondary checkbox" }}
+            />
+            <p>HÖK</p>
+          </div>
+
+          <div className="checkbox_item">
+            <Checkbox
+              checked={false}
+              color="primary"
+              inputProps={{ "aria-label": "secondary checkbox" }}
+            />
+            <p>Kancellária</p>
+          </div>
+
+          <div className="checkbox_item">
+            <Checkbox
+              checked={false}
+              color="primary"
+              inputProps={{ "aria-label": "secondary checkbox" }}
+            />
+            <p>Mindenki</p>
+          </div>
+
+          <div className="create_button">
+            <Button onClick={createHandler} style={{ fontSize: "large" }}>
+              Create New
+            </Button>
+          </div>
         </div>
       </div>
     </div>

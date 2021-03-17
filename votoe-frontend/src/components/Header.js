@@ -60,37 +60,36 @@ function Header() {
         </div>
 
         <div className="header_middle">
-          <div className="header_option header_option--active">
+          <div className="header_option header_option--active" style={{marginLeft:"20%"}}>
             <IconButton>
               <Link to="/" style={{ textDecoration: "none", color: "black" }}>
                 <HomeOutlinedIcon fontSize="large" />
               </Link>
             </IconButton>
           </div>
-          {user ? (
-            <>
-              <div className="header_option">
-                <IconButton>
-                  <Link
-                    to="/vote"
-                    style={{ textDecoration: "none", color: "black" }}
-                  >
-                    <HowToVoteOutlinedIcon fontSize="large" />
-                  </Link>
-                </IconButton>
-              </div>
-              <div className="header_option">
-                <IconButton>
-                  <Link
-                    to="/dashboard"
-                    style={{ textDecoration: "none", color: "black" }}
-                  >
-                    <AccountBoxOutlinedIcon fontSize="large" />
-                  </Link>
-                </IconButton>
-              </div>
-            </>
-          ) : null}
+
+          <>
+            <div className="header_option">
+              <IconButton>
+                <Link
+                  to="/vote"
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  <HowToVoteOutlinedIcon fontSize="large" />
+                </Link>
+              </IconButton>
+            </div>
+            <div className="header_option" style={{marginRight:"20%"}}>
+              <IconButton>
+                <Link
+                  to="/dashboard"
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  <AccountBoxOutlinedIcon fontSize="large" />
+                </Link>
+              </IconButton>
+            </div>
+          </>
         </div>
 
         <div className="header_modal">
