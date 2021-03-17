@@ -87,5 +87,10 @@ namespace Logic
                 }
             }
         }
+
+        public IQueryable<AllVotes> GetAllActiveVotes()
+        {
+            return this.allVotesRepo.GetAll().Where(x => x.IsClosed == 0 && x.IsFinished == 0);
+        }
     }
 }

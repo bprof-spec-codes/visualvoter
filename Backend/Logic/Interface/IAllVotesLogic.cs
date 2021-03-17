@@ -14,5 +14,7 @@ namespace Logic
         bool DeleteVote(int voteId);
         void CreateNewVote(VoteCreation newVote);
         bool UpdateVote(int oldId, AllVotes newVote);
+
+        IQueryable<AllVotes> GetAllActiveVotes();
     }
 }

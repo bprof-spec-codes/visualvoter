@@ -60,5 +60,12 @@ namespace VotOEApi.Controllers
         {
             this.allVotesLogic.CreateNewVote(voteCreation);
         }
+
+        [Route("active")]
+        [HttpGet]
+        public IEnumerable<AllVotes> GetAllActiveVotes()
+        {
+            return this.allVotesLogic.GetAllActiveVotes();
+        }
     }
 }
