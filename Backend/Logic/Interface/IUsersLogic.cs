@@ -15,6 +15,7 @@ namespace Logic
 
         bool UpdateUser(int oldId, Users newUser);
         public bool Login(Login login);
+        IQueryable<UserType> GetAllUserTypes();
 
     }
 }
