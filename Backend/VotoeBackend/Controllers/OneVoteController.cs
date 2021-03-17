@@ -43,9 +43,10 @@ namespace VotOEApi.Controllers
         }
 
         [HttpPost]
-        public void CreateVote([FromBody] OneVote vote)
+        public IActionResult CreateVote([FromBody] OneVote vote)
         {
-            this.oneVoteLogic.CreateOneVote(vote);
+            if (this.oneVoteLogic.CreateOneVote(vote)) return Ok();
+            else return BadRequest();
         }
 
         [HttpPut("{oldId}")]
