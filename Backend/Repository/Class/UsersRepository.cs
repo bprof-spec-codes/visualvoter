@@ -47,5 +47,10 @@ namespace Repository
         {
             return this.db.Users.Where(x => x.Email == email).First();
         }
+
+        public IQueryable<UserType> GetAllUserTypes()
+        {
+            return this.db.UserType;
+        }
     }
 }

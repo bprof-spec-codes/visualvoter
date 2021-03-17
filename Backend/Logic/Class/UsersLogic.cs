@@ -113,5 +113,10 @@ namespace Logic
             }
             return Sb.ToString();
         }
+
+        public IQueryable<UserType> GetAllUserTypes()
+        {
+            return this.usersRepo.GetAllUserTypes();
+        }
     }
 }

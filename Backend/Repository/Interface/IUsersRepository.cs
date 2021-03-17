@@ -9,5 +9,7 @@ namespace Repository
     public interface IUsersRepository : IRepository<Users,int>
     {
         public Users GetOneByEmail(string email);
+
+        public IQueryable<UserType> GetAllUserTypes();
     }
 }

@@ -62,5 +62,12 @@ namespace VotoeBackend.Controllers
             if (this.usersLogic.Login(login)) return Ok();
             return BadRequest();
         }
+
+        [Route("usertype")]
+        [HttpGet]
+        public IEnumerable<UserType> GetAllUserTypes()
+        {
+            return this.usersLogic.GetAllUserTypes();
+        }
     }
 }
