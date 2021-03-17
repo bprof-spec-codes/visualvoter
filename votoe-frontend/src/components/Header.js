@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Header.css";
 import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 import HowToVoteIcon from "@material-ui/icons/HowToVote";
@@ -6,7 +6,8 @@ import HowToVoteOutlinedIcon from "@material-ui/icons/HowToVoteOutlined";
 import logo from "../assets/img/wv4y1e5r.png";
 import Modal from "react-modal";
 import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
-import { Button, TextField } from "@material-ui/core";
+import AccountBoxOutlinedIcon from "@material-ui/icons/AccountBoxOutlined";
+import { Button, TextField, IconButton } from "@material-ui/core";
 import axios from "../axios";
 import { Link, useHistory } from "react-router-dom";
 import { useStateValue } from "../StateProvider";
@@ -31,11 +32,23 @@ function Header() {
       .post("/users/login", data)
       .then((response) => {
         console.log(response);
+        history.push("/");
+
+        dispatch({
+          type: "SET_USER",
+          user: "Valami",
+        });
       })
       .catch((error) => {
-        //console.log(error.message);
+        console.log(error.message);
       });
+
+    setModalOpen(false);
   };
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
 
   return (
     <div className="header">
@@ -47,15 +60,36 @@ function Header() {
         </div>
 
         <div className="header_middle">
-          <div className="header_option header_option--active">
-            <HomeOutlinedIcon fontSize="large" />
+          <div className="header_option header_option--active" style={{marginLeft:"20%"}}>
+            <IconButton>
+              <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+                <HomeOutlinedIcon fontSize="large" />
+              </Link>
+            </IconButton>
           </div>
-          <div className="header_option">
-            <HowToVoteOutlinedIcon fontSize="large" />
-          </div>
-          <div className="header_option">
-            <HowToVoteOutlinedIcon fontSize="large" />
-          </div>
+
+          <>
+            <div className="header_option">
+              <IconButton>
+                <Link
+                  to="/vote"
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  <HowToVoteOutlinedIcon fontSize="large" />
+                </Link>
+              </IconButton>
+            </div>
+            <div className="header_option" style={{marginRight:"20%"}}>
+              <IconButton>
+                <Link
+                  to="/dashboard"
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  <AccountBoxOutlinedIcon fontSize="large" />
+                </Link>
+              </IconButton>
+            </div>
+          </>
         </div>
 
         <div className="header_modal">
@@ -93,7 +127,7 @@ function Header() {
                 marginBottom: 50,
               }}
             >
-              <h1>Log In</h1>
+              <h1>Sign In</h1>
               <div className="modal_close" onClick={() => setModalOpen(false)}>
                 <CloseOutlinedIcon
                   fontSize="large"
@@ -150,7 +184,7 @@ function Header() {
           </Modal>
         </div>
         {user ? (
-          <div className="header_right" >
+          <div className="header_right">
             <p>Sign Out</p>
           </div>
         ) : (

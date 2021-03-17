@@ -23,8 +23,7 @@ function Feed() {
           return(
             <VoteResult
                 key={item.id}
-                title={item.title}
-                body={item.body}
+                title={item.voteName}
             />
           );
       })}

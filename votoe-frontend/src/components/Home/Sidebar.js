@@ -1,29 +1,46 @@
-import { SportsRugbySharp } from "@material-ui/icons";
 import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
-import React, { useState } from "react";
+import axios from "../../axios";
+import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
-import { useStateValue } from "../../StateProvider";
+// import { useStateValue } from "../../StateProvider";
 import "./Sidebar.css";
+import { IconButton } from "@material-ui/core";
 
 Modal.setAppElement("#root");
 function Sidebar() {
-  const [{ user }, dispatch] = useStateValue();
+  // const [{ user }, dispatch] = useStateValue();
   const [modalOpen, setModalOpen] = useState(false);
+  const [activeVotes, setActiveVotes] = useState();
+
+  useEffect(() => {
+    axios
+      .get("/allvotes/active")
+      .then((response) => {
+        const res = response.data;
+        setActiveVotes(res);
+        console.log(activeVotes);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  }, []);
 
   return (
     <div className="sidebar">
       <div className="sidebar_container">
         <h1>Options</h1>
-        <div className="sidebar_option">
-          <p>Profile</p>
-        </div>
+        {
+          <>
+            <div className="sidebar_option">
+              <p>Profile</p>
+            </div>
 
-        {user ? (
-          <div className="sidebar_option" onClick={() => setModalOpen(true)}>
-            <p>Invites</p>
-            <label>0</label>
-          </div>
-        ) : null}
+            <div className="sidebar_option" onClick={() => setModalOpen(true)}>
+              <p>Invites</p>
+              <label>{activeVotes?.length}</label>
+            </div>
+          </>
+        }
 
         <div className="sidebar_option">
           <p>News</p>
@@ -64,11 +81,19 @@ function Sidebar() {
           >
             <h1>Invites</h1>
             <div className="modal_close" onClick={() => setModalOpen(false)}>
-              <CloseOutlinedIcon
-                fontSize="large"
-                style={{ cursor: "pointer" }}
-              />
+              <IconButton>
+                <CloseOutlinedIcon
+                  fontSize="large"
+                  style={{ cursor: "pointer" }}
+                />
+              </IconButton>
             </div>
+          </div>
+          <div className="modal_container">
+            {activeVotes &&
+              activeVotes.map((q, qKey) => {
+                <p>{q.voteName}</p>;
+              })}
           </div>
         </Modal>
       </div>
