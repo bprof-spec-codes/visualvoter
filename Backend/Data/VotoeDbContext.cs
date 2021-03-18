@@ -1,4 +1,6 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Models;
@@ -8,7 +10,7 @@ using System.Linq;
 
 namespace Data
 {
-    public class VotoeDbContext : DbContext
+    public class VotoeDbContext : IdentityDbContext<IdentityUser>
     {
         private readonly string ConnectionStrinPassword;
 
