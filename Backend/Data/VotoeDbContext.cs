@@ -22,7 +22,9 @@ namespace Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                var builder = new SqlConnectionStringBuilder("server=95.111.254.24;database=projektmunka;user=projektmunka");
+                //var builder = new SqlConnectionStringBuilder("server=95.111.254.24;database=projektmunka;user=projektmunka");
+                var builder = new SqlConnectionStringBuilder("server=95.111.254.24;database=projektmunka_teszt;user=projektmunka");
+
                 builder.Password = ConnectionStrinPassword;
                 optionsBuilder.UseSqlServer(builder.ConnectionString);
             }

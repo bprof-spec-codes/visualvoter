@@ -18,6 +18,8 @@ namespace Logic
 
         public bool CreateUser(Users user)
         {
+            this.usersRepo.Add(user);
+            return true;
             user.UserPassword = sha256_hash(user.UserPassword);
             try
             {
