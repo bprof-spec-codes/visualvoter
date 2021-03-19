@@ -2,6 +2,7 @@ using Data;
 using Logic;
 using Logic.Class;
 using Logic.Interface;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -10,10 +11,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace VotoeBackend
@@ -49,7 +52,22 @@ namespace VotoeBackend
                  ).AddEntityFrameworkStores<VotoeDbContext>()
                  .AddDefaultTokenProviders();
 
-
+            services.AddAuthentication(option => {
+                option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options => {
+                options.SaveToken = true;
+                options.RequireHttpsMetadata = true;
+                options.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidAudience = "http://www.security.org",
+                    ValidIssuer = "http://www.security.org",
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("abc 123 970608 qwertzuiopõú"))
+                };
+            });
 
 
             services.AddCors(options =>
@@ -80,6 +98,7 @@ namespace VotoeBackend
                     .Build();
             }
             app.UseRouting();
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseCors();
             app.UseEndpoints(endpoints =>
