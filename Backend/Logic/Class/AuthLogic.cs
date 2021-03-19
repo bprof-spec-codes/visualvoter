@@ -80,7 +80,7 @@ namespace Logic.Class
 
 
                 var signinKey = new SymmetricSecurityKey(
-                  Encoding.UTF8.GetBytes("Paris Berlin Cairo Sydney Tokyo Beijing Rome London Athens"));
+                  Encoding.UTF8.GetBytes("abc 123 970608 qwertzuiopőú"));
 
                 var token = new JwtSecurityToken(
                   issuer: "http://www.security.org",

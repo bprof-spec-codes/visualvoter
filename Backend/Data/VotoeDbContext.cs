@@ -19,15 +19,23 @@ namespace Data
             this.ConnectionStrinPassword = connectpw;
             this.Database.EnsureCreated();
         }
-
+        public VotoeDbContext()
+        {
+            this.Database.EnsureCreated();
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
                 //var builder = new SqlConnectionStringBuilder("server=95.111.254.24;database=projektmunka;user=projektmunka");
-                var builder = new SqlConnectionStringBuilder("server=95.111.254.24;database=projektmunka_teszt;user=projektmunka");
 
-                builder.Password = ConnectionStrinPassword;
+
+                //var builder = new SqlConnectionStringBuilder("server=95.111.254.24;database=projektmunka_teszt;user=projektmunka");
+               // builder.Password = ConnectionStrinPassword;
+                
+                var builder = new SqlConnectionStringBuilder(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=VotOEDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+
+                
                 optionsBuilder.UseSqlServer(builder.ConnectionString);
             }
         }

@@ -1,6 +1,10 @@
+using Data;
 using Logic;
+using Logic.Class;
+using Logic.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,6 +34,22 @@ namespace VotoeBackend
             services.AddTransient<IUsersLogic>(x => new UsersLogic(Configuration["DBPassword"]));
             services.AddTransient<IOneVoteLogic>(x => new OneVoteLogic(Configuration["DBPassword"]));
             services.AddTransient<IAllVotesLogic>(x => new AllVotesLogic(Configuration["DBPassword"]));
+            services.AddTransient<AuthLogic, AuthLogic>();
+
+            services.AddDbContext<VotoeDbContext>();
+            services.AddIdentity<IdentityUser, IdentityRole>(
+                     option =>
+                     {
+                         option.Password.RequireDigit = false;
+                         option.Password.RequiredLength = 6;
+                         option.Password.RequireNonAlphanumeric = false;
+                         option.Password.RequireUppercase = false;
+                         option.Password.RequireLowercase = false;
+                     }
+                 ).AddEntityFrameworkStores<VotoeDbContext>()
+                 .AddDefaultTokenProviders();
+
+
 
 
             services.AddCors(options =>
