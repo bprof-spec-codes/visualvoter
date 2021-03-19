@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Logic.Interface;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Models;
 using System;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Logic.Class
 {
-    public class AuthLogic
+    public class AuthLogic : IAuthLogic
     {
         UserManager<IdentityUser> userManager;
         RoleManager<IdentityRole> roleManager;
@@ -22,12 +23,27 @@ namespace Logic.Class
             this.roleManager = roleManager;
         }
 
-        public IEnumerable<IdentityUser> GetAllUser()
+
+        public IQueryable<IdentityUser> GetAllUsers()
         {
             return userManager.Users;
         }
+        public IdentityUser GetOneUser(string id)
+        {
+            throw new NotImplementedException();
+        }
 
-        public async Task<string> AddUser_debug(Login model)
+        public bool UpdateUser(string oldId, IdentityUser newUser)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeleteUser(string userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<string> CreateUser_debug(Login model)
         {
             var user = new IdentityUser
             {
