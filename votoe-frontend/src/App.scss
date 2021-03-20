@@ -1,3 +1,5 @@
-app{
-  background: #eff2f5;
+@import 'variables';
+
+.app{
+  background: $body-bg;
 }
