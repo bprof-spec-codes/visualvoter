@@ -1,5 +1,5 @@
 import React from "react";
-import "./Right.css";
+import "./Right.scss";
 
 function Right() {
   return (

@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core";
 import axios from "../../axios";
 import React, { useState } from "react";
-import "./CreateNewVote.css";
+import "./CreateNewVote.scss";
 
 function CreateNewVote() {
   const [voteType, setVoteType] = useState("");

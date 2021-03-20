@@ -3,7 +3,7 @@ import axios from "../../axios";
 import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 // import { useStateValue } from "../../StateProvider";
-import "./Sidebar.css";
+import "./Sidebar.scss";
 import { IconButton } from "@material-ui/core";
 
 Modal.setAppElement("#root");

@@ -1,6 +1,6 @@
 import axios from "../../axios";
 import React, { useState, useEffect } from "react";
-import "./Feed.css";
+import "./Feed.scss";
 import VoteResult from "./VoteResult";
 
 function Feed() {
@@ -11,9 +11,9 @@ function Feed() {
       const res=response.data;
       console.log(res);
       setResults(res);
-      console.log(results);
+      // console.log(results);
     }).catch(error=>{
-        console.log(error.message);
+        // console.log(error.message);
     });
   }, []);
 

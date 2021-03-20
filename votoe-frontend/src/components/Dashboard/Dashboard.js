@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../Header';
 import Sidebar from '../Home/Sidebar';
 import CreateNewVote from './CreateNewVote';
-import './Dashboard.css';
+import './Dashboard.scss';
 
 function Dashboard() {
     return (

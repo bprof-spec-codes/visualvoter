@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./Header.css";
+import "./Header.scss";
 import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 import HowToVoteIcon from "@material-ui/icons/HowToVote";
 import HowToVoteOutlinedIcon from "@material-ui/icons/HowToVoteOutlined";
