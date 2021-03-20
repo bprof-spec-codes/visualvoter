@@ -30,17 +30,40 @@ namespace Logic.Class
         }
         public IdentityUser GetOneUser(string id)
         {
-            throw new NotImplementedException();
+            return userManager.Users.Where(x => x.Id == id).SingleOrDefault();
         }
 
-        public bool UpdateUser(string oldId, IdentityUser newUser)
+        public async Task<string> UpdateUser(string oldId, IdentityUser newUser)
         {
-            throw new NotImplementedException();
+            await userManager.UpdateAsync(newUser);
+            return "Success";
         }
 
-        public bool DeleteUser(string userId)
+        public async Task<string> DeleteUser(string userId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var selectedUser = userManager.Users.Where(x => x.Id == userId).Single();
+                await userManager.DeleteAsync(selectedUser);
+                return "Success";
+            }
+            catch (Exception)
+            {
+                return "Fail";
+            }
+        }
+        public async Task<string> DeleteUser(IdentityUser inUser)
+        {
+            try
+            {
+                await userManager.DeleteAsync(inUser);
+                return "Success";
+            }
+            catch (Exception)
+            {
+                return "Fail";
+            }
+
         }
 
         public async Task<string> CreateUser_debug(Login model)

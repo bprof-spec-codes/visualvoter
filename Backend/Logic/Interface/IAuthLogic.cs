@@ -13,9 +13,9 @@ namespace Logic.Interface
         IdentityUser GetOneUser(string userId);
         IQueryable<IdentityUser> GetAllUsers();
         Task<string> CreateUser_debug(Login login);
-        bool DeleteUser(string userId);
-
-        bool UpdateUser(string oldId, IdentityUser newUser);
+        Task<string> DeleteUser(string userId);
+        Task<string> DeleteUser(IdentityUser inUser);
+        Task<string> UpdateUser(string oldId, IdentityUser newUser);
         Task<TokenModel> LoginUser(Login login);
     }
 }
