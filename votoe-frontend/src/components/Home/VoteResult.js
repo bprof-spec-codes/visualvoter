@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import "./VoteResult.scss";
 import HOKLogo from "../../assets/img/nikhok_logo.jpg";
 
-function VoteResult({ key, title, yesVotes, noVotes, absentionVotes, isClosed, isFinished}) {
+function VoteResult({
+  key,
+  title,
+  yesVotes,
+  noVotes,
+  absentionVotes,
+  isClosed,
+  isFinished,
+}) {
+  const [chartData, setChartData] = useState([]);
+
+  useEffect(() => {
+    setChartData([yesVotes,noVotes,absentionVotes]);
+  }, [])
+
   return (
     <div className="voteResult">
       <div className="voteResult_container">
@@ -17,7 +31,20 @@ function VoteResult({ key, title, yesVotes, noVotes, absentionVotes, isClosed, i
         </div>
 
         <div className="voteResult_result">
-          
+          <div className="resultOption">
+              <h3>Igen</h3>
+              <span className="option_bar"><span className="option_votes" style={{width:`${yesVotes*100}%`,background:`${yesVotes>noVotes ? '#fab001' : '#1d2a4d'}`}}></span></span>
+            </div>
+
+            <div className="resultOption">
+              <h3>Nem</h3>
+              <span className="option_bar"><span className="option_votes" style={{width:`${noVotes*100+50}%`,background:`${yesVotes<noVotes ? '#fab001' : '#1d2a4d'}`}}></span></span>
+            </div>
+
+            <div className="resultOption">
+              <h3>Tartózkodik</h3>
+              <span className="option_bar"><span className="option_votes"></span></span>
+            </div>
         </div>
       </div>
     </div>
