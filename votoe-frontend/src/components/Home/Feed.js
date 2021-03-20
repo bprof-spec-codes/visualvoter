@@ -22,8 +22,13 @@ function Feed() {
       {results.map(item=>{
           return(
             <VoteResult
-                key={item.id}
+                key={item.voteID}
                 title={item.voteName}
+                yesVotes={item.yesVotes}
+                noVotes={item.noVotes}
+                absentionVotes={item.absentionVotes}
+                isClosed={(item.isClosed === 1) ? true : false}
+                isFinished={(item.isFinished === 1) ? true : false}
             />
           );
       })}

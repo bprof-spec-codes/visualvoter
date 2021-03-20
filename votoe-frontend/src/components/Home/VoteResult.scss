@@ -1,61 +1,73 @@
+@import "../../variables";
+
 .voteResult {
   display: flex;
-  background: rgba(30, 43, 78, 0.7);
-  background: linear-gradient(
-    140deg,
-    rgba(30, 43, 78, 0.9) 21%,
-    rgba(250, 176, 1, 0.9) 100%
-  );
   border-radius: 20px;
+  border: $base-border;
   box-shadow: 0px 5px 7px -7px rgba(0, 0, 0, 0.75);
   height: 600px;
   width: 40vw;
   margin-bottom: 30px;
-}
 
-.voteResult_container {
-  margin: 20px;
-  width: 100%;
-}
+  &_container {
+    width: 100%;
+    position: relative;
 
-.voteResult_top {
-  display: flex;
-  flex-direction: column;
-  max-width: 100%;
-  max-height: 200px;
-  background: #eff2f5;
-  padding: 15px;
-  border-radius: 20px;
-  box-shadow: 0px 5px 7px -7px rgba(0, 0, 0, 0.75);
-  word-wrap: break-word;
-}
+    .voteResult_top {
+      display: flex;
+      flex-direction: column;
+      max-width: 100%;
+      height: 80px;
+      background: #1d2a4d;
+      color: white;
+      padding: 15px;
+      word-wrap: break-word;
+      border-bottom: 8px solid black;
+      border-radius: 20px 20px 0 0;
 
-.voteResult_top > h3 {
-  font-size: x-large;
-  font-weight: 700;
-}
+      .top_text{
+        padding-left: 200px;
 
-.voteResult_top > label {
-  font-size: 12px;
-  font-weight: 200;
-}
+        > h3 {
+          font-size: x-large;
+          font-weight: 700;
+        }
+    
+        > label {
+          font-size: 12px;
+          font-weight: 200;
+        }
+      }
+      
+    }
 
-.voteResult_top > p {
-  font-size: 14px;
-  font-weight: 200;
-  margin-top: 10px;
-}
+    .voteResult_img{
+      width: 150px;
+      height: 150px;
+      border: 8px solid black;
+      border-radius: 100%;
 
-.voteResult_result {
-  display: flex;
-  flex-direction: column;
-  max-width: 100%;
-  align-items: center;
-  text-align: center;
-  margin-top: 20px;
-  background: #eff2f5;
-  padding: 15px;
-  border-radius: 20px;
-  box-shadow: 0px 5px 7px -7px rgba(0, 0, 0, 0.75);
-  word-wrap: break-word;
+      position: absolute;
+      top: 33px;
+      left: 50px;
+
+      img{
+        width: 100%;
+        border-radius: 100%;
+      }
+    }
+    
+
+    .voteResult_result {
+      display: flex;
+      flex-direction: column;
+      margin: 100px 10px 10px 10px;
+      background: $body-bg;
+      padding: 15px;
+      border-radius: 20px;
+      border: $base-border;
+      box-shadow: 0px 5px 7px -7px rgba(0, 0, 0, 0.75);
+      word-wrap: break-word;
+    }
+  }
 }

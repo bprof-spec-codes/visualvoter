@@ -1,16 +1,23 @@
 import React from "react";
 import "./VoteResult.scss";
+import HOKLogo from "../../assets/img/nikhok_logo.jpg";
 
-function VoteResult({key,title}) {
+function VoteResult({ key, title, yesVotes, noVotes, absentionVotes, isClosed, isFinished}) {
   return (
     <div className="voteResult">
       <div className="voteResult_container">
         <div className="voteResult_top">
-          <h3>{title}</h3>
-          <label>date</label>
+          <div className="top_text">
+            <h3>{title}</h3>
+          </div>
         </div>
+
+        <div className="voteResult_img">
+          <img src={HOKLogo} alt="" />
+        </div>
+
         <div className="voteResult_result">
-          <h1>Diagramm will be here</h1>
+          
         </div>
       </div>
     </div>
