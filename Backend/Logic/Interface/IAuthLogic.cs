@@ -17,5 +17,6 @@ namespace Logic.Interface
         Task<string> DeleteUser(IdentityUser inUser);
         Task<string> UpdateUser(string oldId, IdentityUser newUser);
         Task<TokenModel> LoginUser(Login login);
+        IEnumerable<IdentityRole> getAllRoles();
     }
 }

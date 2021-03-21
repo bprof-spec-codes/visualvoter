@@ -77,7 +77,7 @@ namespace Logic.Class
             var result = await userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
-                
+               await userManager.AddToRoleAsync(user, "HALLGATO");
             }
             return user.UserName;
         }
@@ -121,5 +121,9 @@ namespace Logic.Class
             throw new ArgumentException("Login failed");
         }
 
+        public IEnumerable<IdentityRole> getAllRoles()
+        {
+            return roleManager.Roles.ToList();
+        }
     }
 }

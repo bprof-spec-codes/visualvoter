@@ -21,10 +21,9 @@ namespace VotOEApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateUser([FromBody] IdentityUser model)
+        public async Task<ActionResult> CreateUser([FromBody] Login model)
         {
-            var loginObject = new Login() { Email = model.Email, Password = model.PasswordHash }; //TODO TEMP workaround
-            string result = await authLogic.CreateUser_debug(loginObject);
+            string result = await authLogic.CreateUser_debug(model);
             return Ok(new { UserName = result });
         }
 
@@ -46,7 +45,6 @@ namespace VotOEApi.Controllers
         {
             this.authLogic.DeleteUser(id);
         }
-        [HttpPost]
 
         [HttpPut("{oldId}")]
         public void UpdateUser(string oldId, [FromBody] IdentityUser user)
@@ -67,6 +65,12 @@ namespace VotOEApi.Controllers
             }
         }
 
+        [Route("roles")]
+        [HttpGet]
+        public IEnumerable<IdentityRole> getAllUserRoles()
+        {
+            return authLogic.getAllRoles();
+        }
 
     }
 }
