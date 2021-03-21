@@ -46,12 +46,14 @@ namespace Models
         public int NoVotes { get; set; }
 
         /// <summary>
+        /// User is only allowed to participate in this vote, if it has every role present in this list.
+        /// </summary>
+        public List<string> RequeredRole { get; set; }
+        /// <summary>
         /// Number of 'absention' choices for this vote
         /// </summary>
         public int AbsentionVotes { get; set; }
         [JsonIgnore]
         public virtual ICollection<OneVote> OneVote { get; set; }
-        [JsonIgnore]
-        public virtual ICollection<VotingRight> VotingRight { get; set; }
     }
 }

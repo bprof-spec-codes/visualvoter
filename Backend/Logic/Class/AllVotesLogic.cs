@@ -15,7 +15,6 @@ namespace Logic
         public AllVotesLogic(string dbPassword)
         {
             this.allVotesRepo = new AllVotesRepository(dbPassword);
-            this.vrLogic = new VotingRightLogic(dbPassword);
         }
 
         public bool CreateVote(AllVotes vote)
@@ -71,7 +70,7 @@ namespace Logic
             }
         }
 
-        public void CreateNewVote(VoteCreation newVote)
+        public void CreateNewVote(VoteCreation newVote) //TODO CHECK IF USER HAS THE RIGHT
         {
             if (CreateVote(newVote.NewVote))
             {

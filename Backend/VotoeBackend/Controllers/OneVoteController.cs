@@ -16,12 +16,10 @@ namespace VotOEApi.Controllers
     public class OneVoteController : ControllerBase
     {
         private IOneVoteLogic oneVoteLogic;
-        private readonly ILogger<UsersController> _logger;
 
-        public OneVoteController(ILogger<UsersController> logger, IOneVoteLogic logic)
+        public OneVoteController(IOneVoteLogic logic)
         {
             this.oneVoteLogic = logic;
-            _logger = logger;
         }
 
         [HttpGet]

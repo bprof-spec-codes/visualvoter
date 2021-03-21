@@ -18,8 +18,6 @@ namespace Logic
         {
             this.oneVoteRepo = new OneVoteRepository(dbPassword);
             this.allVotesLogic = new AllVotesLogic(dbPassword);
-            this.vrLogic = new VotingRightLogic(dbPassword);
-            this.usersLogic = new UsersLogic(dbPassword);
         }
         public bool CreateOneVote(OneVote vote)
         {

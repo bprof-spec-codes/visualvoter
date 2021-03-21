@@ -35,7 +35,6 @@ namespace VotoeBackend
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddTransient<IUsersLogic>(x => new UsersLogic(Configuration["DBPassword"]));
             services.AddTransient<IOneVoteLogic>(x => new OneVoteLogic(Configuration["DBPassword"]));
             services.AddTransient<IAllVotesLogic>(x => new AllVotesLogic(Configuration["DBPassword"]));
             services.AddTransient<AuthLogic, AuthLogic>();

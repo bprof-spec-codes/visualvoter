@@ -60,10 +60,10 @@ namespace Data
                 new { Id = "0d301757-99d2-4253-aac2-39e298dd0ab7", Name = "Hallgató", NormalizedName = "HALLGATO" }
             );
         }
-        public virtual DbSet<Models.Users> Users { get; set; }
+        //public virtual DbSet<Models.Users> Users { get; set; } // Deprecated
         public virtual DbSet<Models.OneVote> OneVote { get; set; }
         public virtual DbSet<Models.AllVotes> AllVotes { get; set; }
-        public virtual DbSet<Models.VotingRight> VotingRight { get; set; }
-        public virtual DbSet<Models.UserType> UserType { get; set; }
+        //public virtual DbSet<Models.VotingRight> VotingRight { get; set; } //Deprecated
+       // public virtual DbSet<Models.UserType> UserType { get; set; } //Deprecated
     }
 }
