@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Models;
 using Logic;
 using Microsoft.Extensions.Logging;
+using Microsoft.Net.Http.Headers;
 
 namespace VotOEApi.Controllers
 {
@@ -34,19 +35,19 @@ namespace VotOEApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        public void DeleteUser(int id)
+        public void DeleteVote(int id)
         {
             this.allVotesLogic.DeleteVote(id);
         }
 
         [HttpPost]
-        public void CreateUser([FromBody] AllVotes vote)
+        public void CreateVote([FromBody] AllVotes vote)
         {
             this.allVotesLogic.CreateVote(vote);
         }
 
         [HttpPut("{oldId}")]
-        public void UpdateUser(int oldId, [FromBody] AllVotes vote)
+        public void UpdateVote(int oldId, [FromBody] AllVotes vote)
         {
             this.allVotesLogic.UpdateVote(oldId, vote);
         }
@@ -55,6 +56,7 @@ namespace VotOEApi.Controllers
         [HttpPost]
         public void CreateNewVote([FromBody] VoteCreation voteCreation)
         {
+            
             this.allVotesLogic.CreateNewVote(voteCreation);
         }
 

@@ -71,6 +71,7 @@ namespace Logic
 
         public void CreateNewVote(VoteCreation newVote) //TODO CHECK IF USER HAS THE RIGHT
         {
+
             throw new NotImplementedException();
         }
 
