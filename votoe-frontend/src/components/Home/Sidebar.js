@@ -10,20 +10,33 @@ Modal.setAppElement("#root");
 function Sidebar() {
   // const [{ user }, dispatch] = useStateValue();
   const [modalOpen, setModalOpen] = useState(false);
-  const [activeVotes, setActiveVotes] = useState();
+  const [activeVotes, setActiveVotes] = useState([]);
 
   useEffect(() => {
     axios
       .get("/allvotes/active")
       .then((response) => {
-        const res = response.data;
-        setActiveVotes(res);
-        console.log(activeVotes);
+        setActiveVotes(response.data);
       })
       .catch((error) => {
         console.log(error.message);
       });
   }, []);
+
+  const renderActiveVotes = () => {
+    let arr = [];
+    for (let i = 0; i < activeVotes.length; i++) {
+      arr.push(
+        <div style={{display:"flex", justifyContent:"space-between", height:"80px", width:"100%",borderBottom:"1px solid rgba(0,0,0,0.2)", alignItems:"center"}}>
+          <p style={{fontSize:"large", fontWeight:"500"}}>{activeVotes[0].voteName}</p>{" "}
+          <IconButton>
+            <CloseOutlinedIcon />
+          </IconButton>{" "}
+        </div>
+      );
+    }
+    return arr;
+  };
 
   return (
     <div className="sidebar">
@@ -66,7 +79,7 @@ function Sidebar() {
               left: "36%",
 
               display: "flex",
-              justifyContent: "space-between",
+              flexDirection: "column",
               padding: 30,
             },
           }}
@@ -89,11 +102,11 @@ function Sidebar() {
               </IconButton>
             </div>
           </div>
-          <div className="modal_container">
-            {activeVotes &&
-              activeVotes.map((q, qKey) => {
-                <p>{q.voteName}</p>;
-              })}
+          <div
+            className="modal_container"
+            style={{ display: "flex", flexDirection: "column" }}
+          >
+            {renderActiveVotes()}
           </div>
         </Modal>
       </div>
