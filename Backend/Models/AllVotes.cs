@@ -46,9 +46,9 @@ namespace Models
         public int NoVotes { get; set; }
 
         /// <summary>
-        /// User is only allowed to participate in this vote, if it has every role present in this list.
+        /// User is only allowed to participate in this specific vote, if it has the role found here associated with it
         /// </summary>
-        public List<string> RequeredRole { get; set; }
+        public string RequiredRole { get; set; }
         /// <summary>
         /// Number of 'absention' choices for this vote
         /// </summary>

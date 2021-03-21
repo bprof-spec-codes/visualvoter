@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Models;
 using Logic;
-using VotoeBackend.Controllers;
 using Microsoft.Extensions.Logging;
 
 namespace VotOEApi.Controllers

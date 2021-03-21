@@ -10,7 +10,6 @@ namespace Logic
     public class AllVotesLogic : IAllVotesLogic
     {
         public IAllVotesRepository allVotesRepo;
-        public IVotingRightLogic vrLogic;
 
         public AllVotesLogic(string dbPassword)
         {
@@ -72,19 +71,7 @@ namespace Logic
 
         public void CreateNewVote(VoteCreation newVote) //TODO CHECK IF USER HAS THE RIGHT
         {
-            if (CreateVote(newVote.NewVote))
-            {
-                int lastVoteID = this.allVotesRepo.GetLastVote();
-                foreach (int userTypeID in newVote.WhoCanVote)
-                {
-                    VotingRight tempVR = new VotingRight()
-                    {
-                        UserTypeID = userTypeID,
-                        VoteID = lastVoteID,
-                    };
-                    this.vrLogic.CreateVotingRight(tempVR);
-                }
-            }
+            throw new NotImplementedException();
         }
 
         public IQueryable<AllVotes> GetAllActiveVotes()

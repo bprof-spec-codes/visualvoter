@@ -11,8 +11,6 @@ namespace Logic
     {
         public IOneVoteRepository oneVoteRepo;
         public IAllVotesLogic allVotesLogic;
-        public IVotingRightLogic vrLogic;
-        public IUsersLogic usersLogic;
 
         public OneVoteLogic(string dbPassword)
         {
@@ -73,38 +71,7 @@ namespace Logic
 
         private bool CanVote(OneVote vote)
         {
-            var userTypesWhoCanVote = this.vrLogic.GetOne(vote.VoteID);
-            var userTypeID = this.usersLogic.GetOneUser(vote.UserID).UserTypeID;
-            foreach(var votingRightsRow in userTypesWhoCanVote)
-            {
-                if(votingRightsRow.UserTypeID == userTypeID) // true = the user can vote
-                {
-                    //check if voted before
-                    if (GetUsersVoteHistory(vote.UserID, vote.VoteID))
-                    {
-                        var voteRow = this.allVotesLogic.GetOneVote(vote.VoteID);
-                        switch (vote.Choice)
-                        {
-                            case 0:
-                                voteRow.YesVotes += 1;
-                                this.allVotesLogic.UpdateVote(voteRow.VoteID, voteRow);
-                                break;
-                            case 1:
-                                voteRow.NoVotes += 1;
-                                this.allVotesLogic.UpdateVote(voteRow.VoteID, voteRow);
-                                break;
-                            case 2:
-                                voteRow.AbsentionVotes += 1;
-                                this.allVotesLogic.UpdateVote(voteRow.VoteID, voteRow);
-                                break;
-                            default: return false;
-                        }
-                        return true;
-                    }
-                    else return false;
-                }
-            }
-            return false;
+            throw new NotImplementedException();
         }
 
         private bool GetUsersVoteHistory(int userID, int voteID)
