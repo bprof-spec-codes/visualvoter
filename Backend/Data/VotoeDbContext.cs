@@ -45,6 +45,7 @@ namespace Data
 
                 
                 optionsBuilder.UseSqlServer(builder.ConnectionString);
+                //optionsBuilder.EnableSensitiveDataLogging();
             }
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -21,6 +21,7 @@ namespace Logic.Class
         {
             this.userManager = userManager;
             this.roleManager = roleManager;
+            
         }
 
 
@@ -28,11 +29,21 @@ namespace Logic.Class
         {
             return userManager.Users;
         }
-        public IdentityUser GetOneUser(string id)
+        public IdentityUser GetOneUser(string id, string email)
         {
-            return userManager.Users.Where(x => x.Id == id).SingleOrDefault();
+            if (id != null)
+            {
+                return userManager.Users.Where(x => x.Id == id).SingleOrDefault();
+            }
+            else if (email != null)
+            {
+                return userManager.Users.Where(x => x.Email == email).SingleOrDefault();
+            }
+            else
+            {
+                throw new ArgumentException();
+            }
         }
-
         public async Task<string> UpdateUser(string oldId, IdentityUser newUser)
         {
             await userManager.UpdateAsync(newUser);
@@ -77,9 +88,10 @@ namespace Logic.Class
             var result = await userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
-               await userManager.AddToRoleAsync(user, "HALLGATO");
+               await userManager.AddToRoleAsync(user, "Hallgató");
+                return "OK";
             }
-            return user.UserName;
+            return "NOT OK";
         }
 
         public async Task<TokenModel> LoginUser(Login model)
@@ -142,8 +154,9 @@ namespace Logic.Class
 
         public bool assignRolesToUser(IdentityUser user, List<string> roles)
         {
-            userManager.AddToRolesAsync(user, roles).Wait();
-            
+            var selectedUser = GetOneUser(user.Id, null);
+            //userManager.AddToRolesAsync(user, roles).Wait();
+            userManager.AddToRolesAsync(selectedUser, roles).Wait();
             return true;
         }
 

@@ -38,7 +38,14 @@ namespace VotOEApi.Controllers
         [Route("getOne")]
         public IdentityUser GetUser([FromQuery]string id)
         {
-            return this.authLogic.GetOneUser(id);
+            if (id.Contains('@'))
+            {
+                return this.authLogic.GetOneUser(null, id);
+            }
+            else
+            {
+               return this.authLogic.GetOneUser(id, null);
+            }
         }
 
         [HttpDelete("{id}")]

@@ -10,7 +10,7 @@ namespace Logic.Interface
 {
     public interface IAuthLogic
     {
-        IdentityUser GetOneUser(string userId);
+        IdentityUser GetOneUser(string userId, string email);
         IQueryable<IdentityUser> GetAllUsers();
         Task<string> CreateUser_debug(Login login);
         Task<string> DeleteUser(string userId);
