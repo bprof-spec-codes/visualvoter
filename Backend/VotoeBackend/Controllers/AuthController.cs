@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace VotOEApi.Controllers
 {
     [ApiController]
-    [Route("{controller}")]
+    [Route("[controller]")]
     public class AuthController : Controller
     {
         AuthLogic authLogic;
@@ -34,8 +34,9 @@ namespace VotOEApi.Controllers
             return authLogic.GetAllUsers();
         }
 
-        [HttpGet("{id}")]
-        public IdentityUser GetUser(string id)
+        [HttpGet]
+        [Route("getOne")]
+        public IdentityUser GetUser([FromQuery]string id)
         {
             return this.authLogic.GetOneUser(id);
         }
@@ -71,7 +72,7 @@ namespace VotOEApi.Controllers
         {
             return authLogic.getAllRoles();
         }
-        [Route("userRoles")] //TODO does not work
+        [Route("userRoles")]
         [HttpPost]
         public IEnumerable<string> getAllRolesOfUser([FromBody] IdentityUser user)
         {
@@ -86,12 +87,23 @@ namespace VotOEApi.Controllers
             return Ok();
         }
         [HttpGet]
-        public ActionResult createRole(string name)
+        [Route("createRole")]
+        public ActionResult createRole([FromQuery] string id)
         {
-            return Ok();
-            authLogic.createRole(name);
+            authLogic.createRole(id);
             return Ok();
         }
 
+        [HttpGet]
+        [Route("test")]
+        public RoleModel makeTestRoleModelJson()
+        {
+            var output = new RoleModel();
+            var users = authLogic.GetAllUsers();
+            output.User = users.First();
+
+            output.Roles = new List<string>() { "asd", "asdf" };
+            return output;
+        }
     }
 }

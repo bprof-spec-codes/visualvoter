@@ -143,6 +143,7 @@ namespace Logic.Class
         public bool assignRolesToUser(IdentityUser user, List<string> roles)
         {
             userManager.AddToRolesAsync(user, roles).Wait();
+            
             return true;
         }
 
@@ -150,13 +151,13 @@ namespace Logic.Class
         {
             var test = roleManager.Roles;
             ;
-            var querry = roleManager.Roles.Where(x => x.NormalizedName == name.ToUpper()).SingleOrDefault();
+            var query = roleManager.Roles.Where(x => x.NormalizedName == name.ToUpper()).SingleOrDefault();
             ;
-            if (roleManager.Roles.Where(x => x.NormalizedName == name.ToUpper()).SingleOrDefault() == null)
+            if (query != null)
             {
                 return false;
             }
-            roleManager.CreateAsync(new IdentityRole { Id = Guid.NewGuid().ToString(), Name = name, NormalizedName = name.ToUpper() });
+            roleManager.CreateAsync(new IdentityRole { Id = Guid.NewGuid().ToString(), Name = name, NormalizedName = name.ToUpper() }).Wait();
             return true;
         }
     }
