@@ -125,5 +125,14 @@ namespace Logic.Class
         {
             return roleManager.Roles.ToList();
         }
+
+        public bool hasRole(IdentityUser user, string role)
+        {
+            if (userManager.IsInRoleAsync(user, role).Result)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

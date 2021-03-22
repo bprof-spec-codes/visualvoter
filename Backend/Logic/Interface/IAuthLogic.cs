@@ -18,5 +18,6 @@ namespace Logic.Interface
         Task<string> UpdateUser(string oldId, IdentityUser newUser);
         Task<TokenModel> LoginUser(Login login);
         IEnumerable<IdentityRole> getAllRoles();
+        bool hasRole(IdentityUser user, string role);
     }
 }

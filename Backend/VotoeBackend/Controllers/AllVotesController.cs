@@ -8,6 +8,10 @@ using Models;
 using Logic;
 using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using Logic.Interface;
+using Microsoft.AspNetCore.Identity;
 
 namespace VotOEApi.Controllers
 {
@@ -16,12 +20,12 @@ namespace VotOEApi.Controllers
     public class AllVotesController : ControllerBase
     {
         private IAllVotesLogic allVotesLogic;
-
         public AllVotesController(IAllVotesLogic logic)
         {
             this.allVotesLogic = logic;
         }
 
+        //[Authorize]
         [HttpGet]
         public IEnumerable<AllVotes> GetAllVotes()
         {
@@ -43,7 +47,7 @@ namespace VotOEApi.Controllers
         [HttpPost]
         public void CreateVote([FromBody] AllVotes vote)
         {
-            this.allVotesLogic.CreateVote(vote);
+            this.allVotesLogic.CreateVote(vote); //TODO Miért van 2?
         }
 
         [HttpPut("{oldId}")]
@@ -52,18 +56,27 @@ namespace VotOEApi.Controllers
             this.allVotesLogic.UpdateVote(oldId, vote);
         }
 
+        [Authorize(Roles = "Admin,Szerkesző")]
         [Route("create")]
         [HttpPost]
-        public void CreateNewVote([FromBody] VoteCreation voteCreation)
+        public ActionResult CreateNewVote([FromBody] AllVotes voteCreation)
         {
-            
-            this.allVotesLogic.CreateNewVote(voteCreation);
+            //var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            //if (this.User.IsInRole(voteCreation.RequiredRole))
+            //{
+            //    this.allVotesLogic.CreateVote(voteCreation);
+            //    return Ok();
+            //}
+            //return Unauthorized();
+            this.allVotesLogic.CreateVote(voteCreation);
+            return Ok();
         }
 
         [Route("active")]
         [HttpGet]
         public IEnumerable<AllVotes> GetAllActiveVotes()
         {
+            
             return this.allVotesLogic.GetAllActiveVotes();
         }
     }

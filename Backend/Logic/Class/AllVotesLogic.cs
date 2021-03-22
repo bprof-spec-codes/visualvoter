@@ -1,4 +1,5 @@
-﻿using Models;
+﻿using Microsoft.AspNetCore.Identity;
+using Models;
 using Repository;
 using System;
 using System.Collections.Generic;
@@ -67,12 +68,6 @@ namespace Logic
             {
                 return false;
             }
-        }
-
-        public void CreateNewVote(VoteCreation newVote) //TODO CHECK IF USER HAS THE RIGHT
-        {
-
-            throw new NotImplementedException();
         }
 
         public IQueryable<AllVotes> GetAllActiveVotes()
