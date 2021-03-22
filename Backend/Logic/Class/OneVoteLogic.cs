@@ -20,7 +20,6 @@ namespace Logic
         }
         public bool CreateOneVote(OneVote vote)
         {
-            if (!CanVote(vote)) return false;
             try
             {
                 this.oneVoteRepo.Add(vote);
@@ -68,11 +67,6 @@ namespace Logic
             {
                 return false;
             }
-        }
-
-        private bool CanVote(OneVote vote)
-        {
-            throw new NotImplementedException();
         }
 
         private bool GetUsersVoteHistory(int userID, int voteID)

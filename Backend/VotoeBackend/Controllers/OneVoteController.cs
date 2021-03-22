@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Logic;
 using Microsoft.Extensions.Logging;
 using Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace VotOEApi.Controllers
 {
@@ -39,6 +40,7 @@ namespace VotOEApi.Controllers
             this.oneVoteLogic.DeleteOneVote(id);
         }
 
+        [Authorize(Roles = "Admin,Szerkesztő,Hallgató")]
         [HttpPost]
         public IActionResult CreateVote([FromBody] OneVote vote)
         {

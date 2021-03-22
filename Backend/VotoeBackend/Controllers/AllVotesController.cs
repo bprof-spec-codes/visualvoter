@@ -59,7 +59,7 @@ namespace VotOEApi.Controllers
         [Authorize(Roles = "Admin,Szerkesző")]
         [Route("create")]
         [HttpPost]
-        public ActionResult CreateNewVote([FromBody] AllVotes voteCreation)
+        public ActionResult CreateNewVote([FromBody] AllVotes thisVote)
         {
             //var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             //if (this.User.IsInRole(voteCreation.RequiredRole))
@@ -68,7 +68,7 @@ namespace VotOEApi.Controllers
             //    return Ok();
             //}
             //return Unauthorized();
-            this.allVotesLogic.CreateVote(voteCreation);
+            this.allVotesLogic.CreateVote(thisVote);
             return Ok();
         }
 
