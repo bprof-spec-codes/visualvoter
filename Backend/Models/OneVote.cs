@@ -34,8 +34,6 @@ namespace Models
         /// </summary>
         public int Choice { get; set; }
         [JsonIgnore]
-        public virtual Users Users { get; set; }
-        [JsonIgnore]
         public virtual AllVotes AllVotes { get; set; }
 
     }

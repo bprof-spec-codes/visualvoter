@@ -1,4 +1,5 @@
-﻿using Models;
+﻿using Microsoft.AspNetCore.Identity;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,9 @@ namespace Logic
         IQueryable<AllVotes> GetAllVotes();
         bool CreateVote(AllVotes vote);
         bool DeleteVote(int voteId);
-        void CreateNewVote(VoteCreation newVote);
         bool UpdateVote(int oldId, AllVotes newVote);
 
         IQueryable<AllVotes> GetAllActiveVotes();
+        List<AllVotes> getAllAvaliableVotes(List<string> roles);
     }
 }

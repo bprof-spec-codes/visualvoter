@@ -39,11 +39,6 @@ namespace Repository
             return output;
         }
 
-        public void Update(OneVote element)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Update(int oldKey, OneVote element)
         {
             var oldVote = this.GetOne(oldKey);
