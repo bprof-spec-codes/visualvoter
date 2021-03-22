@@ -80,11 +80,5 @@ namespace Logic
         {
            return allVotesLogic.GetOneVote(input.VoteID);
         }
-
-        public bool canVote(IdentityUser user, OneVote vote)
-        {
-            var associatedVote = getAssociatedVote(vote);
-
-        }
     }
 }

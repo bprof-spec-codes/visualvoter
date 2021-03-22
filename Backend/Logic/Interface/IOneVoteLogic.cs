@@ -15,7 +15,6 @@ namespace Logic
         bool DeleteOneVote(int voteId);
 
         bool UpdateOneVote(int oldId, OneVote newVote);
-        bool canVote(IdentityUser user, OneVote vote);
         AllVotes getAssociatedVote(OneVote input);
     }
 }
