@@ -74,5 +74,18 @@ namespace Logic
         {
             return this.allVotesRepo.GetAll().Where(x => x.IsClosed == 0 && x.IsFinished == 0);
         }
+
+        public List<AllVotes> getAllAvaliableVotes(List<string> roles)
+        {
+            List<AllVotes> output = new List<AllVotes>();
+            foreach (var item in this.GetAllVotes())
+            {
+                if (roles.Contains(item.RequiredRole))
+                {
+                    output.Add(item);
+                }
+            }
+            return output;
+        }
     }
 }

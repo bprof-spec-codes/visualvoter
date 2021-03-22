@@ -81,5 +81,22 @@ namespace VotOEApi.Controllers
 
             return this.allVotesLogic.GetAllActiveVotes();
         }
+
+        [Authorize]
+        [Route("usersVotes")]
+        [HttpGet]
+        public List<AllVotes> getAllUserAccessibleVotes()
+        {
+            var roles = ((ClaimsIdentity)User.Identity).Claims
+                .Where(c => c.Type == ClaimTypes.Role)
+                .Select(c => c.Value).ToList();
+
+            //var userIdentity = (ClaimsIdentity)User.Identity;
+            //var claims = userIdentity.Claims;
+            //var roleClaimType = userIdentity.RoleClaimType;
+            //var roles = claims.Where(c => c.Type == ClaimTypes.Role).ToList();
+
+            return allVotesLogic.getAllAvaliableVotes(roles);
+        }
     }
 }
