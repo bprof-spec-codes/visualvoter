@@ -44,10 +44,12 @@ namespace VotOEApi.Controllers
             this.allVotesLogic.DeleteVote(id);
         }
 
+        [Authorize(Roles = "Admin,Szerkesző")]
         [HttpPost]
-        public void CreateVote([FromBody] AllVotes vote)
+        public ActionResult CreateVote([FromBody] AllVotes vote)
         {
-            this.allVotesLogic.CreateVote(vote); //TODO Miért van 2?
+            this.allVotesLogic.CreateVote(vote);
+            return Ok();
         }
 
         [HttpPut("{oldId}")]
@@ -56,27 +58,27 @@ namespace VotOEApi.Controllers
             this.allVotesLogic.UpdateVote(oldId, vote);
         }
 
-        [Authorize(Roles = "Admin,Szerkesző")]
-        [Route("create")]
-        [HttpPost]
-        public ActionResult CreateNewVote([FromBody] AllVotes thisVote)
-        {
-            //var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            //if (this.User.IsInRole(voteCreation.RequiredRole))
-            //{
-            //    this.allVotesLogic.CreateVote(voteCreation);
-            //    return Ok();
-            //}
-            //return Unauthorized();
-            this.allVotesLogic.CreateVote(thisVote);
-            return Ok();
-        }
+
+        // [Route("create")]
+        // [HttpPost]
+        // public ActionResult CreateNewVote([FromBody] AllVotes thisVote)
+        //{
+        //var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        //if (this.User.IsInRole(voteCreation.RequiredRole))
+        //{
+        //    this.allVotesLogic.CreateVote(voteCreation);
+        //    return Ok();
+        //}
+        //return Unauthorized();
+        // this.allVotesLogic.CreateVote(thisVote);
+        //return Ok();
+        //}
 
         [Route("active")]
         [HttpGet]
         public IEnumerable<AllVotes> GetAllActiveVotes()
         {
-            
+
             return this.allVotesLogic.GetAllActiveVotes();
         }
     }
