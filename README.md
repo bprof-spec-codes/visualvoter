@@ -2,12 +2,11 @@
 ###### team visualvoter
 
 ### Csapatok:
+- #### Team Leader:
+     - Tuba Márk
 - #### Frontend (React):
      - Papp Bence
-     - Tuba Márk
 - #### Backend (Asp api):
     - Pap Tamás
     - Luxeder Zoltán
-
-
-(Közös megbeszélés után abban maradtunk, hogy a team leaderként nem szeretnénk konkrét embert kijelölni, ehhez a pozícióhoz kapcsolódó feladatok szétosztását rugalmasan tervezzük kezelni)
+	

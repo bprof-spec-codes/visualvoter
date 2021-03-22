@@ -59,19 +59,19 @@ namespace VotOEApi.Controllers
         }
 
 
-        // [Route("create")]
-        // [HttpPost]
-        // public ActionResult CreateNewVote([FromBody] AllVotes thisVote)
+        //[Route("create")]
+        //[HttpPost]
+        //public ActionResult CreateNewVote([FromBody] AllVotes thisVote)
         //{
-        //var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        //if (this.User.IsInRole(voteCreation.RequiredRole))
-        //{
-        //    this.allVotesLogic.CreateVote(voteCreation);
+        //    //var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        //    if (this.User.IsInRole(voteCreation.RequiredRole))
+        //    {
+        //        this.allVotesLogic.CreateVote(voteCreation);
+        //        return Ok();
+        //    }
+        //    return Unauthorized();
+        //    this.allVotesLogic.CreateVote(thisVote);
         //    return Ok();
-        //}
-        //return Unauthorized();
-        // this.allVotesLogic.CreateVote(thisVote);
-        //return Ok();
         //}
 
         [Route("active")]

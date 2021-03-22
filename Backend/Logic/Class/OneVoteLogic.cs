@@ -76,5 +76,15 @@ namespace Logic
                         select x;
             return query.Count() == 0;
         }
+        public AllVotes getAssociatedVote(OneVote input)
+        {
+           return allVotesLogic.GetOneVote(input.VoteID);
+        }
+
+        public bool canVote(IdentityUser user, OneVote vote)
+        {
+            var associatedVote = getAssociatedVote(vote);
+
+        }
     }
 }

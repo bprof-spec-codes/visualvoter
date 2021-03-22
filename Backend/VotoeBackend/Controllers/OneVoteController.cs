@@ -42,9 +42,14 @@ namespace VotOEApi.Controllers
 
         [Authorize(Roles = "Admin,Editor,Hallgató")]
         [HttpPost]
-        public IActionResult CreateVote([FromBody] OneVote vote)
+        public IActionResult SubmitVote([FromBody] OneVote vote)
         {
-            if (this.oneVoteLogic.CreateOneVote(vote)) return Ok();
+            var associatedVote = this.oneVoteLogic.getAssociatedVote(vote);
+            if (this.User.IsInRole(associatedVote.RequiredRole))
+            {
+                this.oneVoteLogic.CreateOneVote(vote);
+                return Ok();
+            }
             else return BadRequest();
         }
 
