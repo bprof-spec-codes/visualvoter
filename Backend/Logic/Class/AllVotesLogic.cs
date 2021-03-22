@@ -1,4 +1,5 @@
-﻿using Models;
+﻿using Microsoft.AspNetCore.Identity;
+using Models;
 using Repository;
 using System;
 using System.Collections.Generic;
@@ -10,12 +11,10 @@ namespace Logic
     public class AllVotesLogic : IAllVotesLogic
     {
         public IAllVotesRepository allVotesRepo;
-        public IVotingRightLogic vrLogic;
 
         public AllVotesLogic(string dbPassword)
         {
             this.allVotesRepo = new AllVotesRepository(dbPassword);
-            this.vrLogic = new VotingRightLogic(dbPassword);
         }
 
         public bool CreateVote(AllVotes vote)
@@ -71,26 +70,22 @@ namespace Logic
             }
         }
 
-        public void CreateNewVote(VoteCreation newVote)
-        {
-            if (CreateVote(newVote.NewVote))
-            {
-                int lastVoteID = this.allVotesRepo.GetLastVote();
-                foreach (int userTypeID in newVote.WhoCanVote)
-                {
-                    VotingRight tempVR = new VotingRight()
-                    {
-                        UserTypeID = userTypeID,
-                        VoteID = lastVoteID,
-                    };
-                    this.vrLogic.CreateVotingRight(tempVR);
-                }
-            }
-        }
-
         public IQueryable<AllVotes> GetAllActiveVotes()
         {
             return this.allVotesRepo.GetAll().Where(x => x.IsClosed == 0 && x.IsFinished == 0);
+        }
+
+        public List<AllVotes> getAllAvaliableVotes(List<string> roles)
+        {
+            List<AllVotes> output = new List<AllVotes>();
+            foreach (var item in this.GetAllVotes())
+            {
+                if (roles.Contains(item.RequiredRole))
+                {
+                    output.Add(item);
+                }
+            }
+            return output;
         }
     }
 }

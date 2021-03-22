@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Logic;
-using VotoeBackend.Controllers;
 using Microsoft.Extensions.Logging;
 using Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace VotOEApi.Controllers
 {
@@ -16,12 +16,10 @@ namespace VotOEApi.Controllers
     public class OneVoteController : ControllerBase
     {
         private IOneVoteLogic oneVoteLogic;
-        private readonly ILogger<UsersController> _logger;
 
-        public OneVoteController(ILogger<UsersController> logger, IOneVoteLogic logic)
+        public OneVoteController(IOneVoteLogic logic)
         {
             this.oneVoteLogic = logic;
-            _logger = logger;
         }
 
         [HttpGet]
@@ -42,6 +40,7 @@ namespace VotOEApi.Controllers
             this.oneVoteLogic.DeleteOneVote(id);
         }
 
+        [Authorize(Roles = "Admin,Szerkesztő,Hallgató")]
         [HttpPost]
         public IActionResult CreateVote([FromBody] OneVote vote)
         {
