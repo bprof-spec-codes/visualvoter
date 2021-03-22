@@ -65,11 +65,32 @@ namespace VotOEApi.Controllers
             }
         }
 
-        [Route("roles")]
+        [Route("allRoles")]
         [HttpGet]
         public IEnumerable<IdentityRole> getAllUserRoles()
         {
             return authLogic.getAllRoles();
+        }
+        [Route("userRoles")] //TODO does not work
+        [HttpPost]
+        public IEnumerable<string> getAllRolesOfUser([FromBody] IdentityUser user)
+        {
+            return authLogic.getAllRolesOfUser(user);
+        }
+
+        [Route("assignRole")]
+        [HttpPost]
+        public ActionResult assignRole(RoleModel model)
+        {
+            authLogic.assignRolesToUser(model.User, model.Roles);
+            return Ok();
+        }
+        [HttpGet]
+        public ActionResult createRole(string name)
+        {
+            return Ok();
+            authLogic.createRole(name);
+            return Ok();
         }
 
     }

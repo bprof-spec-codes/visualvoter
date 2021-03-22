@@ -134,5 +134,30 @@ namespace Logic.Class
             }
             return false;
         }
+
+        public IEnumerable<string> getAllRolesOfUser(IdentityUser user)
+        {
+            return userManager.GetRolesAsync(user).Result.ToList();
+        }
+
+        public bool assignRolesToUser(IdentityUser user, List<string> roles)
+        {
+            userManager.AddToRolesAsync(user, roles).Wait();
+            return true;
+        }
+
+        public bool createRole(string name)
+        {
+            var test = roleManager.Roles;
+            ;
+            var querry = roleManager.Roles.Where(x => x.NormalizedName == name.ToUpper()).SingleOrDefault();
+            ;
+            if (roleManager.Roles.Where(x => x.NormalizedName == name.ToUpper()).SingleOrDefault() == null)
+            {
+                return false;
+            }
+            roleManager.CreateAsync(new IdentityRole { Id = Guid.NewGuid().ToString(), Name = name, NormalizedName = name.ToUpper() });
+            return true;
+        }
     }
 }

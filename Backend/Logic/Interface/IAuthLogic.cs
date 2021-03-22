@@ -19,5 +19,8 @@ namespace Logic.Interface
         Task<TokenModel> LoginUser(Login login);
         IEnumerable<IdentityRole> getAllRoles();
         bool hasRole(IdentityUser user, string role);
+        IEnumerable<string> getAllRolesOfUser(IdentityUser user);
+        bool assignRolesToUser(IdentityUser user, List<string> roles);
+        bool createRole(string name);
     }
 }

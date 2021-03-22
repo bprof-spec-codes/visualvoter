@@ -40,7 +40,7 @@ namespace VotOEApi.Controllers
             this.oneVoteLogic.DeleteOneVote(id);
         }
 
-        [Authorize(Roles = "Admin,Szerkesztő,Hallgató")]
+        [Authorize(Roles = "Admin,Editor,Hallgató")]
         [HttpPost]
         public IActionResult CreateVote([FromBody] OneVote vote)
         {
