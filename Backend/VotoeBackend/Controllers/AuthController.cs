@@ -101,6 +101,14 @@ namespace VotOEApi.Controllers
             return Ok();
         }
 
+        [HttpPost]
+        [Route("createRoleForVote")]
+        public ActionResult createRoleForVote([FromBody] List<string> id)
+        {
+            authLogic.RoleCreationForNewVote(id);
+            return Ok();
+        }
+
         [HttpGet]
         [Route("test")]
         public RoleModel makeTestRoleModelJson()
