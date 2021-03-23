@@ -16,6 +16,7 @@ namespace Logic.Class
     {
         UserManager<IdentityUser> userManager;
         RoleManager<IdentityRole> roleManager;
+        private static Random random = new Random();
 
         public AuthLogic(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
@@ -162,10 +163,7 @@ namespace Logic.Class
 
         public bool createRole(string name)
         {
-            var test = roleManager.Roles;
-            ;
             var query = roleManager.Roles.Where(x => x.NormalizedName == name.ToUpper()).SingleOrDefault();
-            ;
             if (query != null)
             {
                 return false;
@@ -179,16 +177,23 @@ namespace Logic.Class
             List<IdentityUser> users = new List<IdentityUser>();
             foreach(var roleId in roles)
             {
-                var users2 = this.GetAllUsersOfRole(roleId);
-                users.Concat(users2);
+                users.Concat(this.GetAllUsersOfRole(roleId));
             }
-            return null;
+            string newRoleNameForVote = "VOTECREATEDROLE-" + RandomString(16);
+            createRole(newRoleNameForVote);
+            return newRoleNameForVote;
         }
 
         public IList<IdentityUser> GetAllUsersOfRole(string roleId)
         {
-            var users = this.userManager.GetUsersInRoleAsync(roleId).Result.ToList();
-            return users;
+            return this.userManager.GetUsersInRoleAsync(roleId).Result.ToList();
+        }
+
+        private static string RandomString(int length)
+        {
+            const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
         }
     }
 }
