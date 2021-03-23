@@ -16,6 +16,6 @@ namespace Logic
         bool UpdateVote(int oldId, AllVotes newVote);
 
         IQueryable<AllVotes> GetAllActiveVotes();
-        List<AllVotes> getAllAvaliableVotes(List<string> roles);
+        List<AllVotes> GetAllAvaliableVotes(List<string> roles);
     }
 }

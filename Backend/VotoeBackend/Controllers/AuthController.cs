@@ -77,27 +77,27 @@ namespace VotOEApi.Controllers
         [HttpGet]
         public IEnumerable<IdentityRole> getAllUserRoles()
         {
-            return authLogic.getAllRoles();
+            return authLogic.GetAllRoles();
         }
         [Route("userRoles")]
         [HttpPost]
         public IEnumerable<string> getAllRolesOfUser([FromBody] IdentityUser user)
         {
-            return authLogic.getAllRolesOfUser(user);
+            return authLogic.GetAllRolesOfUser(user);
         }
 
         [Route("assignRole")]
         [HttpPost]
         public ActionResult assignRole(RoleModel model)
         {
-            authLogic.assignRolesToUser(model.User, model.Roles);
+            authLogic.AssignRolesToUser(model.User, model.Roles);
             return Ok();
         }
         [HttpGet]
         [Route("createRole")]
         public ActionResult createRole([FromQuery] string id)
         {
-            authLogic.createRole(id);
+            authLogic.CreateRole(id);
             return Ok();
         }
 

@@ -134,12 +134,12 @@ namespace Logic.Class
             throw new ArgumentException("Login failed");
         }
 
-        public IEnumerable<IdentityRole> getAllRoles()
+        public IEnumerable<IdentityRole> GetAllRoles()
         {
             return roleManager.Roles.ToList();
         }
 
-        public bool hasRole(IdentityUser user, string role)
+        public bool HasRole(IdentityUser user, string role)
         {
             if (userManager.IsInRoleAsync(user, role).Result)
             {
@@ -148,12 +148,12 @@ namespace Logic.Class
             return false;
         }
 
-        public IEnumerable<string> getAllRolesOfUser(IdentityUser user)
+        public IEnumerable<string> GetAllRolesOfUser(IdentityUser user)
         {
             return userManager.GetRolesAsync(user).Result.ToList();
         }
 
-        public bool assignRolesToUser(IdentityUser user, List<string> roles)
+        public bool AssignRolesToUser(IdentityUser user, List<string> roles)
         {
             var selectedUser = GetOneUser(user.Id, null);
             //userManager.AddToRolesAsync(user, roles).Wait();
@@ -161,7 +161,7 @@ namespace Logic.Class
             return true;
         }
 
-        public bool createRole(string name)
+        public bool CreateRole(string name)
         {
             var query = roleManager.Roles.Where(x => x.NormalizedName == name.ToUpper()).SingleOrDefault();
             if (query != null)
@@ -178,7 +178,7 @@ namespace Logic.Class
             {
                 List<IdentityUser> users = new List<IdentityUser>();
                 string newRoleNameForVote = "VOTECREATEDROLE-" + RandomString(16);
-                createRole(newRoleNameForVote);
+                CreateRole(newRoleNameForVote);
                 foreach (var roleId in roles)
                 {
                     users.Concat(this.GetAllUsersOfRole(roleId));

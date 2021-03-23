@@ -17,11 +17,11 @@ namespace Logic.Interface
         Task<string> DeleteUser(IdentityUser inUser);
         Task<string> UpdateUser(string oldId, IdentityUser newUser);
         Task<TokenModel> LoginUser(Login login);
-        IEnumerable<IdentityRole> getAllRoles();
-        bool hasRole(IdentityUser user, string role);
-        IEnumerable<string> getAllRolesOfUser(IdentityUser user);
-        bool assignRolesToUser(IdentityUser user, List<string> roles);
-        bool createRole(string name);
+        IEnumerable<IdentityRole> GetAllRoles();
+        bool HasRole(IdentityUser user, string role);
+        IEnumerable<string> GetAllRolesOfUser(IdentityUser user);
+        bool AssignRolesToUser(IdentityUser user, List<string> roles);
+        bool CreateRole(string name);
         public string RoleCreationForNewVote(IList<string> roles);
         IList<IdentityUser> GetAllUsersOfRole(string roleId);
     }
