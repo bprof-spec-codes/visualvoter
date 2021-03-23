@@ -11,7 +11,7 @@ namespace Logic
     {
         AllVotes GetOneVote(int voteId);
         IQueryable<AllVotes> GetAllVotes();
-        bool CreateVote(AllVotes vote);
+        bool CreateVote(VoteCreation vote);
         bool DeleteVote(int voteId);
         bool UpdateVote(int oldId, AllVotes newVote);
 

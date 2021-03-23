@@ -84,7 +84,7 @@ namespace Logic
         public bool canVote(IdentityUser user, OneVote vote)
         {
             var associatedVote = getAssociatedVote(vote);
-
+            return true; //placeholder
         }
     }
 }
