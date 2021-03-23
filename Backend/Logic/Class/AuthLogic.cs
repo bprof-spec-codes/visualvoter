@@ -173,5 +173,22 @@ namespace Logic.Class
             roleManager.CreateAsync(new IdentityRole { Id = Guid.NewGuid().ToString(), Name = name, NormalizedName = name.ToUpper() }).Wait();
             return true;
         }
+
+        public string RoleCreationForNewVote(IList<string> roles)
+        {
+            List<IdentityUser> users = new List<IdentityUser>();
+            foreach(var roleId in roles)
+            {
+                var users2 = this.GetAllUsersOfRole(roleId);
+                users.Concat(users2);
+            }
+            return null;
+        }
+
+        public IList<IdentityUser> GetAllUsersOfRole(string roleId)
+        {
+            var users = this.userManager.GetUsersInRoleAsync(roleId).Result.ToList();
+            return users;
+        }
     }
 }

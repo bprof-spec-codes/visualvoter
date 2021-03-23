@@ -22,5 +22,7 @@ namespace Logic.Interface
         IEnumerable<string> getAllRolesOfUser(IdentityUser user);
         bool assignRolesToUser(IdentityUser user, List<string> roles);
         bool createRole(string name);
+        public string RoleCreationForNewVote(IList<string> roles);
+        IList<IdentityUser> GetAllUsersOfRole(string roleId);
     }
 }
