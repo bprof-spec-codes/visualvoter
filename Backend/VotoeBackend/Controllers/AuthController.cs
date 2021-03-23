@@ -49,15 +49,15 @@ namespace VotOEApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        public void DeleteUser(string id)
+        public async void DeleteUser(string id)
         {
-            this.authLogic.DeleteUser(id);
+            await this.authLogic.DeleteUser(id);
         }
 
         [HttpPut("{oldId}")]
-        public void UpdateUser(string oldId, [FromBody] IdentityUser user)
+        public async void UpdateUser(string oldId, [FromBody] IdentityUser user)
         {
-            this.authLogic.UpdateUser(oldId, user);
+            await this.authLogic.UpdateUser(oldId, user);
         }
 
         [HttpPut]
