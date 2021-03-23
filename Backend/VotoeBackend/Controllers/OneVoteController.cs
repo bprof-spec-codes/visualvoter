@@ -40,7 +40,21 @@ namespace VotOEApi.Controllers
             this.oneVoteLogic.DeleteOneVote(id);
         }
 
-        [Authorize(Roles = "Admin,Editor,Hallgató")]
+        [Authorize]
+        [HttpPost]
+        public IActionResult SubmitVote([FromBody] OneVote vote)
+        {
+            var associatedVote = this.oneVoteLogic.getAssociatedVote(vote);
+            if (this.User.IsInRole(associatedVote.RequiredRole))
+            {
+                this.oneVoteLogic.CreateOneVote(vote);
+                //this.User.RemoveFromRole(associatedVote.RequiredRole); //somehow achieve this here
+                return Ok();
+            }
+            return Unauthorized();
+        }
+
+        /*[Authorize(Roles = "Admin,Editor,Hallgató")]
         [HttpPost]
         public IActionResult SubmitVote([FromBody] OneVote vote)
         {
@@ -50,8 +64,8 @@ namespace VotOEApi.Controllers
                 this.oneVoteLogic.CreateOneVote(vote);
                 return Ok();
             }
-            else return BadRequest();
-        }
+            return Unauthorized();
+        }*/
 
         [HttpPut("{oldId}")]
         public IActionResult UpdateVote(int oldId, [FromBody] OneVote vote)
