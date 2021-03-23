@@ -174,14 +174,25 @@ namespace Logic.Class
 
         public string RoleCreationForNewVote(IList<string> roles)
         {
-            List<IdentityUser> users = new List<IdentityUser>();
-            foreach(var roleId in roles)
+            try
             {
-                users.Concat(this.GetAllUsersOfRole(roleId));
+                List<IdentityUser> users = new List<IdentityUser>();
+                string newRoleNameForVote = "VOTECREATEDROLE-" + RandomString(16);
+                createRole(newRoleNameForVote);
+                foreach (var roleId in roles)
+                {
+                    users.Concat(this.GetAllUsersOfRole(roleId));
+                }
+                foreach (var user in users)
+                {
+                    this.userManager.AddToRoleAsync(user, newRoleNameForVote);
+                }
+                return newRoleNameForVote;
             }
-            string newRoleNameForVote = "VOTECREATEDROLE-" + RandomString(16);
-            createRole(newRoleNameForVote);
-            return newRoleNameForVote;
+            catch (Exception)
+            {
+                return "Fail";
+            }
         }
 
         public IList<IdentityUser> GetAllUsersOfRole(string roleId)
