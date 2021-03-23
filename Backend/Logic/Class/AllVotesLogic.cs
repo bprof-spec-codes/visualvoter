@@ -17,12 +17,12 @@ namespace Logic
             this.allVotesRepo = new AllVotesRepository(dbPassword);
         }
 
-        public bool CreateVote(VoteCreation vote)
+        public bool CreateVote(AllVotes vote)
         {
             //this.allVotesRepo.Add(vote);
             try
             {
-                this.allVotesRepo.Add(vote.NewVote);
+                this.allVotesRepo.Add(vote);
                 return true;
             }
             catch (Exception)

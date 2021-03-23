@@ -46,7 +46,7 @@ namespace VotOEApi.Controllers
 
         [Authorize(Roles = "Admin,Editor")]
         [HttpPost]
-        public ActionResult CreateVote([FromBody] VoteCreation vote)
+        public ActionResult CreateVote([FromBody] AllVotes vote)
         {
             this.allVotesLogic.CreateVote(vote);
             return Ok();
