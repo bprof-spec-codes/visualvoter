@@ -148,6 +148,16 @@ namespace Logic.Class
             return false;
         }
 
+        public async Task<bool> HasRoleByName(string userName, string role)
+        {
+            var user = await this.userManager.FindByNameAsync(userName);
+            if (userManager.IsInRoleAsync(user, role).Result)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public IEnumerable<string> GetAllRolesOfUser(IdentityUser user)
         {
             return userManager.GetRolesAsync(user).Result.ToList();
@@ -161,9 +171,10 @@ namespace Logic.Class
             return true;
         }
 
-        public bool CreateRole(string name)
+        public async Task<bool> CreateRole(string name)
         {
-            var query = roleManager.Roles.Where(x => x.NormalizedName == name.ToUpper()).SingleOrDefault();
+            var query = await this.roleManager.FindByNameAsync(name);
+            //var query = roleManager.Roles.Where(x => x.NormalizedName == name.ToUpper()).SingleOrDefault();
             if (query != null)
             {
                 return false;
@@ -172,20 +183,21 @@ namespace Logic.Class
             return true;
         }
 
-        public string RoleCreationForNewVote(IList<string> roles)
+        public async Task<string> RoleCreationForNewVote(IList<string> roles)
         {
             try
             {
                 List<IdentityUser> users = new List<IdentityUser>();
                 string newRoleNameForVote = "VOTECREATEDROLE-" + RandomString(16);
-                CreateRole(newRoleNameForVote);
+                await CreateRole(newRoleNameForVote);
                 foreach (var roleId in roles)
                 {
-                    users.Concat(this.GetAllUsersOfRole(roleId));
+                    var usersOfRole = await this.GetAllUsersOfRole(roleId);
+                    users.AddRange(usersOfRole);
                 }
                 foreach (var user in users)
                 {
-                    this.userManager.AddToRoleAsync(user, newRoleNameForVote);
+                    await this.userManager.AddToRoleAsync(user, newRoleNameForVote);
                 }
                 return newRoleNameForVote;
             }
@@ -195,9 +207,10 @@ namespace Logic.Class
             }
         }
 
-        public IList<IdentityUser> GetAllUsersOfRole(string roleId)
+        public async Task<List<IdentityUser>> GetAllUsersOfRole(string roleId)
         {
-            return this.userManager.GetUsersInRoleAsync(roleId).Result.ToList();
+            var users = await this.userManager.GetUsersInRoleAsync(roleId);
+            return users.ToList();
         }
 
         private static string RandomString(int length)
@@ -207,10 +220,19 @@ namespace Logic.Class
               .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
-        public async void RemoveUserFromRole(string userName,string requiredRole)
+        public async Task<string> RemoveUserFromRole(string userName, string requiredRole)
         {
-            var user = this.userManager.Users.Where(user => user.UserName == userName).SingleOrDefault();
-            await this.userManager.RemoveFromRoleAsync(user, requiredRole);
+            try
+            {
+                var user = await this.userManager.FindByNameAsync(userName);
+                //var user = this.userManager.Users.Where(user => user.UserName == userName).SingleOrDefault();
+                await this.userManager.RemoveFromRoleAsync(user, requiredRole);
+                return "Success";
+            }
+            catch (Exception)
+            {
+                return "Fail";
+            }
         }
     }
 }
