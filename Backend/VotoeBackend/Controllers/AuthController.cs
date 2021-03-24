@@ -103,9 +103,9 @@ namespace VotOEApi.Controllers
 
         [HttpPost]
         [Route("createRoleForVote")]
-        public ActionResult CreateRoleForVote([FromBody] List<string> id)
+        public async Task<ActionResult> CreateRoleForVoteAsync([FromBody] List<string> id)
         {
-            string generatedroleName = this.authLogic.RoleCreationForNewVote(id);
+            string generatedroleName = await this.authLogic.RoleCreationForNewVote(id);
             if (generatedroleName != null) return Ok(generatedroleName);
             return BadRequest();
             
