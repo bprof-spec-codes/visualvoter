@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using Logic.Class;
 
 namespace VotOEApi.Controllers
 {
@@ -17,10 +18,12 @@ namespace VotOEApi.Controllers
     public class OneVoteController : ControllerBase
     {
         private IOneVoteLogic oneVoteLogic;
+        AuthLogic authLogic;
 
-        public OneVoteController(IOneVoteLogic logic)
+        public OneVoteController(IOneVoteLogic logic, AuthLogic authLogic)
         {
             this.oneVoteLogic = logic;
+            this.authLogic = authLogic;
         }
 
         [HttpGet]
@@ -43,20 +46,34 @@ namespace VotOEApi.Controllers
 
         [Authorize]
         [HttpPost]
-        public IActionResult SubmitVote([FromBody] OneVote vote)
+        public async Task<IActionResult> SubmitVote([FromBody] OneVote vote)
         {
             var associatedVote = this.oneVoteLogic.getAssociatedVote(vote);
-            if (this.User.IsInRole(associatedVote.RequiredRole))
+            var userName = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //if (this.User.IsInRole(associatedVote.RequiredRole))
+            if (await this.authLogic.HasRoleByName(userName,associatedVote.RequiredRole))
             {
-                this.oneVoteLogic.CreateOneVote(vote);
+                //this.oneVoteLogic.CreateOneVote(vote);
+
+                //Code is correct but still stays in that role after removing.
+                await this.authLogic.RemoveUserFromRole(userName, associatedVote.RequiredRole);
                 //this.authLogic.RemoveUserFromRole(this.User.Identity.Name, associatedVote.RequiredRole);
-                var role = ((ClaimsIdentity)User.Identity).Claims
+
+
+
+                //TODO Fix this to use the lines below instead of requiring an instance of authlogic
+                //These lines of command work, but for some reason at the next request the role is still on the user after it was remove here.
+                /*var role = ((ClaimsIdentity)User.Identity).Claims
                         .Where(c => c.Type == ClaimTypes.Role && c.Value == associatedVote.RequiredRole)
                         .FirstOrDefault();
 
                 var identity = this.User.Identity as ClaimsIdentity;
-                identity.RemoveClaim(role);
-                //this.User.RemoveFromRole(associatedVote.RequiredRole); //somehow achieve this here
+                identity.RemoveClaim(role);*/
+
+
+
+
+
                 return Ok();
             }
             return Unauthorized();
