@@ -103,7 +103,7 @@ namespace VotOEApi.Controllers
 
         [HttpPost]
         [Route("createRoleForVote")]
-        public ActionResult createRoleForVote([FromBody] List<string> id)
+        public ActionResult CreateRoleForVote([FromBody] List<string> id)
         {
             string generatedroleName = this.authLogic.RoleCreationForNewVote(id);
             if (generatedroleName != null) return Ok(generatedroleName);

@@ -8,6 +8,7 @@ using Logic;
 using Microsoft.Extensions.Logging;
 using Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace VotOEApi.Controllers
 {
@@ -48,6 +49,13 @@ namespace VotOEApi.Controllers
             if (this.User.IsInRole(associatedVote.RequiredRole))
             {
                 this.oneVoteLogic.CreateOneVote(vote);
+                //this.authLogic.RemoveUserFromRole(this.User.Identity.Name, associatedVote.RequiredRole);
+                var role = ((ClaimsIdentity)User.Identity).Claims
+                        .Where(c => c.Type == ClaimTypes.Role && c.Value == associatedVote.RequiredRole)
+                        .FirstOrDefault();
+
+                var identity = this.User.Identity as ClaimsIdentity;
+                identity.RemoveClaim(role);
                 //this.User.RemoveFromRole(associatedVote.RequiredRole); //somehow achieve this here
                 return Ok();
             }
