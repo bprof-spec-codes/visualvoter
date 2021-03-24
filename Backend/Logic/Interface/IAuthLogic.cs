@@ -24,5 +24,6 @@ namespace Logic.Interface
         bool CreateRole(string name);
         public string RoleCreationForNewVote(IList<string> roles);
         IList<IdentityUser> GetAllUsersOfRole(string roleId);
+        public void RemoveUserFromRole(string userName, string requiredRole);
     }
 }

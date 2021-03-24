@@ -206,5 +206,11 @@ namespace Logic.Class
             return new string(Enumerable.Repeat(chars, length)
               .Select(s => s[random.Next(s.Length)]).ToArray());
         }
+
+        public async void RemoveUserFromRole(string userName,string requiredRole)
+        {
+            var user = this.userManager.Users.Where(user => user.UserName == userName).SingleOrDefault();
+            await this.userManager.RemoveFromRoleAsync(user, requiredRole);
+        }
     }
 }
