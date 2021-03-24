@@ -21,9 +21,10 @@ namespace Logic.Interface
         bool HasRole(IdentityUser user, string role);
         IEnumerable<string> GetAllRolesOfUser(IdentityUser user);
         bool AssignRolesToUser(IdentityUser user, List<string> roles);
-        bool CreateRole(string name);
-        public string RoleCreationForNewVote(IList<string> roles);
-        IList<IdentityUser> GetAllUsersOfRole(string roleId);
-        public void RemoveUserFromRole(string userName, string requiredRole);
+        Task<bool> CreateRole(string name);
+        Task<string> RoleCreationForNewVote(IList<string> roles);
+        Task<List<IdentityUser>> GetAllUsersOfRole(string roleId);
+        Task<bool> HasRoleByName(string userName, string role);
+        //public void RemoveUserFromRole(string userName, string requiredRole);
     }
 }
