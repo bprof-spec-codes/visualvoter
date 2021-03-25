@@ -4,6 +4,7 @@ import Home from "./components/Home/Home";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useStateValue } from "./StateProvider";
 import Dashboard from "./components/Dashboard/Dashboard";
+import VoteHere from "./components/Vote/VoteHere";
 
 function App() {
   const [{}, dispatch] = useStateValue();
@@ -18,7 +19,11 @@ function App() {
           </Route>
 
           <Route path="/vote">
-            <Home />
+            <VoteHere />
+          </Route>
+
+          <Route path="/vote/:id">
+            <VoteHere />
           </Route>
 
           <Route path="/">

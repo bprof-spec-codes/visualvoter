@@ -50,3 +50,12 @@
     }
   }
 }
+
+.modal_container{
+  :hover{
+    background: $base-hover;
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+  }
+}

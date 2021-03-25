@@ -5,6 +5,7 @@ import Modal from "react-modal";
 // import { useStateValue } from "../../StateProvider";
 import "./Sidebar.scss";
 import { IconButton } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 Modal.setAppElement("#root");
 function Sidebar() {
@@ -17,6 +18,7 @@ function Sidebar() {
       .get("/allvotes/active")
       .then((response) => {
         setActiveVotes(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
         console.log(error.message);
@@ -27,13 +29,29 @@ function Sidebar() {
     let arr = [];
     for (let i = 0; i < activeVotes.length; i++) {
       arr.push(
-        <div style={{display:"flex", justifyContent:"space-between", height:"80px", width:"100%",borderBottom:"1px solid rgba(0,0,0,0.2)", alignItems:"center"}}>
-          <p style={{fontSize:"large", fontWeight:"500"}}>{activeVotes[0].voteName}</p>{" "}
+        <Link to={`/vote/${activeVotes[i].voteID}`} style={{textDecoration:"none"}}>
+        <div
+          onClick={()=>setModalOpen(!modalOpen)}
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            height: "80px",
+            width: "100%",
+            borderBottom: "1px solid rgba(0,0,0,0.2)",
+            alignItems: "center",
+            color:"black",
+          }}
+        >
+          <p style={{ fontSize: "large", fontWeight: "500"}}>
+            {activeVotes[i].voteName}
+          </p>{" "}
           <IconButton>
             <CloseOutlinedIcon />
           </IconButton>{" "}
         </div>
+        </Link>
       );
+      console.log(activeVotes[i].voteID);
     }
     return arr;
   };
@@ -106,7 +124,9 @@ function Sidebar() {
             className="modal_container"
             style={{ display: "flex", flexDirection: "column" }}
           >
+
             {renderActiveVotes()}
+
           </div>
         </Modal>
       </div>
