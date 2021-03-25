@@ -3,7 +3,7 @@ import "./Header.scss";
 import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 import HowToVoteIcon from "@material-ui/icons/HowToVote";
 import HowToVoteOutlinedIcon from "@material-ui/icons/HowToVoteOutlined";
-import logo from "../assets/img/wv4y1e5r.png";
+import logo from "../assets/img/votoeLogo02.png";
 import Modal from "react-modal";
 import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
 import AccountBoxOutlinedIcon from "@material-ui/icons/AccountBoxOutlined";
