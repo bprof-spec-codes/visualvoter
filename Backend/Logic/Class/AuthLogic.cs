@@ -16,6 +16,7 @@ namespace Logic.Class
     {
         UserManager<IdentityUser> userManager;
         RoleManager<IdentityRole> roleManager;
+        private static Random random = new Random();
 
         public AuthLogic(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
@@ -133,12 +134,13 @@ namespace Logic.Class
             throw new ArgumentException("Login failed");
         }
 
-        public IEnumerable<IdentityRole> getAllRoles()
+        public IEnumerable<IdentityRole> GetAllRoles()
         {
-            return roleManager.Roles.ToList();
+            return this.roleManager.Roles.Where(x => !x.Name.Contains("VOTECREATEDROLE")).ToList();
+            //return roleManager.Roles.ToList();
         }
 
-        public bool hasRole(IdentityUser user, string role)
+        public bool HasRole(IdentityUser user, string role)
         {
             if (userManager.IsInRoleAsync(user, role).Result)
             {
@@ -147,12 +149,22 @@ namespace Logic.Class
             return false;
         }
 
-        public IEnumerable<string> getAllRolesOfUser(IdentityUser user)
+        public async Task<bool> HasRoleByName(string userName, string role)
+        {
+            var user = await this.userManager.FindByNameAsync(userName);
+            if (userManager.IsInRoleAsync(user, role).Result)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public IEnumerable<string> GetAllRolesOfUser(IdentityUser user)
         {
             return userManager.GetRolesAsync(user).Result.ToList();
         }
 
-        public bool assignRolesToUser(IdentityUser user, List<string> roles)
+        public bool AssignRolesToUser(IdentityUser user, List<string> roles)
         {
             var selectedUser = GetOneUser(user.Id, null);
             //userManager.AddToRolesAsync(user, roles).Wait();
@@ -160,18 +172,68 @@ namespace Logic.Class
             return true;
         }
 
-        public bool createRole(string name)
+        public async Task<bool> CreateRole(string name)
         {
-            var test = roleManager.Roles;
-            ;
-            var query = roleManager.Roles.Where(x => x.NormalizedName == name.ToUpper()).SingleOrDefault();
-            ;
+            var query = await this.roleManager.FindByNameAsync(name);
+            //var query = roleManager.Roles.Where(x => x.NormalizedName == name.ToUpper()).SingleOrDefault();
             if (query != null)
             {
                 return false;
             }
             roleManager.CreateAsync(new IdentityRole { Id = Guid.NewGuid().ToString(), Name = name, NormalizedName = name.ToUpper() }).Wait();
             return true;
+        }
+
+        public async Task<string> RoleCreationForNewVote(IList<string> roles)
+        {
+            try
+            {
+                List<IdentityUser> users = new List<IdentityUser>();
+                string newRoleNameForVote = "VOTECREATEDROLE-" + RandomString(16);
+                await CreateRole(newRoleNameForVote);
+                foreach (var roleId in roles)
+                {
+                    var usersOfRole = await this.GetAllUsersOfRole(roleId);
+                    users.AddRange(usersOfRole);
+                }
+                foreach (var user in users)
+                {
+                    await this.userManager.AddToRoleAsync(user, newRoleNameForVote);
+                }
+                return newRoleNameForVote;
+            }
+            catch (Exception)
+            {
+                return "Fail";
+            }
+        }
+
+        public async Task<List<IdentityUser>> GetAllUsersOfRole(string roleId)
+        {
+            var users = await this.userManager.GetUsersInRoleAsync(roleId);
+            return users.ToList();
+        }
+
+        private static string RandomString(int length)
+        {
+            const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
+        public async Task<string> RemoveUserFromRole(string userName, string requiredRole)
+        {
+            try
+            {
+                var user = await this.userManager.FindByNameAsync(userName);
+                //var user = this.userManager.Users.Where(user => user.UserName == userName).SingleOrDefault();
+                await this.userManager.RemoveFromRoleAsync(user, requiredRole);
+                return "Success";
+            }
+            catch (Exception)
+            {
+                return "Fail";
+            }
         }
     }
 }

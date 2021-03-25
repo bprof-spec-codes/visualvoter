@@ -85,7 +85,7 @@ namespace VotOEApi.Controllers
         [Authorize]
         [Route("usersVotes")]
         [HttpGet]
-        public List<AllVotes> getAllUserAccessibleVotes()
+        public List<AllVotes> GetAllUserAccessibleVotes()
         {
             var roles = ((ClaimsIdentity)User.Identity).Claims
                 .Where(c => c.Type == ClaimTypes.Role)
@@ -96,7 +96,7 @@ namespace VotOEApi.Controllers
             //var roleClaimType = userIdentity.RoleClaimType;
             //var roles = claims.Where(c => c.Type == ClaimTypes.Role).ToList();
 
-            return allVotesLogic.getAllAvaliableVotes(roles);
+            return allVotesLogic.GetAllAvaliableVotes(roles);
         }
     }
 }
