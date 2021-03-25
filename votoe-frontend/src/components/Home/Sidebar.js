@@ -124,9 +124,7 @@ function Sidebar() {
             className="modal_container"
             style={{ display: "flex", flexDirection: "column" }}
           >
-
             {renderActiveVotes()}
-
           </div>
         </Modal>
       </div>

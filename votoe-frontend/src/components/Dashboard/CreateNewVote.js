@@ -14,6 +14,10 @@ function CreateNewVote() {
   const [voteType, setVoteType] = useState("");
   const [voteName, setVoteName] = useState("");
 
+  const [hokCheckBox, setHokCheckBox] = useState(false);
+  const [chancelleryCheckBox, setChancelleryCheckBox] = useState(false);
+  const [everyoneCheckBox, setEveryoneCheckBox] = useState(false);
+
   const createHandler = () => {
     const data = {
       NewVote: {
@@ -48,27 +52,30 @@ function CreateNewVote() {
 
           <div className="checkbox_item">
             <Checkbox
-              checked={false}
+              checked={hokCheckBox}
               color="primary"
               inputProps={{ "aria-label": "secondary checkbox" }}
+              onChange={()=>setHokCheckBox(!hokCheckBox)}
             />
             <p>HÖK</p>
           </div>
 
           <div className="checkbox_item">
             <Checkbox
-              checked={false}
+              checked={chancelleryCheckBox}
               color="primary"
               inputProps={{ "aria-label": "secondary checkbox" }}
+              onChange={()=>setChancelleryCheckBox(!chancelleryCheckBox)}
             />
             <p>Kancellária</p>
           </div>
 
           <div className="checkbox_item">
             <Checkbox
-              checked={false}
+              checked={everyoneCheckBox}
               color="primary"
               inputProps={{ "aria-label": "secondary checkbox" }}
+              onChange={()=>setEveryoneCheckBox(!everyoneCheckBox)}
             />
             <p>Mindenki</p>
           </div>
