@@ -136,7 +136,8 @@ namespace Logic.Class
 
         public IEnumerable<IdentityRole> GetAllRoles()
         {
-            return roleManager.Roles.ToList();
+            return this.roleManager.Roles.Where(x => !x.Name.Contains("VOTECREATEDROLE")).ToList();
+            //return roleManager.Roles.ToList();
         }
 
         public bool HasRole(IdentityUser user, string role)

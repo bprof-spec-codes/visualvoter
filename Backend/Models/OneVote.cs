@@ -27,7 +27,7 @@ namespace Models
         /// </summary>
         //[ForeignKey("Users")]
         //TODO remove this and reset the database
-        public int UserID { get; set; }
+        //public int UserID { get; set; }
 
         /// <summary>
         /// (Nullable bool!)
