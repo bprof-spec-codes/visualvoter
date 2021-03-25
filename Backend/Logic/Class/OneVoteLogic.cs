@@ -23,6 +23,7 @@ namespace Logic
             try
             {
                 this.oneVoteRepo.Add(vote);
+                this.AddUsersChoiceToAllVotes(vote);
                 return true;
             }
             catch (Exception)
@@ -69,13 +70,14 @@ namespace Logic
             }
         }
 
-        private bool GetUsersVoteHistory(int userID, int voteID)
+        /*private bool GetUsersVoteHistory(int userID, int voteID)
         {
             var query = from x in oneVoteRepo.GetAll()
                         where x.UserID == userID && x.VoteID == voteID
                         select x;
             return query.Count() == 0;
-        }
+        }*/
+
         public AllVotes getAssociatedVote(OneVote input)
         {
            return allVotesLogic.GetOneVote(input.VoteID);
@@ -84,7 +86,27 @@ namespace Logic
         public bool canVote(IdentityUser user, OneVote vote)
         {
             var associatedVote = getAssociatedVote(vote);
-
+            return true; //placeholder
         }
+
+        void AddUsersChoiceToAllVotes(OneVote vote)
+        {
+            AllVotes allVoteToSaveChoise = this.allVotesLogic.GetOneVote(vote.VoteID);
+            switch (vote.Choice)
+            {
+                case 0:
+                    allVoteToSaveChoise.YesVotes += 1;
+                    this.allVotesLogic.UpdateVote(allVoteToSaveChoise.VoteID, allVoteToSaveChoise);
+                    break;
+                case 1:
+                    allVoteToSaveChoise.NoVotes += 1;
+                    this.allVotesLogic.UpdateVote(allVoteToSaveChoise.VoteID, allVoteToSaveChoise);
+                    break;
+                default:
+                    allVoteToSaveChoise.AbsentionVotes += 1;
+                    this.allVotesLogic.UpdateVote(allVoteToSaveChoise.VoteID, allVoteToSaveChoise);
+                    break;
+            }
+        } 
     }
 }

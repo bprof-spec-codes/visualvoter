@@ -49,15 +49,15 @@ namespace VotOEApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        public void DeleteUser(string id)
+        public async void DeleteUser(string id)
         {
-            this.authLogic.DeleteUser(id);
+            await this.authLogic.DeleteUser(id);
         }
 
         [HttpPut("{oldId}")]
-        public void UpdateUser(string oldId, [FromBody] IdentityUser user)
+        public async void UpdateUser(string oldId, [FromBody] IdentityUser user)
         {
-            this.authLogic.UpdateUser(oldId, user);
+            await this.authLogic.UpdateUser(oldId, user);
         }
 
         [HttpPut]
@@ -77,28 +77,38 @@ namespace VotOEApi.Controllers
         [HttpGet]
         public IEnumerable<IdentityRole> getAllUserRoles()
         {
-            return authLogic.getAllRoles();
+            return authLogic.GetAllRoles();
         }
         [Route("userRoles")]
         [HttpPost]
         public IEnumerable<string> getAllRolesOfUser([FromBody] IdentityUser user)
         {
-            return authLogic.getAllRolesOfUser(user);
+            return authLogic.GetAllRolesOfUser(user);
         }
 
         [Route("assignRole")]
         [HttpPost]
         public ActionResult assignRole(RoleModel model)
         {
-            authLogic.assignRolesToUser(model.User, model.Roles);
+            authLogic.AssignRolesToUser(model.User, model.Roles);
             return Ok();
         }
         [HttpGet]
         [Route("createRole")]
         public ActionResult createRole([FromQuery] string id)
         {
-            authLogic.createRole(id);
+            authLogic.CreateRole(id);
             return Ok();
+        }
+
+        [HttpPost]
+        [Route("createRoleForVote")]
+        public async Task<ActionResult> CreateRoleForVoteAsync([FromBody] List<string> id)
+        {
+            string generatedroleName = await this.authLogic.RoleCreationForNewVote(id);
+            if (generatedroleName != null) return Ok(generatedroleName);
+            return BadRequest();
+            
         }
 
         [HttpGet]
