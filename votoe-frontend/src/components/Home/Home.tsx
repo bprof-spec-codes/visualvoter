@@ -2,7 +2,7 @@ import React, {useState, useEffect } from 'react';
 import Header from '../Header';
 import Feed from './Feed';
 import './Home.scss';
-import Right from './Right';
+import Right from './Right.';
 import Sidebar from './Sidebar';
 
 function Home() {

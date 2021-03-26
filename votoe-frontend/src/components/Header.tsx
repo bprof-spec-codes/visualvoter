@@ -21,7 +21,7 @@ function Header() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const loginHandler = (e) => {
+  const loginHandler = (e:any) => {
     e.preventDefault();
 
     const data = {

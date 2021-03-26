@@ -7,11 +7,24 @@ import "./Sidebar.scss";
 import { IconButton } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
+
+
+type ActiveVote={
+  absentionVotes: number;
+  isClosed: number;
+  isFinished: number;
+  noVotes: number;
+  requiredRole: string;
+  voteID: number;
+  voteName: string;
+  yesVotes: number;
+}
+
 Modal.setAppElement("#root");
 function Sidebar() {
   // const [{ user }, dispatch] = useStateValue();
   const [modalOpen, setModalOpen] = useState(false);
-  const [activeVotes, setActiveVotes] = useState([]);
+  const [activeVotes, setActiveVotes]  = useState<ActiveVote[]>([]);
 
   useEffect(() => {
     axios
@@ -42,7 +55,7 @@ function Sidebar() {
             color:"black",
           }}
         >
-          <p style={{ fontSize: "large", fontWeight: "500"}}>
+          <p style={{ fontSize: "large", fontWeight: 500}}>
             {activeVotes[i].voteName}
           </p>{" "}
           <IconButton>
@@ -86,7 +99,7 @@ function Sidebar() {
             overlay: {
               backgroundColor: "rgba(1,1,1,0.6)",
               position: "fixed",
-              marign: 0,
+              margin: 0,
             },
             content: {
               width: 500,

@@ -4,7 +4,17 @@ import HOKLogo from "../../assets/img/nikhok_logo.jpg";
 import CheckBoxOutlinedIcon from "@material-ui/icons/CheckBoxOutlined";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 
-function VoteResult({
+export interface IVoteResult {
+  key?: any;
+  title: string;
+  yesVotes: number;
+  noVotes: number;
+  absentionVotes: number;
+  isClosed: number;
+  isFinished: number;
+}
+
+const VoteResult: React.FC<IVoteResult> = ({
   key,
   title,
   yesVotes,
@@ -12,8 +22,7 @@ function VoteResult({
   absentionVotes,
   isClosed,
   isFinished,
-}) {
-
+}) => {
   return (
     <div className="voteResult">
       <div className="voteResult_container">
@@ -111,6 +120,6 @@ function VoteResult({
       </div>
     </div>
   );
-}
+};
 
 export default VoteResult;
