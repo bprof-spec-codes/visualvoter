@@ -7,29 +7,16 @@ import React, {
 } from "react";
 import { initialState } from "./reducer";
 
-interface Actions {
-  type: string;
-  value: any;
+/*
+export const StateContext = createContext(null);
+
+interface IProvider{
+  reducer:any;
+  initState:typeof initialState;
+  children:any;
 }
 
-interface Props {
-  user: any;
-  content: JSX.Element | null;
-}
-
-interface ProviderProps {
-  reducer: Reducer<Props, Actions>;
-  initState: Props;
-}
-
-interface InitContrextProps {
-  state: Props;
-  dispatch: Dispatch<Actions>;
-}
-
-export const StateContext = createContext({} as InitContrextProps);
-
-export const StateProvider: React.FC<ProviderProps> = ({
+export const StateProvider:React.FC<IProvider> = ({
   reducer,
   initState,
   children,
@@ -42,3 +29,4 @@ export const StateProvider: React.FC<ProviderProps> = ({
 };
 
 export const useStateValue = () => useContext(StateContext);
+*/

@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import "./Header.scss";
 import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
-import HowToVoteIcon from "@material-ui/icons/HowToVote";
 import HowToVoteOutlinedIcon from "@material-ui/icons/HowToVoteOutlined";
 import logo from "../assets/img/votoeLogo02.png";
 import Modal from "react-modal";
@@ -10,18 +9,25 @@ import AccountBoxOutlinedIcon from "@material-ui/icons/AccountBoxOutlined";
 import { Button, TextField, IconButton } from "@material-ui/core";
 import axios from "../axios";
 import { Link, useHistory } from "react-router-dom";
-import { useStateValue } from "../StateProvider";
+// import { useStateValue } from "../StateProvider";
+
+import reducer from '../reducer';
+import initialState from '../reducer';
+import LoginUseReducer from "../reducer";
 
 Modal.setAppElement("#root");
 function Header() {
-  const [{ user }, dispatch] = useStateValue();
+  const login = LoginUseReducer();
 
   const history = useHistory();
   const [modalOpen, setModalOpen] = useState(false);
+  /*
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  */
 
-  const loginHandler = (e:any) => {
+  /*
+  const loginHandler = (e:React.FormEvent) => {
     e.preventDefault();
 
     const data = {
@@ -36,7 +42,15 @@ function Header() {
 
         dispatch({
           type: "SET_USER",
-          user: "Valami",
+          user: {
+            email:email,
+            password:password,
+            login:{
+              isLoading:true,
+              error:'',
+              isLoggedIn:true,
+            },
+          },
         });
       })
       .catch((error) => {
@@ -45,10 +59,7 @@ function Header() {
 
     setModalOpen(false);
   };
-
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
+  */
 
   return (
     <div className="header">
@@ -101,7 +112,7 @@ function Header() {
               overlay: {
                 backgroundColor: "rgba(1,1,1,0.6)",
                 position: "fixed",
-                marign: 0,
+                margin: 0,
               },
               content: {
                 width: 500,
@@ -118,6 +129,7 @@ function Header() {
               },
             }}
           >
+            {/*
             <div
               className="modal_top"
               style={{
@@ -176,13 +188,16 @@ function Header() {
                     onClick={loginHandler}
                     style={{ fontSize: "large", padding: 15, width: 100 }}
                   >
-                    Send
+                    {isLoading ? 'Logging in...' : 'Send'}
                   </Button>
                 </div>
               </div>
-            </div>
+            </div>*/}
           </Modal>
         </div>
+
+
+        {/*
         {user ? (
           <div className="header_right">
             <p>Sign Out</p>
@@ -192,6 +207,7 @@ function Header() {
             <p>Sign In</p>
           </div>
         )}
+        */}
       </div>
     </div>
   );
