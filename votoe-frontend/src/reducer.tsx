@@ -2,7 +2,6 @@ import { useReducer } from "react";
 import axios from "./axios";
 
 import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
-import AccountBoxOutlinedIcon from "@material-ui/icons/AccountBoxOutlined";
 import { Button, TextField, IconButton } from "@material-ui/core";
 
 export interface LoginState {
@@ -103,73 +102,41 @@ export default function LoginUseReducer() {
 
   return (
     <div>
-      <div
-        className="modal_top"
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          width: "100%",
-          marginBottom: 50,
+      <TextField
+        label="Email"
+        variant="standard"
+        helperText="Use your student email (JhonDoe@stud.uni-obuda.hu)"
+        value={user.email}
+        onChange={(e) => {
+          dispatch({
+            type: "field",
+            fieldName: "email",
+            payload: e.currentTarget.value,
+          });
         }}
-      >
-        <h1>Sign In</h1>
-        <div className="modal_close" /*onClick={() => setModalOpen(false)}*/>
-          <CloseOutlinedIcon fontSize="large" style={{ cursor: "pointer" }} />
-        </div>
-      </div>
-      <div
-        className="modal_form"
-        style={{
-          width: "100%",
-          alignItems: "center",
-          display: "flex",
-          flexDirection: "column",
+        style={{ width: "80%", marginBottom: 30 }}
+      ></TextField>
+      <TextField
+        label="Password"
+        variant="standard"
+        type="password"
+        value={user.password}
+        onChange={(e) => {
+          dispatch({
+            type: "field",
+            fieldName: "password",
+            payload: e.currentTarget.value,
+          });
         }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            width: "100%",
-          }}
+        style={{ width: "80%" }}
+      ></TextField>
+      <div className="form_buttons" style={{ marginTop: 30 }}>
+        <Button
+          onClick={loginHandler}
+          style={{ fontSize: "large", padding: 15, width: 100 }}
         >
-          <TextField
-            label="Email"
-            variant="standard"
-            helperText="Use your student email (JhonDoe@stud.uni-obuda.hu)"
-            value={user.email}
-            onChange={(e) => {
-              dispatch({
-                type: 'field',
-                fieldName: 'email',
-                payload: e.currentTarget.value,
-              })
-            }}
-            style={{ width: "80%", marginBottom: 30 }}
-          ></TextField>
-          <TextField
-            label="Password"
-            variant="standard"
-            type="password"
-            value={user.password}
-            onChange={(e) => {
-              dispatch({
-                type: 'field',
-                fieldName: 'password',
-                payload: e.currentTarget.value,
-              })
-            }}
-            style={{ width: "80%" }}
-          ></TextField>
-          <div className="form_buttons" style={{ marginTop: 30 }}>
-            <Button
-              onClick={loginHandler}
-              style={{ fontSize: "large", padding: 15, width: 100 }}
-            >
-              {user.login.isLoading ? "Logging in..." : "Send"}
-            </Button>
-          </div>
-        </div>
+          {user.login.isLoading ? "Logging in..." : "Send"}
+        </Button>
       </div>
     </div>
   );

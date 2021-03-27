@@ -11,14 +11,12 @@ import axios from "../axios";
 import { Link, useHistory } from "react-router-dom";
 // import { useStateValue } from "../StateProvider";
 
-import reducer from '../reducer';
-import initialState from '../reducer';
+import reducer from "../reducer";
+import initialState from "../reducer";
 import LoginUseReducer from "../reducer";
 
 Modal.setAppElement("#root");
 function Header() {
-  const login = LoginUseReducer();
-
   const history = useHistory();
   const [modalOpen, setModalOpen] = useState(false);
   /*
@@ -71,7 +69,10 @@ function Header() {
         </div>
 
         <div className="header_middle">
-          <div className="header_option header_option--active" style={{marginLeft:"20%"}}>
+          <div
+            className="header_option header_option--active"
+            style={{ marginLeft: "20%" }}
+          >
             <IconButton>
               <Link to="/" style={{ textDecoration: "none", color: "black" }}>
                 <HomeOutlinedIcon fontSize="large" />
@@ -90,7 +91,7 @@ function Header() {
                 </Link>
               </IconButton>
             </div>
-            <div className="header_option" style={{marginRight:"20%"}}>
+            <div className="header_option" style={{ marginRight: "20%" }}>
               <IconButton>
                 <Link
                   to="/dashboard"
@@ -129,73 +130,49 @@ function Header() {
               },
             }}
           >
-            {/*
-            <div
-              className="modal_top"
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                width: "100%",
-                marginBottom: 50,
-              }}
-            >
-              <h1>Sign In</h1>
-              <div className="modal_close" onClick={() => setModalOpen(false)}>
-                <CloseOutlinedIcon
-                  fontSize="large"
-                  style={{ cursor: "pointer" }}
-                />
-              </div>
-            </div>
-            <div
-              className="modal_form"
-              style={{
-                width: "100%",
-                alignItems: "center",
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
+            <div>
               <div
+                className="modal_top"
                 style={{
                   display: "flex",
-                  flexDirection: "column",
+                  justifyContent: "space-between",
                   width: "100%",
+                  marginBottom: 50,
                 }}
               >
-                <TextField
-                  label="Email"
-                  variant="standard"
-                  helperText="Use your student email (JhonDoe@stud.uni-obuda.hu)"
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                  }}
-                  style={{ width: "80%", marginBottom: 30 }}
-                ></TextField>
-                <TextField
-                  label="Password"
-                  variant="standard"
-                  type="password"
-                  value={password}
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                  }}
-                  style={{ width: "80%" }}
-                ></TextField>
-                <div className="form_buttons" style={{ marginTop: 30 }}>
-                  <Button
-                    onClick={loginHandler}
-                    style={{ fontSize: "large", padding: 15, width: 100 }}
-                  >
-                    {isLoading ? 'Logging in...' : 'Send'}
-                  </Button>
+                <h1>Sign In</h1>
+                <div
+                  className="modal_close"
+                  onClick={() => setModalOpen(false)}
+                >
+                  <CloseOutlinedIcon
+                    fontSize="large"
+                    style={{ cursor: "pointer" }}
+                  />
                 </div>
               </div>
-            </div>*/}
+              <div
+                className="modal_form"
+                style={{
+                  width: "100%",
+                  alignItems: "center",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    width: "100%",
+                  }}
+                ></div>
+
+                {LoginUseReducer()}
+              </div>
+            </div>
           </Modal>
         </div>
-
 
         {/*
         {user ? (
@@ -203,11 +180,10 @@ function Header() {
             <p>Sign Out</p>
           </div>
         ) : (
-          <div className="header_right" onClick={() => setModalOpen(true)}>
-            <p>Sign In</p>
-          </div>
-        )}
-        */}
+          */}
+        <div className="header_right" onClick={() => setModalOpen(true)}>
+          <p>Sign In</p>
+        </div>
       </div>
     </div>
   );

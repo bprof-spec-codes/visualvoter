@@ -102,7 +102,7 @@ const VoteResult: React.FC<IVoteResult> = ({
         </div>
 
         <div className="voteResult_data">
-          {isClosed && (
+          {isClosed === 1 && (
             <div style={{ display: "flex" }}>
               <ErrorOutlineIcon />
 
@@ -110,7 +110,7 @@ const VoteResult: React.FC<IVoteResult> = ({
             </div>
           )}
 
-          {isFinished && (
+          {isFinished === 1 && (
             <div style={{ display: "flex", marginLeft: "20px" }}>
               <CheckBoxOutlinedIcon />
               <p style={{ marginLeft: "5px" }}>A szavazást már lezárták</p>
