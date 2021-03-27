@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState } from "react";
 import "./Header.scss";
 import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 import HowToVoteOutlinedIcon from "@material-ui/icons/HowToVoteOutlined";
@@ -6,18 +6,12 @@ import logo from "../assets/img/votoeLogo02.png";
 import Modal from "react-modal";
 import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
 import AccountBoxOutlinedIcon from "@material-ui/icons/AccountBoxOutlined";
-import { Button, TextField, IconButton } from "@material-ui/core";
-import axios from "../axios";
+import { IconButton } from "@material-ui/core";
 import { Link, useHistory } from "react-router-dom";
-// import { useStateValue } from "../StateProvider";
-
-import reducer from "../reducer";
-import initialState from "../reducer";
 import LoginUseReducer from "../reducer";
 
 Modal.setAppElement("#root");
 function Header() {
-  const history = useHistory();
   const [modalOpen, setModalOpen] = useState(false);
   /*
   const [email, setEmail] = useState("");

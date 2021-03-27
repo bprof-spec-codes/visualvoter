@@ -1,8 +1,7 @@
 import { useReducer } from "react";
 import axios from "./axios";
 
-import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
-import { Button, TextField, IconButton } from "@material-ui/core";
+import { Button, TextField } from "@material-ui/core";
 
 export interface LoginState {
   user: {

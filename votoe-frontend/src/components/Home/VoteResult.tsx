@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./VoteResult.scss";
 import HOKLogo from "../../assets/img/nikhok_logo.jpg";
 import CheckBoxOutlinedIcon from "@material-ui/icons/CheckBoxOutlined";

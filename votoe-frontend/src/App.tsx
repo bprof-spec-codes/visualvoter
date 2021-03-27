@@ -19,11 +19,11 @@ function App() {
           </Route>
 
           <Route path="/vote">
-            <VoteHere />
+            <VoteHere { ...({} as any) }/>
           </Route>
 
           <Route path="/vote/:id">
-            <VoteHere />
+            <VoteHere { ...({} as any) }/>
           </Route>
 
           <Route path="/">
