@@ -64,7 +64,6 @@ function Sidebar() {
         </div>
         </Link>
       );
-      console.log(activeVotes[i].voteID);
     }
     return arr;
   };

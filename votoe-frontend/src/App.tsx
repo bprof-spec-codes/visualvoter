@@ -14,21 +14,12 @@ function App() {
     <Router>
       <div className="app">
         <Switch>
-          <Route path="/dashboard">
-            <Dashboard />
-          </Route>
+          <Route path="/dashboard" exact component={Dashboard}></Route>
 
-          <Route path="/vote">
-            <VoteHere { ...({} as any) }/>
+          <Route path="/vote" component={VoteHere}>
+            <Route path="/vote/:voteID" component={VoteHere}></Route>
           </Route>
-
-          <Route path="/vote/:id">
-            <VoteHere { ...({} as any) }/>
-          </Route>
-
-          <Route path="/">
-            <Home />
-          </Route>
+          <Route path="/" exact component={Home}></Route>
         </Switch>
       </div>
     </Router>
