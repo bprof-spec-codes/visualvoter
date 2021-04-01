@@ -1,3 +1,4 @@
+/*
 import { useReducer } from "react";
 import axios from "./axios";
 
@@ -74,22 +75,95 @@ const reducer = (state: LoginState, action: LoginAction) => {
       return state;
   }
 };
+*/
 
-// export default reducer;
+import React, { useReducer } from 'react';
+import axios from "./axios";
+
+import { Button, TextField } from "@material-ui/core";
+
+const initialState: LoginState = {
+  username: '',
+  password: '',
+  isLoading: false,
+  error: '',
+  isLoggedIn: false,
+  variant: 'login',
+};
+
+interface LoginState {
+  username: string;
+  password: string;
+  isLoading: boolean;
+  error: string;
+  isLoggedIn: boolean;
+  variant: 'login' | 'forgetPassword';
+}
+
+type LoginAction =
+  | { type: 'login' | 'success' | 'error' | 'logOut' }
+  | { type: 'field'; fieldName: string; payload: string };
+
+function reducer(state: LoginState, action: LoginAction) {
+  switch (action.type) {
+    case 'field': {
+      return {
+        ...state,
+        [action.fieldName]: action.payload,
+      };
+    }
+    case 'login': {
+      return {
+        ...state,
+        error: '',
+        isLoading: true,
+      };
+    }
+    case 'success': {
+      return {
+        ...state,
+        isLoggedIn: true,
+        isLoading: false,
+      };
+    }
+    case 'error': {
+      return {
+        ...state,
+        error: 'Incorrect username or password!',
+        isLoggedIn: false,
+        isLoading: false,
+        username: '',
+        password: '',
+      };
+    }
+    case 'logOut': {
+      return {
+        ...state,
+        isLoggedIn: false,
+      };
+    }
+    default:
+      return state;
+  }
+}
+
 
 export default function LoginUseReducer() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { user } = state;
+  const { username, password, isLoading, error, isLoggedIn } = state;
 
   const loginHandler = (e: React.FormEvent) => {
     e.preventDefault();
 
     const data = {
-      Email: user.email,
-      Password: user.password,
+      Email: username,
+      Password: password,
     };
+
+    console.log(data)
+
     axios
-      .post("/users/login", data)
+      .put("/auth", data)
       .then((response) => {
         console.log(response);
         dispatch({ type: "login" });
@@ -105,11 +179,11 @@ export default function LoginUseReducer() {
         label="Email"
         variant="standard"
         helperText="Use your student email (JhonDoe@stud.uni-obuda.hu)"
-        value={user.email}
+        value={username}
         onChange={(e) => {
           dispatch({
             type: "field",
-            fieldName: "email",
+            fieldName: "username",
             payload: e.currentTarget.value,
           });
         }}
@@ -119,7 +193,7 @@ export default function LoginUseReducer() {
         label="Password"
         variant="standard"
         type="password"
-        value={user.password}
+        value={password}
         onChange={(e) => {
           dispatch({
             type: "field",
@@ -134,7 +208,7 @@ export default function LoginUseReducer() {
           onClick={loginHandler}
           style={{ fontSize: "large", padding: 15, width: 100 }}
         >
-          {user.login.isLoading ? "Logging in..." : "Send"}
+          Send
         </Button>
       </div>
     </div>
