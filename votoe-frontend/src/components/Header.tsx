@@ -8,51 +8,12 @@ import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
 import AccountBoxOutlinedIcon from "@material-ui/icons/AccountBoxOutlined";
 import { IconButton } from "@material-ui/core";
 import { Link, useHistory } from "react-router-dom";
-import LoginUseReducer from "../reducer";
+import LoginUseReducer, { initialState } from "../reducer";
 
 Modal.setAppElement("#root");
 function Header() {
-  const [modalOpen, setModalOpen] = useState(false);
-  /*
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  */
-
-  /*
-  const loginHandler = (e:React.FormEvent) => {
-    e.preventDefault();
-
-    const data = {
-      Email: email,
-      Password: password,
-    };
-    axios
-      .post("/users/login", data)
-      .then((response) => {
-        console.log(response);
-        history.push("/");
-
-        dispatch({
-          type: "SET_USER",
-          user: {
-            email:email,
-            password:password,
-            login:{
-              isLoading:true,
-              error:'',
-              isLoggedIn:true,
-            },
-          },
-        });
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-
-    setModalOpen(false);
-  };
-  */
-
+  const [modalOpen, setModalOpen] = useState(initialState.modalOpen);
+  
   return (
     <div className="header">
       <div className="header_container">
@@ -96,6 +57,7 @@ function Header() {
               </IconButton>
             </div>
           </>
+
         </div>
 
         <div className="header_modal">

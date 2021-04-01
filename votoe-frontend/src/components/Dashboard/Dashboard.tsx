@@ -1,4 +1,5 @@
 import React from 'react';
+import { initialState } from '../../reducer';
 import Header from '../Header';
 import CreateNewVote from './CreateNewVote';
 import './Dashboard.scss';

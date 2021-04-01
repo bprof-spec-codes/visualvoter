@@ -1,94 +1,17 @@
-/*
-import { useReducer } from "react";
+import React, { useState, useReducer } from 'react';
 import axios from "./axios";
 
 import { Button, TextField } from "@material-ui/core";
-
-export interface LoginState {
-  user: {
-    email: string;
-    password: string;
-    login: {
-      isLoading: boolean;
-      error: string;
-      isLoggedIn: boolean;
-    };
-  };
-}
 
 export const initialState: LoginState = {
-  user: {
-    email: "",
-    password: "",
-    login: {
-      isLoading: false,
-      error: "",
-      isLoggedIn: false,
-    },
-  },
-};
-
-type LoginAction =
-  | { type: "login" | "success" | "error" | "logOut" }
-  | { type: "field"; fieldName: string; payload: string };
-
-const reducer = (state: LoginState, action: LoginAction) => {
-  switch (action.type) {
-    case "field":
-      return {
-        ...state,
-        [action.fieldName]: action.payload,
-      };
-
-    case "login": {
-      return {
-        ...state,
-        error: "",
-        isLoading: true,
-      };
-    }
-    case "success": {
-      return {
-        ...state,
-        isLoggedIn: true,
-        isLoading: false,
-      };
-    }
-    case "error": {
-      return {
-        ...state,
-        error: "Incorrect username or password!",
-        isLoggedIn: false,
-        isLoading: false,
-        username: "",
-        password: "",
-      };
-    }
-    case "logOut": {
-      return {
-        ...state,
-        isLoggedIn: false,
-      };
-    }
-
-    default:
-      return state;
-  }
-};
-*/
-
-import React, { useReducer } from 'react';
-import axios from "./axios";
-
-import { Button, TextField } from "@material-ui/core";
-
-const initialState: LoginState = {
   username: '',
   password: '',
   isLoading: false,
   error: '',
   isLoggedIn: false,
   variant: 'login',
+
+  modalOpen: false,
 };
 
 interface LoginState {
@@ -98,6 +21,8 @@ interface LoginState {
   error: string;
   isLoggedIn: boolean;
   variant: 'login' | 'forgetPassword';
+
+  modalOpen:boolean;
 }
 
 type LoginAction =
@@ -115,7 +40,7 @@ function reducer(state: LoginState, action: LoginAction) {
     case 'login': {
       return {
         ...state,
-        error: '',
+        isloggedIn: true,
         isLoading: true,
       };
     }
@@ -152,6 +77,8 @@ export default function LoginUseReducer() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { username, password, isLoading, error, isLoggedIn } = state;
 
+  const [modal,setModal]=useState(initialState.modalOpen);
+
   const loginHandler = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -159,9 +86,6 @@ export default function LoginUseReducer() {
       Email: username,
       Password: password,
     };
-
-    console.log(data)
-
     axios
       .put("/auth", data)
       .then((response) => {
@@ -171,6 +95,8 @@ export default function LoginUseReducer() {
       .catch((error) => {
         console.log(error.message);
       });
+      setModal(modal)
+      console.log(initialState.isLoggedIn)
   };
 
   return (
@@ -203,7 +129,7 @@ export default function LoginUseReducer() {
         }}
         style={{ width: "80%" }}
       ></TextField>
-      <div className="form_buttons" style={{ marginTop: 30 }}>
+      <div className="form_buttons" style={{ marginTop: 30 }}> 
         <Button
           onClick={loginHandler}
           style={{ fontSize: "large", padding: 15, width: 100 }}
