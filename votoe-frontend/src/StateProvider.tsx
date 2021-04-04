@@ -1,3 +1,4 @@
+
 import React, {
   Reducer,
   Dispatch,
@@ -5,9 +6,10 @@ import React, {
   useContext,
   useReducer,
 } from "react";
-// import  { initialState } from "./reducer";
 
-/*
+/* import  { initialState } from "./reducer";
+
+
 export const StateContext = createContext(null);
 
 interface IProvider{

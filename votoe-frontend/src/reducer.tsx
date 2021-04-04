@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState, useEffect, useReducer, useMemo } from 'react';
 import axios from "./axios";
 
 import { Button, TextField } from "@material-ui/core";
@@ -75,6 +75,7 @@ function reducer(state: LoginState, action: LoginAction) {
         ...state,
 
         user: action.payload,
+        isLoggedIn: true,
         // username: action.payload,
       };
     }
