@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Header.scss";
 import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 import HowToVoteOutlinedIcon from "@material-ui/icons/HowToVoteOutlined";
@@ -13,6 +13,13 @@ import LoginUseReducer, { initialState } from "../reducer";
 Modal.setAppElement("#root");
 function Header() {
   const [modalOpen, setModalOpen] = useState(initialState.modalOpen);
+  const [username, setUsername]=useState<string>();
+
+
+  useEffect(()=>{
+    setUsername(initialState.username);
+    console.log(initialState.username);
+  },[initialState.username])
   
   return (
     <div className="header">
@@ -34,7 +41,7 @@ function Header() {
               </Link>
             </IconButton>
           </div>
-
+          {initialState.username && 
           <>
             <div className="header_option">
               <IconButton>
@@ -57,7 +64,7 @@ function Header() {
               </IconButton>
             </div>
           </>
-
+        }
         </div>
 
         <div className="header_modal">
@@ -137,9 +144,11 @@ function Header() {
           </div>
         ) : (
           */}
-        <div className="header_right" onClick={() => setModalOpen(true)}>
+          <Link to="/Login">
+        <div className="header_right" /* onClick={() => setModalOpen(true)} */>
           <p>Sign In</p>
         </div>
+        </Link>
       </div>
     </div>
   );

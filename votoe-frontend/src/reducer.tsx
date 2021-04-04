@@ -1,7 +1,8 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import axios from "./axios";
 
 import { Button, TextField } from "@material-ui/core";
+import { Link, useHistory } from "react-router-dom";
 
 export const initialState: LoginState = {
   username: '',
@@ -12,6 +13,9 @@ export const initialState: LoginState = {
   variant: 'login',
 
   modalOpen: false,
+  responseData: null,
+
+  user: null,
 };
 
 interface LoginState {
@@ -22,26 +26,56 @@ interface LoginState {
   isLoggedIn: boolean;
   variant: 'login' | 'forgetPassword';
 
-  modalOpen:boolean;
+  modalOpen: boolean;
+  responseData: any;
+
+ user:any
 }
 
 type LoginAction =
+/*
   | { type: 'login' | 'success' | 'error' | 'logOut' }
   | { type: 'field'; fieldName: string; payload: string };
+*/
+  { type: 'setUsername', payload: string }
+| { type: 'setPassword', payload: string }
+| { type: 'login', payload: string }
+| { type: 'success', payload: string }
+| { type: 'error', payload: string }
+| { type: 'logOut', payload: string}
+| { type: 'field'; fieldName: string; payload: string };
 
 function reducer(state: LoginState, action: LoginAction) {
   switch (action.type) {
+    /*
     case 'field': {
       return {
         ...state,
+
+        responseData: action.type,
+
         [action.fieldName]: action.payload,
       };
     }
+    */
+    case 'setUsername': 
+      return {
+        ...state,
+        username: action.payload
+      };
+    case 'setPassword': 
+      return {
+        ...state,
+        password: action.payload
+      };
+
+
     case 'login': {
       return {
         ...state,
-        isloggedIn: true,
-        isLoading: true,
+
+        user: action.payload,
+        // username: action.payload,
       };
     }
     case 'success': {
@@ -51,6 +85,7 @@ function reducer(state: LoginState, action: LoginAction) {
         isLoading: false,
       };
     }
+    /* 
     case 'error': {
       return {
         ...state,
@@ -61,6 +96,8 @@ function reducer(state: LoginState, action: LoginAction) {
         password: '',
       };
     }
+    */
+
     case 'logOut': {
       return {
         ...state,
@@ -75,9 +112,14 @@ function reducer(state: LoginState, action: LoginAction) {
 
 export default function LoginUseReducer() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { username, password, isLoading, error, isLoggedIn } = state;
+  const { username, password, isLoading, error, isLoggedIn, modalOpen, responseData, user } = state;
 
-  const [modal,setModal]=useState(initialState.modalOpen);
+  const history=useHistory();
+
+
+  useEffect(() => {
+    console.log(initialState,state);
+  },[username,password, user])
 
   const loginHandler = (e: React.FormEvent) => {
     e.preventDefault();
@@ -90,14 +132,30 @@ export default function LoginUseReducer() {
       .put("/auth", data)
       .then((response) => {
         console.log(response);
-        dispatch({ type: "login" });
+        dispatch({ type: "login",payload: "Login succesfully" });
+      }).then(data=>{
+        history.push("/");
       })
       .catch((error) => {
         console.log(error.message);
       });
-      setModal(modal)
-      console.log(initialState.isLoggedIn)
   };
+
+  const handleUsernameChange: React.ChangeEventHandler<HTMLInputElement> =
+    (event) => {
+      dispatch({
+        type: 'setUsername',
+        payload: event.target.value
+      });
+    };
+
+  const handlePasswordChange: React.ChangeEventHandler<HTMLInputElement> =
+    (event) => {
+      dispatch({
+        type: 'setPassword',
+        payload: event.target.value
+      });
+    }
 
   return (
     <div>
@@ -106,6 +164,9 @@ export default function LoginUseReducer() {
         variant="standard"
         helperText="Use your student email (JhonDoe@stud.uni-obuda.hu)"
         value={username}
+        onChange={handleUsernameChange}
+
+        /*
         onChange={(e) => {
           dispatch({
             type: "field",
@@ -113,6 +174,8 @@ export default function LoginUseReducer() {
             payload: e.currentTarget.value,
           });
         }}
+        */
+
         style={{ width: "80%", marginBottom: 30 }}
       ></TextField>
       <TextField
@@ -120,6 +183,10 @@ export default function LoginUseReducer() {
         variant="standard"
         type="password"
         value={password}
+
+        onChange={handlePasswordChange}
+
+        /*
         onChange={(e) => {
           dispatch({
             type: "field",
@@ -127,6 +194,8 @@ export default function LoginUseReducer() {
             payload: e.currentTarget.value,
           });
         }}
+        */
+
         style={{ width: "80%" }}
       ></TextField>
       <div className="form_buttons" style={{ marginTop: 30 }}> 
