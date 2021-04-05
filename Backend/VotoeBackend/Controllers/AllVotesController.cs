@@ -98,5 +98,23 @@ namespace VotOEApi.Controllers
 
             return allVotesLogic.GetAllAvaliableVotes(roles);
         }
+
+        [Authorize(Roles = "Admin,Editor")]
+        [HttpGet("{id}")]
+        [Route("close")]
+        public IActionResult CloseAVote(int id)
+        {
+            if (this.allVotesLogic.CloseAVote(id)) return Ok();
+            return BadRequest();
+        }
+
+        [Authorize(Roles = "Admin,Editor")]
+        [HttpGet("{id}")]
+        [Route("finish")]
+        public IActionResult FinishAVote(int id)
+        {
+            if (this.allVotesLogic.FinishAVote(id)) return Ok();
+            return BadRequest();
+        }
     }
 }
