@@ -25,8 +25,9 @@ namespace Models
         /// <summary>
         /// Gets or sets which user submitted this vote
         /// </summary>
-        [ForeignKey("Users")]
-        public int UserID { get; set; }
+        //[ForeignKey("Users")]
+        //TODO remove this and reset the database
+        //public int UserID { get; set; }
 
         /// <summary>
         /// (Nullable bool!)

@@ -85,7 +85,7 @@ namespace VotOEApi.Controllers
         [Authorize]
         [Route("usersVotes")]
         [HttpGet]
-        public List<AllVotes> getAllUserAccessibleVotes()
+        public List<AllVotes> GetAllUserAccessibleVotes()
         {
             var roles = ((ClaimsIdentity)User.Identity).Claims
                 .Where(c => c.Type == ClaimTypes.Role)
@@ -96,7 +96,25 @@ namespace VotOEApi.Controllers
             //var roleClaimType = userIdentity.RoleClaimType;
             //var roles = claims.Where(c => c.Type == ClaimTypes.Role).ToList();
 
-            return allVotesLogic.getAllAvaliableVotes(roles);
+            return allVotesLogic.GetAllAvaliableVotes(roles);
+        }
+
+        [Authorize(Roles = "Admin,Editor")]
+        [HttpGet("{id}")]
+        [Route("close")]
+        public IActionResult CloseAVote(int id)
+        {
+            if (this.allVotesLogic.CloseAVote(id)) return Ok();
+            return BadRequest();
+        }
+
+        [Authorize(Roles = "Admin,Editor")]
+        [HttpGet("{id}")]
+        [Route("finish")]
+        public IActionResult FinishAVote(int id)
+        {
+            if (this.allVotesLogic.FinishAVote(id)) return Ok();
+            return BadRequest();
         }
     }
 }

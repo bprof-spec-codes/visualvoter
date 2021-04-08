@@ -75,7 +75,7 @@ namespace Logic
             return this.allVotesRepo.GetAll().Where(x => x.IsClosed == 0 && x.IsFinished == 0);
         }
 
-        public List<AllVotes> getAllAvaliableVotes(List<string> roles)
+        public List<AllVotes> GetAllAvaliableVotes(List<string> roles)
         {
             List<AllVotes> output = new List<AllVotes>();
             foreach (var item in this.GetAllVotes())
@@ -86,6 +86,36 @@ namespace Logic
                 }
             }
             return output;
+        }
+
+        public bool CloseAVote(int id)
+        {
+            try
+            {
+                var vote = this.allVotesRepo.GetOne(id);
+                _ = vote.IsClosed == 0 ? vote.IsClosed = 1 : vote.IsClosed = 0;
+                this.allVotesRepo.Update(id, vote);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool FinishAVote(int id)
+        {
+            try
+            {
+                var vote = this.allVotesRepo.GetOne(id);
+                vote.IsFinished = 1;
+                this.allVotesRepo.Update(id, vote);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }
