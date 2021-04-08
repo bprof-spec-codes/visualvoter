@@ -6,20 +6,48 @@ import logo from "../assets/img/votoeLogo02.png";
 import Modal from "react-modal";
 import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
 import AccountBoxOutlinedIcon from "@material-ui/icons/AccountBoxOutlined";
-import { IconButton } from "@material-ui/core";
+import { Button, IconButton, TextField } from "@material-ui/core";
 import { Link, useHistory } from "react-router-dom";
-import LoginUseReducer, { initialState } from "../reducer";
+import axios from "../axios";
+
+import { useSelector, useDispatch } from "react-redux";
+import { increment, decrement, login } from "../store/actions";
 
 Modal.setAppElement("#root");
 function Header() {
-  const [modalOpen, setModalOpen] = useState(initialState.modalOpen);
-  const [userName, setUsername]=useState<string>();
+  const counter = useSelector((state: any) => state.counter);
+  const isLogged = useSelector((state: any) => state.isLogged);
+  const dispatch = useDispatch();
 
-  useEffect(()=>{
-    setUsername(initialState.username);
-    console.log(initialState.username);
-  },[initialState.username])
-  
+  const [modalOpen, setModalOpen] = useState(false);
+  const [email, setEmail] = useState<string>();
+  const [password, setPassword] = useState<string>();
+
+  const loginHandler = () => {
+    const data = {
+      Email: email,
+      Password: password,
+    };
+
+    axios
+      .put("/auth", data)
+      .then((response) => {
+        console.log(response);
+        dispatch(login(data))
+        console.log(isLogged)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      /*
+      .finally(()=>{
+      
+          setModalOpen(!modalOpen);
+        
+      });
+      */
+  };
+
   return (
     <div className="header">
       <div className="header_container">
@@ -40,7 +68,7 @@ function Header() {
               </Link>
             </IconButton>
           </div>
-          {initialState.username && 
+
           <>
             <div className="header_option">
               <IconButton>
@@ -63,7 +91,6 @@ function Header() {
               </IconButton>
             </div>
           </>
-        }
         </div>
 
         <div className="header_modal">
@@ -128,9 +155,34 @@ function Header() {
                     flexDirection: "column",
                     width: "100%",
                   }}
-                ></div>
+                >
+                  <TextField
+                    label="Email"
+                    variant="standard"
+                    helperText="Use your student email (JhonDoe@stud.uni-obuda.hu)"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    style={{ width: "80%", marginBottom: 30 }}
+                  ></TextField>
+                  <TextField
+                    label="Password"
+                    variant="standard"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    style={{ width: "80%" }}
+                  ></TextField>
+                  <div className="form_buttons" style={{ marginTop: 30 }}>
+                    <Button
+                      onClick={loginHandler}
+                      style={{ fontSize: "large", padding: 15, width: 100 }}
+                    >
+                      Send
+                    </Button>
+                  </div>
 
-                {LoginUseReducer()}
+                  <div></div>
+                </div>
               </div>
             </div>
           </Modal>
@@ -143,8 +195,8 @@ function Header() {
           </div>
         ) : (
           */}
-          {/* <Link to="/Login"> */}
-        <div className="header_right"  onClick={() => setModalOpen(true)} >
+        {/* <Link to="/Login"> */}
+        <div className="header_right" onClick={() => setModalOpen(true)}>
           <p>Sign In</p>
         </div>
         {/* </Link> */}
