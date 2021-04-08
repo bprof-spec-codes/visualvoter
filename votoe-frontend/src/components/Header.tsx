@@ -33,19 +33,16 @@ function Header() {
       .put("/auth", data)
       .then((response) => {
         console.log(response);
-        dispatch(login(data))
-        console.log(isLogged)
+        dispatch(login(data));
+        console.log(isLogged);
+
+        if (isLogged.user.Email !== "") {
+          setModalOpen(!modalOpen);
+        }
       })
       .catch((error) => {
         console.log(error);
-      })
-      /*
-      .finally(()=>{
-      
-          setModalOpen(!modalOpen);
-        
       });
-      */
   };
 
   return (
@@ -159,7 +156,7 @@ function Header() {
                   <TextField
                     label="Email"
                     variant="standard"
-                    helperText="Use your student email (JhonDoe@stud.uni-obuda.hu)"
+                    helperText="Use your student email (tesztx@stud.uni-obuda.hu)"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     style={{ width: "80%", marginBottom: 30 }}
@@ -188,18 +185,11 @@ function Header() {
           </Modal>
         </div>
 
-        {/*
-        {user ? (
-          <div className="header_right">
-            <p>Sign Out</p>
+        
+          <div className="header_right" onClick={() => setModalOpen(true)}>
+            {isLogged.user?.Email ? <p>{isLogged.user?.Email}</p> : <p>Sign In</p>}
           </div>
-        ) : (
-          */}
-        {/* <Link to="/Login"> */}
-        <div className="header_right" onClick={() => setModalOpen(true)}>
-          <p>Sign In</p>
-        </div>
-        {/* </Link> */}
+        
       </div>
     </div>
   );
