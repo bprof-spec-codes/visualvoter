@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState } from "react";
 import "./Header.scss";
 import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 import HowToVoteOutlinedIcon from "@material-ui/icons/HowToVoteOutlined";
@@ -7,19 +7,20 @@ import Modal from "react-modal";
 import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
 import AccountBoxOutlinedIcon from "@material-ui/icons/AccountBoxOutlined";
 import { Button, IconButton, TextField } from "@material-ui/core";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "../axios";
 
 import { useSelector, useDispatch } from "react-redux";
-import { increment, decrement, login } from "../store/actions";
+import { login } from "../store/actions";
 
 Modal.setAppElement("#root");
 function Header() {
-  const counter = useSelector((state: any) => state.counter);
   const isLogged = useSelector((state: any) => state.isLogged);
   const dispatch = useDispatch();
 
   const [modalOpen, setModalOpen] = useState(false);
+
+  const [modalSignOutOpen, setModalSignOutOpen] = useState(false);
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
 
@@ -35,14 +36,19 @@ function Header() {
         console.log(response);
         dispatch(login(data));
         console.log(isLogged);
-
-        if (isLogged.user.Email !== "") {
+      })
+      .then((data) => {
+        if (isLogged.user) {
           setModalOpen(!modalOpen);
         }
       })
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  const signoutHandler = () => {
+    dispatch(login(null));
   };
 
   return (
@@ -116,7 +122,15 @@ function Header() {
               },
             }}
           >
-            <div>
+            <div
+              className="modal_container"
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                width: "100%",
+                height: "100%",
+              }}
+            >
               <div
                 className="modal_top"
                 style={{
@@ -131,10 +145,12 @@ function Header() {
                   className="modal_close"
                   onClick={() => setModalOpen(false)}
                 >
-                  <CloseOutlinedIcon
-                    fontSize="large"
-                    style={{ cursor: "pointer" }}
-                  />
+                  <IconButton>
+                    <CloseOutlinedIcon
+                      fontSize="large"
+                      style={{ cursor: "pointer" }}
+                    />
+                  </IconButton>
                 </div>
               </div>
               <div
@@ -177,19 +193,102 @@ function Header() {
                       Send
                     </Button>
                   </div>
-
-                  <div></div>
                 </div>
               </div>
             </div>
           </Modal>
         </div>
 
-        
-          <div className="header_right" onClick={() => setModalOpen(true)}>
-            {isLogged.user?.Email ? <p>{isLogged.user?.Email}</p> : <p>Sign In</p>}
-          </div>
-        
+        <div className="header_modal_signOut">
+          <Modal
+            isOpen={modalSignOutOpen}
+            onRequestClose={() => setModalOpen(false)}
+            shouldCloseOnOverlayClick={false}
+            style={{
+              overlay: {
+                backgroundColor: "rgba(1,1,1,0.6)",
+                position: "fixed",
+                margin: 0,
+              },
+              content: {
+                width: 500,
+                height: 350,
+                borderRadius: 20,
+                position: "absolute",
+                top: "28%",
+                left: "36%",
+
+                display: "flex",
+                flexDirection: "column",
+                padding: 30,
+                alignItems: "center",
+              },
+            }}
+          >
+            <div
+              className="modal_container"
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                width: "100%",
+                height: "100%",
+              }}
+            >
+              <div
+                className="modal_top"
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  width: "100%",
+                  marginBottom: 50,
+                }}
+              >
+                <h1>Sign Out</h1>
+                <div
+                  className="modal_close"
+                  onClick={() => setModalOpen(false)}
+                >
+                  <IconButton>
+                    <CloseOutlinedIcon
+                      fontSize="large"
+                      style={{ cursor: "pointer" }}
+                    />
+                  </IconButton>
+                </div>
+              </div>
+              <div
+                className="modal_form"
+                style={{
+                  width: "100%",
+                  alignItems: "center",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    width: "100%",
+                  }}
+                >
+                  <div className="form_buttons" style={{ marginTop: 30 }}>
+                    <Button
+                      onClick={signoutHandler}
+                      style={{ fontSize: "large", padding: 15, width: 100 }}
+                    >
+                      Sign Out
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Modal>
+        </div>
+
+        <div className="header_right" onClick={() => setModalOpen(true)}>
+          {isLogged.user ? <p>{isLogged.user?.Email}</p> : <p>Sign In</p>}
+        </div>
       </div>
     </div>
   );

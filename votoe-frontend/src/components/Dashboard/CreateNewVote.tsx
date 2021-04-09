@@ -1,9 +1,6 @@
 import {
   Button,
   Checkbox,
-  FormControl,
-  InputLabel,
-  Select,
   TextField,
 } from "@material-ui/core";
 import axios from "../../axios";

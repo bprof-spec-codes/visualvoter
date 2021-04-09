@@ -7,9 +7,10 @@ import "./Sidebar.scss";
 import { IconButton } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
+import { useSelector, useDispatch } from "react-redux";
+import { login } from "../../store/actions";
 
-
-type ActiveVote={
+type ActiveVote = {
   absentionVotes: number;
   isClosed: number;
   isFinished: number;
@@ -18,13 +19,14 @@ type ActiveVote={
   voteID: number;
   voteName: string;
   yesVotes: number;
-}
+};
 
 Modal.setAppElement("#root");
 function Sidebar() {
-  // const [{ user }, dispatch] = useStateValue();
   const [modalOpen, setModalOpen] = useState(false);
-  const [activeVotes, setActiveVotes]  = useState<ActiveVote[]>([]);
+  const [activeVotes, setActiveVotes] = useState<ActiveVote[]>([]);
+
+  const isLogged = useSelector((state: any) => state.isLogged);
 
   useEffect(() => {
     axios
@@ -42,26 +44,29 @@ function Sidebar() {
     let arr = [];
     for (let i = 0; i < activeVotes.length; i++) {
       arr.push(
-        <Link to={`/vote/${activeVotes[i].voteID}`} style={{textDecoration:"none"}}>
-        <div
-          onClick={()=>setModalOpen(!modalOpen)}
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            height: "80px",
-            width: "100%",
-            borderBottom: "1px solid rgba(0,0,0,0.2)",
-            alignItems: "center",
-            color:"black",
-          }}
+        <Link
+          to={`/vote/${activeVotes[i].voteID}`}
+          style={{ textDecoration: "none" }}
         >
-          <p style={{ fontSize: "large", fontWeight: 500}}>
-            {activeVotes[i].voteName}
-          </p>{" "}
-          <IconButton>
-            <CloseOutlinedIcon />
-          </IconButton>{" "}
-        </div>
+          <div
+            onClick={() => setModalOpen(!modalOpen)}
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              height: "80px",
+              width: "100%",
+              borderBottom: "1px solid rgba(0,0,0,0.2)",
+              alignItems: "center",
+              color: "black",
+            }}
+          >
+            <p style={{ fontSize: "large", fontWeight: 500 }}>
+              {activeVotes[i].voteName}
+            </p>{" "}
+            <IconButton>
+              <CloseOutlinedIcon />
+            </IconButton>{" "}
+          </div>
         </Link>
       );
     }
@@ -72,7 +77,7 @@ function Sidebar() {
     <div className="sidebar">
       <div className="sidebar_container">
         <h1>Options</h1>
-        {
+        {isLogged.user ? (
           <>
             <div className="sidebar_option">
               <p>Profile</p>
@@ -82,12 +87,16 @@ function Sidebar() {
               <p>Invites</p>
               <label>{activeVotes?.length}</label>
             </div>
-          </>
-        }
 
-        <div className="sidebar_option">
-          <p>News</p>
-        </div>
+            <div className="sidebar_option">
+              <p>News</p>
+            </div>
+          </>
+        ) : (
+          <div className="sidebar_option">
+            <p>Sign in first</p>
+          </div>
+        )}
       </div>
 
       <div className="sidebar_modal">

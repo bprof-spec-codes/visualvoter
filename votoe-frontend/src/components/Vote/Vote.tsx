@@ -1,4 +1,4 @@
-import { Button, Icon } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import SendIcon from "@material-ui/icons/Send";
 import React, { useState, useEffect } from "react";
@@ -15,13 +15,6 @@ interface VoteDetails {
   voteName: string | undefined;
   yesVotes: number | undefined;
 }
-
-/*
-type VoteType = {
-  VoteID: number;
-  Choice: number;
-};
-*/
 
 const Vote: React.FC<VoteDetails> = ({
   absentionVotes,

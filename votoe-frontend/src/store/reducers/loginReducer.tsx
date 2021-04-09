@@ -1,12 +1,10 @@
 
 export const initialState:IInitState={
-    Email:'',
-    Password:'',
+    user: null,
 }
 
 interface IInitState{
-    Email:string;
-    Password:string;
+    user: object | null;
 }
 
 const loginReducer = (state = initialState, action: any) => {
