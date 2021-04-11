@@ -3,6 +3,7 @@ using Logic;
 using Logic.Class;
 using Logic.Interface;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -69,7 +70,12 @@ namespace VotoeBackend
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("abc 123 970608 qwertzuiopõú"))
                 };
             });
-
+            services.AddAuthorization(options =>
+            {
+                options.DefaultPolicy = new AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme)
+                    .RequireAuthenticatedUser()
+                    .Build();
+            });
 
             services.AddCors(options =>
             {
@@ -84,6 +90,9 @@ namespace VotoeBackend
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -98,9 +107,6 @@ namespace VotoeBackend
                     .AddEnvironmentVariables()
                     .Build();
             }
-            app.UseRouting();
-            app.UseAuthentication();
-            app.UseAuthorization();
             app.UseCors();
             app.UseEndpoints(endpoints =>
             {
