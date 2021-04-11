@@ -67,7 +67,7 @@ namespace VotoeBackend
                     ValidateAudience = true,
                     ValidAudience = "http://www.security.org",
                     ValidIssuer = "http://www.security.org",
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("abc 123 970608 qwertzuiopõú"))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("abc 123 970608 qwertzuiop"))
                 };
             });
             services.AddAuthorization(options =>

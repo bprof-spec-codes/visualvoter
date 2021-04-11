@@ -116,7 +116,7 @@ namespace Logic.Class
 
 
                 var signinKey = new SymmetricSecurityKey(
-                  Encoding.UTF8.GetBytes("abc 123 970608 qwertzuiopőú"));
+                  Encoding.UTF8.GetBytes("abc 123 970608 qwertzuiop"));
 
                 var token = new JwtSecurityToken(
                   issuer: "http://www.security.org",
