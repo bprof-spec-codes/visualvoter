@@ -32,7 +32,7 @@ namespace VotOEApi.Controllers
             return this.oneVoteLogic.GetAllOneVote();
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public OneVote GetOneVote(int id)
         {
             return this.oneVoteLogic.GetOneVote(id);
