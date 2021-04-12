@@ -4,6 +4,7 @@ import SendIcon from "@material-ui/icons/Send";
 import React, { useState, useEffect } from "react";
 import "./Vote.scss";
 import axios from "../../axios";
+import { useSelector } from "react-redux";
 
 interface VoteDetails {
   absentionVotes: number | undefined;
@@ -26,19 +27,26 @@ const Vote: React.FC<VoteDetails> = ({
   voteName,
   yesVotes,
 }) => {
+  const isLogged = useSelector((state: any) => state.isLogged);
   const [vote, setVote] = useState<number>(2);
 
   useEffect(() => {
     console.log(vote);
   }, [vote]);
 
+  const headers={
+    'Authorization': 'Bearer ' + (isLogged.user?.token)
+  }
+
   const sendVoteHandler = () => {
     axios
-      .post("/onevote", { VoteID: voteID, Choice: vote })
+      .post("/onevote", { VoteID: voteID, Choice: vote },{ headers: headers })
       .then((response) => {
         console.log(response);
       })
       .catch((error) => console.log(error));
+
+      console.log(voteID,vote,headers);
   };
 
   return (
@@ -48,6 +56,7 @@ const Vote: React.FC<VoteDetails> = ({
           <h1>{voteName}</h1>
         </div>
         <div className="choose">
+          <h1>{vote}</h1>
           <div className="choose_firstRow">
             <Button variant="contained" onClick={() => setVote(1)}>
               Nem

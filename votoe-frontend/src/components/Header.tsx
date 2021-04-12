@@ -34,8 +34,12 @@ function Header() {
       .put("/auth", data)
       .then((response) => {
         console.log(response);
-        dispatch(login(data));
-        console.log(isLogged);
+
+        const dataForVote={
+          ...data,
+          token: response.data.token,
+        };
+        dispatch(login(dataForVote));
       })
       .then((data) => {
         if (isLogged.user) {
@@ -49,6 +53,7 @@ function Header() {
 
   const signoutHandler = () => {
     dispatch(login(null));
+    setModalSignOutOpen(false)
   };
 
   return (
@@ -286,7 +291,7 @@ function Header() {
           </Modal>
         </div>
 
-        <div className="header_right" onClick={() => setModalOpen(true)}>
+        <div className="header_right" onClick={!isLogged.user?.Email ? (() => setModalOpen(true)) : (()=>setModalSignOutOpen(true))}>
           {isLogged.user ? <p>{isLogged.user?.Email}</p> : <p>Sign In</p>}
         </div>
       </div>

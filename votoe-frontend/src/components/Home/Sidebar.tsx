@@ -2,13 +2,10 @@ import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
 import axios from "../../axios";
 import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
-// import { useStateValue } from "../../StateProvider";
 import "./Sidebar.scss";
 import { IconButton } from "@material-ui/core";
 import { Link } from "react-router-dom";
-
-import { useSelector, useDispatch } from "react-redux";
-import { login } from "../../store/actions";
+import { useSelector } from "react-redux";
 
 type ActiveVote = {
   absentionVotes: number;

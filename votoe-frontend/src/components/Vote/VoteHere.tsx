@@ -3,6 +3,7 @@ import "./VoteHere.scss";
 import Vote from "./Vote";
 import axios from "../../axios";
 import { RouteComponentProps } from "react-router-dom";
+import Header from "../Header";
 
 type VoteType = {
   absentionVotes: number;
@@ -33,10 +34,13 @@ const VoteHere = ({ match }: RouteComponentProps<TParams>) => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+
+      console.log(vote)
+  },[]);
 
   return (
     <div className="voteHere">
+      <Header />
       <div className="voteHere_container">
         <Vote 
         absentionVotes={vote?.absentionVotes}

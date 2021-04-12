@@ -8,9 +8,6 @@ import React, { useState } from "react";
 import "./CreateNewVote.scss";
 
 function CreateNewVote() {
-  const [voteType, setVoteType] = useState("");
-  const [voteName, setVoteName] = useState("");
-
   const [hokCheckBox, setHokCheckBox] = useState(false);
   const [chancelleryCheckBox, setChancelleryCheckBox] = useState(false);
   const [everyoneCheckBox, setEveryoneCheckBox] = useState(false);
