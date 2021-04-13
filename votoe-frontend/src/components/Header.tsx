@@ -35,7 +35,7 @@ function Header() {
       .then((response) => {
         console.log(response);
 
-        const dataForVote={
+        const dataForVote = {
           ...data,
           token: response.data.token,
         };
@@ -53,7 +53,7 @@ function Header() {
 
   const signoutHandler = () => {
     dispatch(login(null));
-    setModalSignOutOpen(false)
+    setModalSignOutOpen(false);
   };
 
   return (
@@ -68,7 +68,7 @@ function Header() {
         <div className="header_middle">
           <div
             className="header_option header_option--active"
-            style={{ marginLeft: "20%" }}
+            // style={{ marginLeft: "20%" }}
           >
             <IconButton>
               <Link to="/" style={{ textDecoration: "none", color: "black" }}>
@@ -291,7 +291,14 @@ function Header() {
           </Modal>
         </div>
 
-        <div className="header_right" onClick={!isLogged.user?.Email ? (() => setModalOpen(true)) : (()=>setModalSignOutOpen(true))}>
+        <div
+          className="header_right"
+          onClick={
+            !isLogged.user?.Email
+              ? () => setModalOpen(true)
+              : () => setModalSignOutOpen(true)
+          }
+        >
           {isLogged.user ? <p>{isLogged.user?.Email}</p> : <p>Sign In</p>}
         </div>
       </div>

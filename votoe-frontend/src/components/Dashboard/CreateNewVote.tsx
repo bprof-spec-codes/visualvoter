@@ -2,8 +2,11 @@ import { Button, Checkbox, TextField } from "@material-ui/core";
 import axios from "../../axios";
 import React, { useState } from "react";
 import "./CreateNewVote.scss";
+import { useSelector } from "react-redux";
 
 function CreateNewVote() {
+  const isLogged = useSelector((state: any) => state.isLogged);
+
   const [hokCheckBox, setHokCheckBox] = useState(false);
   const [chancelleryCheckBox, setChancelleryCheckBox] = useState(false);
   const [everyoneCheckBox, setEveryoneCheckBox] = useState(false);
@@ -11,6 +14,10 @@ function CreateNewVote() {
   const [step, setStep] = useState(1);
 
   const [requiredRole, setRequiredRole] = useState<any>();
+
+  const headers={
+    'Authorization': 'Bearer ' + (isLogged.user?.token)
+  }
 
   const firstCreateHandler = () => {
     let data: any = [];
@@ -21,11 +28,11 @@ function CreateNewVote() {
     axios
       .post("/auth/createRoleForVote", data)
       .then((response) => {
-        console.log(response.data);
-        setRequiredRole(response.data);
-        console.log(requiredRole);
+        console.log(response);
+        const res=response.data;
+        setRequiredRole(res);
         setStep(step + 1);
-      })
+      }).then(()=>console.log(requiredRole))
       .catch((error) => {
         console.log(error.message);
       });
@@ -37,7 +44,7 @@ function CreateNewVote() {
       RequiredRole: requiredRole,
     };
     axios
-      .post("/allvotes", data)
+      .post("/allvotes", data,{ headers: headers })
       .then((response) => {
         console.log(response.data);
       })

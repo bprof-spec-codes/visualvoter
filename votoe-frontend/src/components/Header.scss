@@ -7,7 +7,7 @@
   margin-bottom: 30px;
   align-items: center;
 
-  &_container {
+  .header_container {
     display: flex;
     width: 100%;
     justify-content: space-between;
@@ -16,7 +16,7 @@
     align-items: center;
     text-align: center;
 
-    &_left {
+    .header_left {
       > img {
         width: 200px;
         cursor: pointer;
@@ -39,15 +39,9 @@
         cursor: pointer;
         border-radius: 8px;
 
-        &:last-child {
+        .header_option:last-child {
           margin-right: 0;
-        }
-        
-        &:hover {
-          background: $base-hover;
-          border: none;
-        }
-        
+        } 
 
         > .MuiSvgIcon-root {
           margin: 10px 0px;
@@ -66,4 +60,9 @@
       cursor: pointer;
     }
   }
+}
+
+.header_option:hover {
+  background: $base-hover;
+  border: none;
 }
