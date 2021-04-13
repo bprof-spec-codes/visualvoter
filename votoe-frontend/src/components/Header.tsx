@@ -68,7 +68,7 @@ function Header() {
         <div className="header_middle">
           <div
             className="header_option header_option--active"
-            // style={{ marginLeft: "20%" }}
+            style={{ marginLeft: "20%" }}
           >
             <IconButton>
               <Link to="/" style={{ textDecoration: "none", color: "black" }}>
