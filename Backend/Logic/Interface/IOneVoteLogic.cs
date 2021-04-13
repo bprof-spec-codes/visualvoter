@@ -42,10 +42,8 @@ namespace Logic
         /// <param name="oldId">Original id of the vote to be updated</param>
         /// <param name="newVote">OneVote object, with the already updated details</param>
         /// <returns>True if successful, false if not</returns>
+        /// 
         bool UpdateOneVote(int oldId, OneVote newVote);
-<<<<<<< HEAD
-=======
-
         /// <summary>
         /// TODO PLACEHOLDER
         /// </summary>
@@ -59,7 +57,6 @@ namespace Logic
         /// </summary>
         /// <param name="input">OneVote object, to be checked</param>
         /// <returns>The associated AllVotes object</returns>
->>>>>>> backend-develop
         AllVotes getAssociatedVote(OneVote input);
     }
 }
