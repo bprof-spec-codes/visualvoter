@@ -33,7 +33,7 @@ const VoteResult: React.FC<IVoteResult> = ({
         </div>
 
         <div className="voteResult_img">
-          <img src={HOKLogo} alt="" />
+          <img src={HOKLogo} alt="" loading="lazy" />
         </div>
 
         <div className="voteResult_result">

@@ -61,7 +61,7 @@ function Header() {
       <div className="header_container">
         <div className="header_left">
           <Link to="/">
-            <img style={{ width: 200 }} src={logo} alt="logo" />
+            <img style={{ width: 200 }} src={logo} alt="logo" loading="lazy" />
           </Link>
         </div>
 
