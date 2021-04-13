@@ -8,15 +8,23 @@ using System.Text;
 
 namespace Logic
 {
+    ///<inheritdoc/>
     public class AllVotesLogic : IAllVotesLogic
     {
+        /// <summary>
+        /// Repository for the allVotes table
+        /// </summary>
         public IAllVotesRepository allVotesRepo;
 
+        /// <summary>
+        /// Creates an instance of the AllVotesLogic
+        /// </summary>
+        /// <param name="dbPassword">Database password string</param>
         public AllVotesLogic(string dbPassword)
         {
             this.allVotesRepo = new AllVotesRepository(dbPassword);
         }
-
+        ///<inheritdoc/>
         public bool CreateVote(AllVotes vote)
         {
             //this.allVotesRepo.Add(vote);
@@ -30,7 +38,7 @@ namespace Logic
                 return false;
             }
         }
-
+        ///<inheritdoc/>
         public bool DeleteVote(int voteId)
         {
 
@@ -45,17 +53,17 @@ namespace Logic
                 return false;
             }
         }
-
+        ///<inheritdoc/>
         public IQueryable<AllVotes> GetAllVotes()
         {
             return this.allVotesRepo.GetAll();
         }
-
+        ///<inheritdoc/>
         public AllVotes GetOneVote(int voteId)
         {
             return this.allVotesRepo.GetOne(voteId);
         }
-
+        ///<inheritdoc/>
         public bool UpdateVote(int oldId, AllVotes newVote)
         {
             //this.allVotesRepo.Update(oldId, newVote);
@@ -69,12 +77,12 @@ namespace Logic
                 return false;
             }
         }
-
+        ///<inheritdoc/>
         public IQueryable<AllVotes> GetAllActiveVotes()
         {
             return this.allVotesRepo.GetAll().Where(x => x.IsClosed == 0 && x.IsFinished == 0);
         }
-
+        ///<inheritdoc/>
         public List<AllVotes> GetAllAvaliableVotes(List<string> roles)
         {
             List<AllVotes> output = new List<AllVotes>();
@@ -87,7 +95,7 @@ namespace Logic
             }
             return output;
         }
-
+        ///<inheritdoc/>
         public bool CloseAVote(int id)
         {
             try
@@ -102,7 +110,7 @@ namespace Logic
                 return false;
             }
         }
-
+        ///<inheritdoc/>
         public bool FinishAVote(int id)
         {
             try

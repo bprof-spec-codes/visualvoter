@@ -7,6 +7,9 @@ using System.Text.Json.Serialization;
 
 namespace Models
 {
+    /// <summary>
+    /// Model outlining the structure of a OneVote object
+    /// </summary>
     public class OneVote
     {
         /// <summary>
@@ -23,17 +26,13 @@ namespace Models
         public int VoteID { get; set; }
 
         /// <summary>
-        /// Gets or sets which user submitted this vote
-        /// </summary>
-        //[ForeignKey("Users")]
-        //TODO remove this and reset the database
-        //public int UserID { get; set; }
-
-        /// <summary>
         /// (Nullable bool!)
         /// Gets or sets what this user's choice was. true = yes; false = no, NULL = absention (vagy tartózkodott, fene se tudja hogy van árgyélusul)
         /// </summary>
         public int Choice { get; set; }
+        /// <summary>
+        /// Virtual EF related prop, containing the allVotes associated with this OneVote
+        /// </summary>
         [JsonIgnore]
         public virtual AllVotes AllVotes { get; set; }
 
