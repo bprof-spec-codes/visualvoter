@@ -11,7 +11,14 @@ namespace Logic
     ///<inheritdoc/>
     public class OneVoteLogic : IOneVoteLogic
     {
+        /// <summary>
+        /// Repository for the oneVote table
+        /// </summary>
         public IOneVoteRepository oneVoteRepo;
+
+        /// <summary>
+        /// Repository for the AllVotes table
+        /// </summary>
         public IAllVotesLogic allVotesLogic;
 
         /// <summary>

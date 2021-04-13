@@ -6,6 +6,9 @@ using System.Text.Json.Serialization;
 
 namespace Models
 {
+    /// <summary>
+    /// Model outlining the structure of an AllVotes object
+    /// </summary>
     public class AllVotes
     {
         /// <summary>
@@ -53,6 +56,9 @@ namespace Models
         /// Number of 'absention' choices for this vote
         /// </summary>
         public int AbsentionVotes { get; set; }
+        /// <summary>
+        /// Virtal, EF related prop containing all the associated votes (OneVotes)
+        /// </summary>
         [JsonIgnore]
         public virtual ICollection<OneVote> OneVote { get; set; }
     }
