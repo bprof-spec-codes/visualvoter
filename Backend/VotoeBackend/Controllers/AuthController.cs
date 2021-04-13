@@ -106,7 +106,7 @@ namespace VotOEApi.Controllers
         public async Task<ActionResult> CreateRoleForVoteAsync([FromBody] List<string> id)
         {
             string generatedroleName = await this.authLogic.RoleCreationForNewVote(id);
-            if (generatedroleName != null) return Ok(generatedroleName);
+            if (generatedroleName != null) return new JsonResult(generatedroleName);
             return BadRequest();
             
         }
