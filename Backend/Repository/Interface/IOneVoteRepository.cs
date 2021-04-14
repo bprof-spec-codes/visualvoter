@@ -6,6 +6,9 @@ using System.Text;
 
 namespace Repository
 {
+    /// <summary>
+    /// Repository for handling oneVote related data.
+    /// </summary>
     public interface IOneVoteRepository : IRepository<OneVote, int>
     {
 

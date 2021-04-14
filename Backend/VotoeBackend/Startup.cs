@@ -1,3 +1,4 @@
+#pragma warning disable 1591
 using Data;
 using Logic;
 using Logic.Class;
