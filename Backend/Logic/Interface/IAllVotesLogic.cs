@@ -72,5 +72,34 @@ namespace Logic
         /// <param name="id">Id of the vote to be marked as finished</param>
         /// <returns>True if successful, false if not</returns>
         public bool FinishAVote(int id);
+
+        /// <summary>
+        /// Gets all the allvotes, which has the voteGroup property set to the one provided in the input parameter
+        /// </summary>
+        /// <param name="input">voteGroup id to look for</param>
+        /// <returns>A collection of allvotes that match the criteria</returns>
+        public List<AllVotes> getVotesFromGroup(string input);
+
+
+        /// <summary>
+        /// Returns the number of users, who participated in a specific vote group. (One user submitting multiple votes within the same group only counts as one)
+        /// </summary>
+        /// <param name="groupName">Name of the vote group we're looking for</param>
+        /// <returns>The number of unique voters in the group, who participated by submittint at least 1 vote</returns>
+        public int numberOfGroupParticipants(string groupName);
+
+        /// <summary>
+        /// Counts the number of votes submitted within one vote group.
+        /// </summary>
+        /// <param name="groupName">The name of the group we're looking for</param>
+        /// <returns>The number of votes submitted within a group</returns>
+        public int numberOfVotesInGroup(string groupName);
+
+        /// <summary>
+        /// Counts the number of users, that can currently access the votes in the voteGroup provided in the parameter
+        /// </summary>
+        /// <param name="groupName">The name of the group we're looking for</param>
+        /// <returns>The nubmer of users who could vote in this group, if they choose to do so.</returns>
+        public int howManyUsersCanVoteInGroup(string groupName);
     }
 }

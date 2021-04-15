@@ -125,5 +125,28 @@ namespace Logic
                 return false;
             }
         }
+
+        ///<inheritdoc/>
+        public List<AllVotes> getVotesFromGroup(string input)
+        {
+            var matchingVotes = allVotesRepo.GetAll().Where(x => x.voteGroup.ToLower() == input.ToLower());
+
+            return matchingVotes.ToList();
+        }
+        ///<inheritdoc/>
+        public int numberOfGroupParticipants(string groupName)
+        {
+            throw new NotImplementedException();
+        }
+        ///<inheritdoc/>
+        public int numberOfVotesInGroup(string groupName)
+        {
+            throw new NotImplementedException();
+        }
+        ///<inheritdoc/>
+        public int howManyUsersCanVoteInGroup(string groupName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
