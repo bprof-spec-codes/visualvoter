@@ -130,79 +130,66 @@ function Header() {
             }}
           >
             <div
-              className="modal_container"
+              className="modal_top"
               style={{
                 display: "flex",
-                flexDirection: "column",
+                justifyContent: "space-between",
                 width: "100%",
-                height: "100%",
+                marginBottom: 50,
+              }}
+            >
+              <h1>Sign In</h1>
+              <div className="modal_close" onClick={() => setModalOpen(false)}>
+                <IconButton>
+                  <CloseOutlinedIcon
+                    fontSize="large"
+                    style={{ cursor: "pointer" }}
+                  />
+                </IconButton>
+              </div>
+            </div>
+            <div
+              className="modal_form"
+              style={{
+                width: "100%",
+                alignItems: "center",
+                display: "flex",
+                flexDirection: "column",
               }}
             >
               <div
-                className="modal_top"
                 style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  width: "100%",
-                  marginBottom: 50,
-                }}
-              >
-                <h1>Sign In</h1>
-                <div
-                  className="modal_close"
-                  onClick={() => setModalOpen(false)}
-                >
-                  <IconButton>
-                    <CloseOutlinedIcon
-                      fontSize="large"
-                      style={{ cursor: "pointer" }}
-                    />
-                  </IconButton>
-                </div>
-              </div>
-              <div
-                className="modal_form"
-                style={{
-                  width: "100%",
-                  alignItems: "center",
                   display: "flex",
                   flexDirection: "column",
+                  width: "100%",
                 }}
               >
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    width: "100%",
-                  }}
-                >
-                  <TextField
-                    label="Email"
-                    variant="standard"
-                    helperText="Use your student email (tesztx@stud.uni-obuda.hu)"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    style={{ width: "80%", marginBottom: 30 }}
-                  ></TextField>
-                  <TextField
-                    label="Password"
-                    variant="standard"
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    style={{ width: "80%" }}
-                  ></TextField>
-                  {showError && (
-                    <p className="error_message">Hibás email vagy jelszó</p>
-                  )}
-                  <div className="form_buttons" style={{ marginTop: 30 }}>
-                    <Button
-                      onClick={loginHandler}
-                      style={{ fontSize: "large", padding: 15, width: 100 }}
-                    >
-                      Send
-                    </Button>
-                  </div>
+                <TextField
+                  label="Email"
+                  variant="standard"
+                  helperText="Use your student email (tesztx@stud.uni-obuda.hu)"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  style={{ width: "80%", marginBottom: 30 }}
+                ></TextField>
+                <TextField
+                  label="Password"
+                  variant="standard"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  style={{ width: "80%" }}
+                ></TextField>
+                {showError && (
+                  <p className="error_message">Hibás email vagy jelszó</p>
+                )}
+                <div className="form_buttons" style={{ marginTop: 30 }}>
+                  <Button
+                    onClick={loginHandler}
+                    style={{ fontSize: "large", padding: 15, width: 100 }}
+                  >
+                    Send
+                  </Button>
                 </div>
               </div>
             </div>
@@ -236,60 +223,47 @@ function Header() {
             }}
           >
             <div
-              className="modal_container"
+              className="modal_top"
               style={{
                 display: "flex",
-                flexDirection: "column",
+                justifyContent: "space-between",
                 width: "100%",
-                height: "100%",
+                marginBottom: 50,
+              }}
+            >
+              <h1>Sign Out</h1>
+              <div className="modal_close" onClick={() => setModalOpen(false)}>
+                <IconButton>
+                  <CloseOutlinedIcon
+                    fontSize="large"
+                    style={{ cursor: "pointer" }}
+                  />
+                </IconButton>
+              </div>
+            </div>
+            <div
+              className="modal_form"
+              style={{
+                width: "100%",
+                alignItems: "center",
+                display: "flex",
+                flexDirection: "column",
               }}
             >
               <div
-                className="modal_top"
                 style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  width: "100%",
-                  marginBottom: 50,
-                }}
-              >
-                <h1>Sign Out</h1>
-                <div
-                  className="modal_close"
-                  onClick={() => setModalOpen(false)}
-                >
-                  <IconButton>
-                    <CloseOutlinedIcon
-                      fontSize="large"
-                      style={{ cursor: "pointer" }}
-                    />
-                  </IconButton>
-                </div>
-              </div>
-              <div
-                className="modal_form"
-                style={{
-                  width: "100%",
-                  alignItems: "center",
                   display: "flex",
                   flexDirection: "column",
+                  width: "100%",
                 }}
               >
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    width: "100%",
-                  }}
-                >
-                  <div className="form_buttons" style={{ marginTop: 30 }}>
-                    <Button
-                      onClick={signoutHandler}
-                      style={{ fontSize: "large", padding: 15, width: 100 }}
-                    >
-                      Sign Out
-                    </Button>
-                  </div>
+                <div className="form_buttons" style={{ marginTop: 30 }}>
+                  <Button
+                    onClick={signoutHandler}
+                    style={{ fontSize: "large", padding: 15, width: "100%" }}
+                  >
+                    Sign Out
+                  </Button>
                 </div>
               </div>
             </div>
