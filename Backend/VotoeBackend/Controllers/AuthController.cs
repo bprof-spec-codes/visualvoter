@@ -1,4 +1,5 @@
 ﻿using Logic.Class;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Models;
@@ -121,6 +122,17 @@ namespace VotOEApi.Controllers
 
             output.Roles = new List<string>() { "asd", "asdf" };
             return output;
+        }
+
+        [HttpGet]
+        [Route("makeAdmin")]
+        [Authorize(Roles = "Admin")]
+        public ActionResult makeUserAdmin(string email)
+        {
+            var user = authLogic.GetOneUser(null, email);
+            authLogic.AssignRolesToUser(user, new List<string> { "Admin" });
+
+            return Ok();
         }
     }
 }

@@ -132,5 +132,10 @@
             Expiration date of the token
             </summary>
         </member>
+        <member name="P:Models.TokenModel.isAdmin">
+            <summary>
+            Indicates if the logged in user is admin or not. 
+            </summary>
+        </member>
     </members>
 </doc>
