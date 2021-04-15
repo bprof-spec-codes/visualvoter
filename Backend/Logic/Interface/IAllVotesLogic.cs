@@ -94,5 +94,10 @@ namespace Logic
         /// <param name="groupName">The name of the group we're looking for</param>
         /// <returns>The number of votes submitted within a group</returns>
         public int numberOfVotesInGroup(string groupName);
+
+        /// <summary>
+        /// Checks if a vote would be considered as won at the moment. (According to the .pdf, a vote is won, when 1.) It has the most yes votes in it's voting group, AND 2.) 2/3 of the voters, who submitted a vote to this, or any other candidate in the same voting group, voted 'Yes' to this candidate.)
+        /// </summary>
+        public bool IsVoteWon(int voteID);
     }
 }

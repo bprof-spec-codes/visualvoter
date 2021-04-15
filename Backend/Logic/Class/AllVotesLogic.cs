@@ -16,11 +16,8 @@ namespace Logic
         /// Repository for the allVotes table
         /// </summary>
         public IAllVotesRepository allVotesRepo;
-        /// <summary>
-        /// Logic for the OneVote related methods.
-        /// </summary>
-        public IOneVoteLogic oneVoteLogic;
 
+        public IOneVoteRepository oneVoteRepository;
 
         /// <summary>
         /// Creates an instance of the AllVotesLogic
@@ -29,21 +26,16 @@ namespace Logic
         public AllVotesLogic(string dbPassword)
         {
             this.allVotesRepo = new AllVotesRepository(dbPassword);
-            this.oneVoteLogic = new OneVoteLogic(dbPassword);
+            this.oneVoteRepository = new OneVoteRepository(dbPassword);
         }
         ///<inheritdoc/>
         public bool CreateVote(AllVotes vote)
         {
             //this.allVotesRepo.Add(vote);
-            try
-            {
-                this.allVotesRepo.Add(vote);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+
+            this.allVotesRepo.Add(vote);
+            return true;
+
         }
         ///<inheritdoc/>
         public bool DeleteVote(int voteId)
@@ -136,23 +128,56 @@ namespace Logic
         ///<inheritdoc/>
         public List<AllVotes> getVotesFromGroup(string groupName)
         {
-           var matchingAllVotes = GetAllVotes().Where(x => x.voteGroup == groupName);
+            var matchingAllVotes = GetAllVotes().Where(x => x.voteGroup == groupName);
             return matchingAllVotes.ToList();
         }
         ///<inheritdoc/>
         public int numberOfGroupParticipants(string groupName)
         {
-
-            var matchingOneVotes = oneVoteLogic.GetAllOneVote().Where(x => x.voteGroup == groupName).Select(x => x.submitterName); //Todo: untested
+            var matchingOneVotes = oneVoteRepository.GetAll().Where(x => x.voteGroup == groupName).Select(x => x.submitterName); //Todo: untested
 
             return matchingOneVotes.Distinct().Count();
         }
         ///<inheritdoc/>
         public int numberOfVotesInGroup(string groupName)
         {
-            var matchingOneVotes = oneVoteLogic.GetAllOneVote().Where(x => x.voteGroup == groupName);
+            var matchingOneVotes = oneVoteRepository.GetAll().Where(x => x.voteGroup == groupName);
 
             return matchingOneVotes.Count();
+        }
+        ///<inheritdoc/>
+        public bool IsVoteWon(int voteID)  //TODO: Untested
+        {
+            //According to the .pdf, a vote is won, when 
+            // - 1.) It has the most yes votes in it's voting group,
+            //AND
+            // - 2.) 2/3 of the voters, who submitted a vote to this, or any other candidate in the same voting group, voted 'Yes' to this candidate.
+
+            bool mostYesVoted_Condition = false; // 1.)
+            bool twoThird_Condition = false;         // 2.)
+
+            var thisVote = this.GetOneVote(voteID);
+            var otherVotesInSameGroup = getVotesFromGroup(thisVote.voteGroup);
+            int maxYesVotesInGroup = -1;
+            foreach (var item in otherVotesInSameGroup)
+            {
+                if (item.YesVotes > maxYesVotesInGroup)
+                {
+                    maxYesVotesInGroup = item.YesVotes;
+                }
+            }
+            if (thisVote.YesVotes >= maxYesVotesInGroup)
+            {
+                mostYesVoted_Condition = true;
+            }
+
+            int participantNumber = this.numberOfGroupParticipants(thisVote.voteGroup);
+            double twoThirds = participantNumber / 3.0 * 2.0;
+            if (thisVote.YesVotes >= twoThirds)
+            {
+                twoThird_Condition = true;
+            }
+            return mostYesVoted_Condition && twoThird_Condition;
         }
     }
 }

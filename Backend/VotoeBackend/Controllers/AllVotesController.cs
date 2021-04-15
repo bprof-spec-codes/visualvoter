@@ -44,7 +44,7 @@ namespace VotOEApi.Controllers
             this.allVotesLogic.DeleteVote(id);
         }
 
-        //[Authorize(Roles = "Admin,Editor")] TODO: RE-enable
+        [Authorize(Roles = "Admin,Editor")]
         [HttpPost]
         public ActionResult CreateVote([FromBody] AllVotes vote)
         {

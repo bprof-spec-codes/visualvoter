@@ -12,11 +12,6 @@
             Repository for the allVotes table
             </summary>
         </member>
-        <member name="F:Logic.AllVotesLogic.oneVoteLogic">
-            <summary>
-            Logic for the OneVote related methods.
-            </summary>
-        </member>
         <member name="M:Logic.AllVotesLogic.#ctor(System.String)">
             <summary>
             Creates an instance of the AllVotesLogic
