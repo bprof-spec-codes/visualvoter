@@ -33,7 +33,7 @@ namespace Models
         /// <summary>
         /// Email address of the user who submitted the vote.
         /// </summary>
-        public string submitterEmail { get; set; }
+        public string submitterName { get; set; }
 
         /// <summary>
         /// (Nullable bool!)

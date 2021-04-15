@@ -31,7 +31,7 @@ namespace Logic
             this.allVotesLogic = new AllVotesLogic(dbPassword);
         }
         ///<inheritdoc/>
-        public bool CreateOneVote(OneVote vote)
+        public bool CreateOneVote(OneVote vote, string name)
         {
             try
             {
@@ -40,9 +40,9 @@ namespace Logic
                     var associatedVoteGroup = allVotesLogic.GetOneVote(vote.VoteID).voteGroup;
                     vote.voteGroup = associatedVoteGroup;
                 }
-                if (string.IsNullOrEmpty(vote.submitterEmail))
+                if (string.IsNullOrEmpty(vote.submitterName)) // -||-
                 {
-                    //TODO: Should make the endpoint tell this method the email address of the logged in user, so we could fill in the 'submitterEmail' ourselves, if it arrives as NULL.
+                    vote.submitterName = name;
                 }
                 this.oneVoteRepo.Add(vote);
                 this.AddUsersChoiceToAllVotes(vote);

@@ -136,7 +136,7 @@
             </summary>
             <param name="dbPassword">The password used for connecting to the db</param>
         </member>
-        <member name="M:Logic.OneVoteLogic.CreateOneVote(Models.OneVote)">
+        <member name="M:Logic.OneVoteLogic.CreateOneVote(Models.OneVote,System.String)">
             <inheritdoc/>
         </member>
         <member name="M:Logic.OneVoteLogic.DeleteOneVote(System.Int32)">
@@ -383,11 +383,12 @@
             </summary>
             <returns>A collection of all the OneVotes</returns>
         </member>
-        <member name="M:Logic.IOneVoteLogic.CreateOneVote(Models.OneVote)">
+        <member name="M:Logic.IOneVoteLogic.CreateOneVote(Models.OneVote,System.String)">
             <summary>
             Submits a new vote
             </summary>
             <param name="vote">OneVote object, containing the details of the vote to be submitted</param>
+            <param name="name">Username of the user</param>
             <returns>True if successful, false if not</returns>
         </member>
         <member name="M:Logic.IOneVoteLogic.DeleteOneVote(System.Int32)">

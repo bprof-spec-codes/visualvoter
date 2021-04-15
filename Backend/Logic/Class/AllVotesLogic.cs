@@ -143,7 +143,7 @@ namespace Logic
         public int numberOfGroupParticipants(string groupName)
         {
 
-            var matchingOneVotes = oneVoteLogic.GetAllOneVote().Where(x => x.voteGroup == groupName).Select(x => x.submitterEmail); //Todo: untested
+            var matchingOneVotes = oneVoteLogic.GetAllOneVote().Where(x => x.voteGroup == groupName).Select(x => x.submitterName); //Todo: untested
 
             return matchingOneVotes.Distinct().Count();
         }

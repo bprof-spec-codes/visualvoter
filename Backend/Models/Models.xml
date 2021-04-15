@@ -96,7 +96,7 @@
             Marks which vote group does this specific vote belongs to
             </summary>
         </member>
-        <member name="P:Models.OneVote.submitterEmail">
+        <member name="P:Models.OneVote.submitterName">
             <summary>
             Email address of the user who submitted the vote.
             </summary>
