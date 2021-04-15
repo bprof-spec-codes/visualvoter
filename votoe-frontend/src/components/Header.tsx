@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Header.scss";
 import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 import HowToVoteOutlinedIcon from "@material-ui/icons/HowToVoteOutlined";
@@ -19,10 +19,16 @@ function Header() {
   const dispatch = useDispatch();
 
   const [modalOpen, setModalOpen] = useState(false);
-
   const [modalSignOutOpen, setModalSignOutOpen] = useState(false);
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
+  const [showError, setShowError] = useState(false);
+
+  useEffect(() => {
+    if (isLogged.user) {
+      setModalOpen(!modalOpen);
+    }
+  }, [isLogged.user]);
 
   const loginHandler = () => {
     const data = {
@@ -41,13 +47,9 @@ function Header() {
         };
         dispatch(login(dataForVote));
       })
-      .then((data) => {
-        if (isLogged.user) {
-          setModalOpen(!modalOpen);
-        }
-      })
       .catch((error) => {
         console.log(error);
+        setShowError(true);
       });
   };
 
@@ -190,6 +192,9 @@ function Header() {
                     onChange={(e) => setPassword(e.target.value)}
                     style={{ width: "80%" }}
                   ></TextField>
+                  {showError && (
+                    <p className="error_message">Hibás email vagy jelszó</p>
+                  )}
                   <div className="form_buttons" style={{ marginTop: 30 }}>
                     <Button
                       onClick={loginHandler}
