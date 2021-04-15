@@ -26,6 +26,16 @@ namespace Models
         public int VoteID { get; set; }
 
         /// <summary>
+        /// Marks which vote group does this specific vote belongs to
+        /// </summary>
+        public string voteGroup { get; set; }
+
+        /// <summary>
+        /// Email address of the user who submitted the vote.
+        /// </summary>
+        public string submitterEmail { get; set; }
+
+        /// <summary>
         /// (Nullable bool!)
         /// Gets or sets what this user's choice was. true = yes; false = no, NULL = absention (vagy tartózkodott, fene se tudja hogy van árgyélusul)
         /// </summary>

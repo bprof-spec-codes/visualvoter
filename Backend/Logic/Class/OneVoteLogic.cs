@@ -35,8 +35,18 @@ namespace Logic
         {
             try
             {
+                if (string.IsNullOrEmpty(vote.voteGroup)) //If we didn't get a votegroup from the frontend for the submitted vote, we look it up on backend side.
+                {
+                    var associatedVoteGroup = allVotesLogic.GetOneVote(vote.VoteID).voteGroup;
+                    vote.voteGroup = associatedVoteGroup;
+                }
+                if (string.IsNullOrEmpty(vote.submitterEmail))
+                {
+                    //TODO: Should make the endpoint tell this method the email address of the logged in user, so we could fill in the 'submitterEmail' ourselves, if it arrives as NULL.
+                }
                 this.oneVoteRepo.Add(vote);
                 this.AddUsersChoiceToAllVotes(vote);
+                
                 return true;
             }
             catch (Exception)

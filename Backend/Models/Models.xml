@@ -91,6 +91,16 @@
             Gets or sets which voting event does this specific vote belong to.
             </summary>
         </member>
+        <member name="P:Models.OneVote.voteGroup">
+            <summary>
+            Marks which vote group does this specific vote belongs to
+            </summary>
+        </member>
+        <member name="P:Models.OneVote.submitterEmail">
+            <summary>
+            Email address of the user who submitted the vote.
+            </summary>
+        </member>
         <member name="P:Models.OneVote.Choice">
             <summary>
             (Nullable bool!)

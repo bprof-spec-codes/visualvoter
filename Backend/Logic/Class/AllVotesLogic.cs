@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Logic.Interface;
+using Microsoft.AspNetCore.Identity;
 using Models;
 using Repository;
 using System;
@@ -15,6 +16,11 @@ namespace Logic
         /// Repository for the allVotes table
         /// </summary>
         public IAllVotesRepository allVotesRepo;
+        /// <summary>
+        /// Logic for the OneVote related methods.
+        /// </summary>
+        public IOneVoteLogic oneVoteLogic;
+
 
         /// <summary>
         /// Creates an instance of the AllVotesLogic
@@ -23,6 +29,7 @@ namespace Logic
         public AllVotesLogic(string dbPassword)
         {
             this.allVotesRepo = new AllVotesRepository(dbPassword);
+            this.oneVoteLogic = new OneVoteLogic(dbPassword);
         }
         ///<inheritdoc/>
         public bool CreateVote(AllVotes vote)
@@ -127,26 +134,25 @@ namespace Logic
         }
 
         ///<inheritdoc/>
-        public List<AllVotes> getVotesFromGroup(string input)
+        public List<AllVotes> getVotesFromGroup(string groupName)
         {
-            var matchingVotes = allVotesRepo.GetAll().Where(x => x.voteGroup.ToLower() == input.ToLower());
-
-            return matchingVotes.ToList();
+           var matchingAllVotes = GetAllVotes().Where(x => x.voteGroup == groupName);
+            return matchingAllVotes.ToList();
         }
         ///<inheritdoc/>
         public int numberOfGroupParticipants(string groupName)
         {
-            throw new NotImplementedException();
+
+            var matchingOneVotes = oneVoteLogic.GetAllOneVote().Where(x => x.voteGroup == groupName).Select(x => x.submitterEmail); //Todo: untested
+
+            return matchingOneVotes.Distinct().Count();
         }
         ///<inheritdoc/>
         public int numberOfVotesInGroup(string groupName)
         {
-            throw new NotImplementedException();
-        }
-        ///<inheritdoc/>
-        public int howManyUsersCanVoteInGroup(string groupName)
-        {
-            throw new NotImplementedException();
+            var matchingOneVotes = oneVoteLogic.GetAllOneVote().Where(x => x.voteGroup == groupName);
+
+            return matchingOneVotes.Count();
         }
     }
 }

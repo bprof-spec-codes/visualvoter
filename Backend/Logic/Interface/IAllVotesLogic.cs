@@ -94,12 +94,5 @@ namespace Logic
         /// <param name="groupName">The name of the group we're looking for</param>
         /// <returns>The number of votes submitted within a group</returns>
         public int numberOfVotesInGroup(string groupName);
-
-        /// <summary>
-        /// Counts the number of users, that can currently access the votes in the voteGroup provided in the parameter
-        /// </summary>
-        /// <param name="groupName">The name of the group we're looking for</param>
-        /// <returns>The nubmer of users who could vote in this group, if they choose to do so.</returns>
-        public int howManyUsersCanVoteInGroup(string groupName);
     }
 }
