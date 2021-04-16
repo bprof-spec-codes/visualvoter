@@ -100,8 +100,7 @@ namespace VotOEApi.Controllers
         }
 
         [Authorize(Roles = "Admin,Editor")]
-        [HttpGet("{id}")]
-        [Route("close")]
+        [HttpGet("close/{id}")]
         public IActionResult CloseAVote(int id)
         {
             if (this.allVotesLogic.CloseAVote(id)) return Ok();
@@ -109,8 +108,7 @@ namespace VotOEApi.Controllers
         }
 
         [Authorize(Roles = "Admin,Editor")]
-        [HttpGet("{id}")]
-        [Route("finish")]
+        [HttpGet("finish/{id}")]
         public IActionResult FinishAVote(int id)
         {
             if (this.allVotesLogic.FinishAVote(id)) return Ok();

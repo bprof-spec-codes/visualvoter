@@ -1,3 +1,4 @@
+#pragma warning disable 1591
 using Data;
 using Logic;
 using Logic.Class;
@@ -14,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -39,7 +41,31 @@ namespace VotoeBackend
             services.AddTransient<IOneVoteLogic>(x => new OneVoteLogic(Configuration["DBPassword"]));
             services.AddTransient<IAllVotesLogic>(x => new AllVotesLogic(Configuration["DBPassword"]));
             services.AddTransient<AuthLogic, AuthLogic>();
+            services.AddSwaggerGen(c =>
+            {
+                // configure SwaggerDoc and others
 
+                // add JWT Authentication
+                var securityScheme = new OpenApiSecurityScheme
+                {
+                    Name = "JWT Authentication",
+                    Description = "Enter JWT Bearer token **_only_**",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer", // must be lower case
+                    BearerFormat = "JWT",
+                    Reference = new OpenApiReference
+                    {
+                        Id = JwtBearerDefaults.AuthenticationScheme,
+                        Type = ReferenceType.SecurityScheme
+                    }
+                };
+                c.AddSecurityDefinition(securityScheme.Reference.Id, securityScheme);
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                {securityScheme, new string[] { }}
+                });
+            });
             var connectionString = "server=95.111.254.24;database=projektmunka_teszt;user=projektmunka;password=" + Configuration["DBPassword"] + ";ApplicationIntent=ReadWrite;";
             services.AddDbContext<VotoeDbContext>(options => options.UseSqlServer(connectionString));
             services.AddIdentity<IdentityUser, IdentityRole>(
@@ -108,6 +134,12 @@ namespace VotoeBackend
                     .Build();
             }
             app.UseCors();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.RoutePrefix = string.Empty;
+            });
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
