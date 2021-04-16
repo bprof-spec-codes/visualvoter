@@ -26,7 +26,7 @@ function Header() {
 
   useEffect(() => {
     if (isLogged.user) {
-      setModalOpen(!modalOpen);
+      setModalOpen(false);
     }
   }, [isLogged.user]);
 
