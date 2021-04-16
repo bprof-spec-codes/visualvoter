@@ -5,6 +5,10 @@ import React, { useState, useEffect } from "react";
 import "./Vote.scss";
 import axios from "../../axios";
 import { useSelector } from "react-redux";
+import ReactNotification from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
+
+import { store } from 'react-notifications-component';
 
 interface VoteDetails {
   absentionVotes: number | undefined;
@@ -34,6 +38,22 @@ const Vote: React.FC<VoteDetails> = ({
     console.log(vote);
   }, [vote]);
 
+  useEffect(() => {
+    store.addNotification({
+      title: "Wonderful!",
+      message: "teodosii@react-notifications-component",
+      type: "success",
+      insert: "top",
+      container: "top-right",
+      animationIn: ["animate__animated", "animate__fadeIn"],
+      animationOut: ["animate__animated", "animate__fadeOut"],
+      dismiss: {
+      duration: 5000,
+      onScreen: true
+    }
+    });
+  }, []);
+
   const headers={
     'Authorization': 'Bearer ' + (isLogged.user?.token)
   }
@@ -43,8 +63,36 @@ const Vote: React.FC<VoteDetails> = ({
       .post("/onevote", { VoteID: voteID, Choice: vote },{ headers: headers })
       .then((response) => {
         console.log(response);
+        store.addNotification({
+          title: "Siker!",
+          message: "Sikeresen leadtad a szavazatod!",
+          type: "success",
+          insert: "top",
+          container: "top-right",
+          animationIn: ["animate__animated", "animate__fadeIn"],
+          animationOut: ["animate__animated", "animate__fadeOut"],
+          dismiss: {
+          duration: 5000,
+          onScreen: true
+        }
+        });
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        store.addNotification({
+          title: "Hiba!",
+          message: "Erre a szavazásra már adtál le szavazatot vagy nincs jogosultságod szavazni!",
+          type: "danger",
+          insert: "top",
+          container: "top-right",
+          animationIn: ["animate__animated", "animate__fadeIn"],
+          animationOut: ["animate__animated", "animate__fadeOut"],
+          dismiss: {
+          duration: 5000,
+          onScreen: true
+        }
+        });
+      });
 
       console.log(voteID,vote,headers);
   };

@@ -12,15 +12,14 @@ function CreateNewVote() {
   const [everyoneCheckBox, setEveryoneCheckBox] = useState(false);
   const [voteName, setVoteName] = useState("");
   const [step, setStep] = useState(1);
-
   const [requiredRole, setRequiredRole] = useState<any>();
 
-  const headers={
-    'Authorization': 'Bearer ' + (isLogged.user?.token)
-  }
+  const headers = {
+    Authorization: "Bearer " + isLogged.user?.token,
+  };
 
   const firstCreateHandler = () => {
-    let data: any = [];
+    let data = [];
 
     hokCheckBox && data.push("Hök");
     chancelleryCheckBox && data.push("Szenátus");
@@ -29,10 +28,10 @@ function CreateNewVote() {
       .post("/auth/createRoleForVote", data)
       .then((response) => {
         console.log(response);
-        const res=response.data;
+        const res = response.data;
         setRequiredRole(res);
         setStep(step + 1);
-      }).then(()=>console.log(requiredRole))
+      })
       .catch((error) => {
         console.log(error.message);
       });
@@ -44,11 +43,13 @@ function CreateNewVote() {
       RequiredRole: requiredRole,
     };
     axios
-      .post("/allvotes", data,{ headers: headers })
+      .post("/allvotes", data, { headers: headers })
       .then((response) => {
         console.log(response.data);
       })
-      .catch((error) => console.log(error.message));
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
 
   switch (step) {
