@@ -3,6 +3,8 @@ import axios from "../../axios";
 import React, { useState } from "react";
 import "./CreateNewVote.scss";
 import { useSelector } from "react-redux";
+import "react-notifications-component/dist/theme.css";
+import { store } from "react-notifications-component";
 
 function CreateNewVote() {
   const isLogged = useSelector((state: any) => state.isLogged);
@@ -13,6 +15,14 @@ function CreateNewVote() {
   const [voteName, setVoteName] = useState("");
   const [step, setStep] = useState(1);
   const [requiredRole, setRequiredRole] = useState<any>();
+
+  const resetVote = () => {
+    setHokCheckBox(false);
+    setChancelleryCheckBox(false);
+    setEveryoneCheckBox(false);
+    setVoteName("");
+    setStep(1);
+  };
 
   const headers = {
     Authorization: "Bearer " + isLogged.user?.token,
@@ -46,9 +56,38 @@ function CreateNewVote() {
       .post("/allvotes", data, { headers: headers })
       .then((response) => {
         console.log(response.data);
+        store.addNotification({
+          title: "Siker!",
+          message: "Sikeresen létrehoztál egy szavazást!",
+          type: "success",
+          insert: "top",
+          container: "top-right",
+          animationIn: ["animate__animated", "animate__fadeIn"],
+          animationOut: ["animate__animated", "animate__fadeOut"],
+          dismiss: {
+            duration: 5000,
+            onScreen: true,
+          },
+        });
+      })
+      .then(() => {
+        resetVote();
       })
       .catch((error) => {
         console.log(error.message);
+        store.addNotification({
+          title: "Hiba!",
+          message: "A szavazás létrehozása sikertelen!",
+          type: "danger",
+          insert: "top",
+          container: "top-right",
+          animationIn: ["animate__animated", "animate__fadeIn"],
+          animationOut: ["animate__animated", "animate__fadeOut"],
+          dismiss: {
+            duration: 5000,
+            onScreen: true,
+          },
+        });
       });
   };
 
