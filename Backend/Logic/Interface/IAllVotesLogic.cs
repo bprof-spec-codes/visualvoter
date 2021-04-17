@@ -72,5 +72,32 @@ namespace Logic
         /// <param name="id">Id of the vote to be marked as finished</param>
         /// <returns>True if successful, false if not</returns>
         public bool FinishAVote(int id);
+
+        /// <summary>
+        /// Gets all the allvotes, which has the voteGroup property set to the one provided in the input parameter
+        /// </summary>
+        /// <param name="input">voteGroup id to look for</param>
+        /// <returns>A collection of allvotes that match the criteria</returns>
+        public List<AllVotes> getVotesFromGroup(string input);
+
+
+        /// <summary>
+        /// Returns the number of users, who participated in a specific vote group. (One user submitting multiple votes within the same group only counts as one)
+        /// </summary>
+        /// <param name="groupName">Name of the vote group we're looking for</param>
+        /// <returns>The number of unique voters in the group, who participated by submittint at least 1 vote</returns>
+        public int numberOfGroupParticipants(string groupName);
+
+        /// <summary>
+        /// Counts the number of votes submitted within one vote group.
+        /// </summary>
+        /// <param name="groupName">The name of the group we're looking for</param>
+        /// <returns>The number of votes submitted within a group</returns>
+        public int numberOfVotesInGroup(string groupName);
+
+        /// <summary>
+        /// Checks if a vote would be considered as won at the moment. (According to the .pdf, a vote is won, when 1.) It has the most yes votes in it's voting group, AND 2.) 2/3 of the voters, who submitted a vote to this, or any other candidate in the same voting group, voted 'Yes' to this candidate.)
+        /// </summary>
+        public bool IsVoteWon(int voteID);
     }
 }

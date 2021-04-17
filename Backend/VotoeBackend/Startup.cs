@@ -66,7 +66,7 @@ namespace VotoeBackend
                 {securityScheme, new string[] { }}
                 });
             });
-            var connectionString = "server=95.111.254.24;database=projektmunka_teszt;user=projektmunka;password=" + Configuration["DBPassword"] + ";ApplicationIntent=ReadWrite;";
+            var connectionString = "server=95.111.254.24;database=projektmunka;user=projektmunka;password=" + Configuration["DBPassword"] + ";ApplicationIntent=ReadWrite;";
             services.AddDbContext<VotoeDbContext>(options => options.UseSqlServer(connectionString));
             services.AddIdentity<IdentityUser, IdentityRole>(
                      option =>

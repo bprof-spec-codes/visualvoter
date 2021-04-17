@@ -31,12 +31,22 @@ namespace Logic
             this.allVotesLogic = new AllVotesLogic(dbPassword);
         }
         ///<inheritdoc/>
-        public bool CreateOneVote(OneVote vote)
+        public bool CreateOneVote(OneVote vote, string name)
         {
             try
             {
+                if (string.IsNullOrEmpty(vote.voteGroup)) //If we didn't get a votegroup from the frontend for the submitted vote, we look it up on backend side.
+                {
+                    var associatedVoteGroup = allVotesLogic.GetOneVote(vote.VoteID).voteGroup;
+                    vote.voteGroup = associatedVoteGroup;
+                }
+                if (string.IsNullOrEmpty(vote.submitterName)) // -||-
+                {
+                    vote.submitterName = name;
+                }
                 this.oneVoteRepo.Add(vote);
                 this.AddUsersChoiceToAllVotes(vote);
+                
                 return true;
             }
             catch (Exception)

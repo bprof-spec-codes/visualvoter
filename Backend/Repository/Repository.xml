@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Repository</name>
+    </assembly>
+    <members>
+        <member name="T:Repository.AllVotesRepository">
+            <inheritdoc/>
+        </member>
+        <member name="M:Repository.AllVotesRepository.#ctor(System.String)">
+            <summary>
+            Creates a new instance of the AllVotes repo
+            </summary>
+            <param name="dbPassword">The password for the db</param>
+        </member>
+        <member name="M:Repository.AllVotesRepository.Add(Models.AllVotes)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Repository.AllVotesRepository.Delete(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Repository.AllVotesRepository.GetAll">
+            <inheritdoc/>
+        </member>
+        <member name="M:Repository.AllVotesRepository.GetOne(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Repository.AllVotesRepository.Update(System.Int32,Models.AllVotes)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Repository.AllVotesRepository.GetLastVote">
+            <inheritdoc/>
+        </member>
+        <member name="T:Repository.OneVoteRepository">
+            <inheritdoc/>
+        </member>
+        <member name="M:Repository.OneVoteRepository.#ctor(System.String)">
+            <summary>
+            Creates a new instance of the oneVote repo
+            </summary>
+            <param name="dbPassword">Password for the db</param>
+        </member>
+        <member name="M:Repository.OneVoteRepository.Add(Models.OneVote)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Repository.OneVoteRepository.Delete(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Repository.OneVoteRepository.GetAll">
+            <inheritdoc/>
+        </member>
+        <member name="M:Repository.OneVoteRepository.GetOne(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Repository.OneVoteRepository.Update(System.Int32,Models.OneVote)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Repository.IAllVotesRepository">
+            <summary>
+            Repository for handling AllVotes related data
+            </summary>
+        </member>
+        <member name="M:Repository.IAllVotesRepository.GetLastVote">
+            <summary>
+            TODO Update this summary
+            </summary>
+            <returns>The last vote?</returns>
+        </member>
+        <member name="T:Repository.IOneVoteRepository">
+            <summary>
+            Repository for handling oneVote related data.
+            </summary>
+        </member>
+        <member name="T:Repository.IRepository`2">
+            <summary>
+            Common interface for all repositories
+            </summary>
+            <typeparam name="TReturnType">.</typeparam>
+            <typeparam name="TKeyType">.</typeparam>
+        </member>
+        <member name="M:Repository.IRepository`2.GetOne(`1)">
+            <summary>
+            Return a single instance
+            </summary>
+            <param name="key">identifier of the instance</param>
+            <returns></returns>
+        </member>
+        <member name="M:Repository.IRepository`2.GetAll">
+            <summary>
+            Gets all the objects in the repository
+            </summary>
+            <returns>A collection of the objects in the repository</returns>
+        </member>
+        <member name="M:Repository.IRepository`2.Add(`0)">
+            <summary>
+            Add a new item to the repository
+            </summary>
+            <param name="element">The item to add</param>
+        </member>
+        <member name="M:Repository.IRepository`2.Delete(`1)">
+            <summary>
+            Delete an item from the repository
+            </summary>
+            <param name="element">The item to be deleted</param>
+        </member>
+        <member name="M:Repository.IRepository`2.Update(`1,`0)">
+            <summary>
+            Update an item in the repository
+            </summary>
+            <param name="oldKey">Old key of the item</param>
+            <param name="element">Updated object</param>
+        </member>
+    </members>
+</doc>

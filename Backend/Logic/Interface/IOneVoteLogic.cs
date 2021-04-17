@@ -27,8 +27,9 @@ namespace Logic
         /// Submits a new vote
         /// </summary>
         /// <param name="vote">OneVote object, containing the details of the vote to be submitted</param>
+        /// <param name="name">Username of the user</param>
         /// <returns>True if successful, false if not</returns>
-        bool CreateOneVote(OneVote vote);
+        bool CreateOneVote(OneVote vote, string name);
         /// <summary>
         /// Deletes a specified vote
         /// </summary>

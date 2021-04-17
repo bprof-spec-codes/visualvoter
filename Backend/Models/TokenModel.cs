@@ -18,5 +18,10 @@ namespace Models
         /// Expiration date of the token
         /// </summary>
         public DateTime ExpirationDate { get; set; }
+
+        /// <summary>
+        /// Indicates if the logged in user is admin or not. 
+        /// </summary>
+        public bool isAdmin { get; set; }
     }
 }

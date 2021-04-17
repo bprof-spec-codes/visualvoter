@@ -45,6 +45,15 @@
         <member name="M:Logic.AllVotesLogic.FinishAVote(System.Int32)">
             <inheritdoc/>
         </member>
+        <member name="M:Logic.AllVotesLogic.getVotesFromGroup(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Logic.AllVotesLogic.numberOfGroupParticipants(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Logic.AllVotesLogic.numberOfVotesInGroup(System.String)">
+            <inheritdoc/>
+        </member>
         <member name="T:Logic.Class.AuthLogic">
             <inheritdoc/>
         </member>
@@ -106,13 +115,23 @@
         <member name="T:Logic.OneVoteLogic">
             <inheritdoc/>
         </member>
+        <member name="F:Logic.OneVoteLogic.oneVoteRepo">
+            <summary>
+            Repository for the oneVote table
+            </summary>
+        </member>
+        <member name="F:Logic.OneVoteLogic.allVotesLogic">
+            <summary>
+            Repository for the AllVotes table
+            </summary>
+        </member>
         <member name="M:Logic.OneVoteLogic.#ctor(System.String)">
             <summary>
             Creates a new instance of the oneVote logic.
             </summary>
             <param name="dbPassword">The password used for connecting to the db</param>
         </member>
-        <member name="M:Logic.OneVoteLogic.CreateOneVote(Models.OneVote)">
+        <member name="M:Logic.OneVoteLogic.CreateOneVote(Models.OneVote,System.String)">
             <inheritdoc/>
         </member>
         <member name="M:Logic.OneVoteLogic.DeleteOneVote(System.Int32)">
@@ -205,6 +224,27 @@
             </summary>
             <param name="id">Id of the vote to be marked as finished</param>
             <returns>True if successful, false if not</returns>
+        </member>
+        <member name="M:Logic.IAllVotesLogic.getVotesFromGroup(System.String)">
+            <summary>
+            Gets all the allvotes, which has the voteGroup property set to the one provided in the input parameter
+            </summary>
+            <param name="input">voteGroup id to look for</param>
+            <returns>A collection of allvotes that match the criteria</returns>
+        </member>
+        <member name="M:Logic.IAllVotesLogic.numberOfGroupParticipants(System.String)">
+            <summary>
+            Returns the number of users, who participated in a specific vote group. (One user submitting multiple votes within the same group only counts as one)
+            </summary>
+            <param name="groupName">Name of the vote group we're looking for</param>
+            <returns>The number of unique voters in the group, who participated by submittint at least 1 vote</returns>
+        </member>
+        <member name="M:Logic.IAllVotesLogic.numberOfVotesInGroup(System.String)">
+            <summary>
+            Counts the number of votes submitted within one vote group.
+            </summary>
+            <param name="groupName">The name of the group we're looking for</param>
+            <returns>The number of votes submitted within a group</returns>
         </member>
         <member name="T:Logic.Interface.IAuthLogic">
             <summary>
@@ -338,11 +378,12 @@
             </summary>
             <returns>A collection of all the OneVotes</returns>
         </member>
-        <member name="M:Logic.IOneVoteLogic.CreateOneVote(Models.OneVote)">
+        <member name="M:Logic.IOneVoteLogic.CreateOneVote(Models.OneVote,System.String)">
             <summary>
             Submits a new vote
             </summary>
             <param name="vote">OneVote object, containing the details of the vote to be submitted</param>
+            <param name="name">Username of the user</param>
             <returns>True if successful, false if not</returns>
         </member>
         <member name="M:Logic.IOneVoteLogic.DeleteOneVote(System.Int32)">
