@@ -139,11 +139,18 @@ namespace Logic.Class
                 {
                     adminState = true;
                 }
+
+                bool editorState = false;
+                if (roles.Contains("Editor"))
+                {
+                    editorState = true;
+                }
                 return new TokenModel
                 {
                     Token = new JwtSecurityTokenHandler().WriteToken(token),
                     ExpirationDate = token.ValidTo,
-                    isAdmin = adminState
+                    isAdmin = adminState,
+                    isEditor = editorState
                 };
             }
             throw new ArgumentException("Login failed");
