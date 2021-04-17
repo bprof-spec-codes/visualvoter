@@ -121,5 +121,12 @@ namespace VotOEApi.Controllers
         {
             return new JsonResult(allVotesLogic.getVotesFromGroup(groupName));
         }
+
+        [Route("participantCount")]
+        [HttpGet]
+        public IActionResult participantCount(string groupName)
+        {
+            return new JsonResult(allVotesLogic.numberOfGroupParticipants(groupName));
+        }
     }
 }
