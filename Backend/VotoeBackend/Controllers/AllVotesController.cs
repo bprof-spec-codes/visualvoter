@@ -114,5 +114,12 @@ namespace VotOEApi.Controllers
             if (this.allVotesLogic.FinishAVote(id)) return Ok();
             return BadRequest();
         }
+
+        [Route("groupVotes")]
+        [HttpGet]
+        public IActionResult groupVotes(string groupName)
+        {
+            return new JsonResult(allVotesLogic.getVotesFromGroup(groupName));
+        }
     }
 }
