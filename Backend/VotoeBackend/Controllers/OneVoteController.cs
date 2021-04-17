@@ -53,7 +53,7 @@ namespace VotOEApi.Controllers
             //if (this.User.IsInRole(associatedVote.RequiredRole))
             if (await this.authLogic.HasRoleByName(userName,associatedVote.RequiredRole))
             {
-                this.oneVoteLogic.CreateOneVote(vote);
+                this.oneVoteLogic.CreateOneVote(vote, userName);
 
                 //Code is correct but still stays in that role after removing.
                 await this.authLogic.RemoveUserFromRole(userName, associatedVote.RequiredRole);

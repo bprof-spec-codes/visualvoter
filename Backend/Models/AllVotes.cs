@@ -56,5 +56,10 @@ namespace Models
         /// </summary>
         [JsonIgnore]
         public virtual ICollection<OneVote> OneVote { get; set; }
+
+        /// <summary>
+        /// Identifies which voting group does this current vote belongs to.
+        /// </summary>
+        public string voteGroup { get; set; }
     }
 }

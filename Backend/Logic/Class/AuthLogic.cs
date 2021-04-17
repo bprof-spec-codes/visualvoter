@@ -120,7 +120,7 @@ namespace Logic.Class
 
 
                 var roles = await userManager.GetRolesAsync(user);
-
+                ;
                 claims.AddRange(roles.Select(role => new Claim(ClaimsIdentity.DefaultRoleClaimType, role)));
 
 
@@ -134,10 +134,16 @@ namespace Logic.Class
                   expires: DateTime.Now.AddMinutes(60),
                   signingCredentials: new SigningCredentials(signinKey, SecurityAlgorithms.HmacSha256)
                 );
+                bool adminState = false;
+                if (roles.Contains("Admin"))
+                {
+                    adminState = true;
+                }
                 return new TokenModel
                 {
                     Token = new JwtSecurityTokenHandler().WriteToken(token),
-                    ExpirationDate = token.ValidTo
+                    ExpirationDate = token.ValidTo,
+                    isAdmin = adminState
                 };
             }
             throw new ArgumentException("Login failed");
