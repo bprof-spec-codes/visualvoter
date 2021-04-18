@@ -128,5 +128,12 @@ namespace VotOEApi.Controllers
         {
             return new JsonResult(allVotesLogic.numberOfGroupParticipants(groupName));
         }
+
+        [Route("winCheck")]
+        [HttpGet]
+        public IActionResult winCheck(int voteID)
+        {
+            return new JsonResult(allVotesLogic.IsVoteWon(voteID));
+        }
     }
 }
