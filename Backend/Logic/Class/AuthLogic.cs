@@ -28,7 +28,7 @@ namespace Logic.Class
         {
             this.userManager = userManager;
             this.roleManager = roleManager;
-            
+
         }
 
         ///<inheritdoc/>
@@ -98,7 +98,7 @@ namespace Logic.Class
             var result = await userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
-               await userManager.AddToRoleAsync(user, "Hallgató");
+                await userManager.AddToRoleAsync(user, "Hallgató");
                 return "OK";
             }
             return "NOT OK";
@@ -139,11 +139,18 @@ namespace Logic.Class
                 {
                     adminState = true;
                 }
+
+                bool editorState = false;
+                if (roles.Contains("Editor"))
+                {
+                    editorState = true;
+                }
                 return new TokenModel
                 {
                     Token = new JwtSecurityTokenHandler().WriteToken(token),
                     ExpirationDate = token.ValidTo,
-                    isAdmin = adminState
+                    isAdmin = adminState,
+                    isEditor = editorState
                 };
             }
             throw new ArgumentException("Login failed");
@@ -167,7 +174,7 @@ namespace Logic.Class
         public async Task<bool> HasRoleByName(string userName, string role)
         {
             var user = await this.userManager.FindByNameAsync(userName);
-            if (userManager.IsInRoleAsync(user, role).Result)
+            if (userManager.IsInRoleAsync(user, role).Result || userManager.IsInRoleAsync(user, "Admin").Result)
             {
                 return true;
             }
@@ -181,7 +188,15 @@ namespace Logic.Class
         ///<inheritdoc/>
         public bool AssignRolesToUser(IdentityUser user, List<string> roles)
         {
-            var selectedUser = GetOneUser(user.Id, null);
+            IdentityUser selectedUser;
+            if (!string.IsNullOrWhiteSpace(user.Id) && user.Id.ToLower() != "string")
+            {
+                selectedUser = GetOneUser(user.Id, null);
+            }
+            else
+            {
+                selectedUser = GetOneUser(null, user.Email);
+            }
             //userManager.AddToRolesAsync(user, roles).Wait();
             userManager.AddToRolesAsync(selectedUser, roles).Wait();
             return true;

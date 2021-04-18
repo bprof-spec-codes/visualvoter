@@ -23,5 +23,10 @@ namespace Models
         /// Indicates if the logged in user is admin or not. 
         /// </summary>
         public bool isAdmin { get; set; }
+
+        /// <summary>
+        /// Indicates if the logged in user is admin or not. 
+        /// </summary>
+        public bool isEditor { get; set; }
     }
 }

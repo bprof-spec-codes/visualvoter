@@ -146,17 +146,31 @@ namespace Logic
             return matchingOneVotes.Count();
         }
         ///<inheritdoc/>
-        public bool IsVoteWon(int voteID)  //TODO: Untested
+        public bool IsVoteWon(int voteID)
         {
             //According to the .pdf, a vote is won, when 
             // - 1.) It has the most yes votes in it's voting group,
             //AND
             // - 2.) 2/3 of the voters, who submitted a vote to this, or any other candidate in the same voting group, voted 'Yes' to this candidate.
 
+            
+
+            var thisVote = this.GetOneVote(voteID);
+
+            if (string.IsNullOrWhiteSpace(thisVote.voteGroup) || thisVote.voteGroup.ToLower() == "string")
+            {
+                var totalVotes = thisVote.YesVotes + thisVote.NoVotes + thisVote.AbsentionVotes;
+                var twoThird = totalVotes / 3.0 * 2.0;
+                if (thisVote.YesVotes >= twoThird)
+                {
+                    return true;
+                }
+                return false;
+            }
+
             bool mostYesVoted_Condition = false; // 1.)
             bool twoThird_Condition = false;         // 2.)
 
-            var thisVote = this.GetOneVote(voteID);
             var otherVotesInSameGroup = getVotesFromGroup(thisVote.voteGroup);
             int maxYesVotesInGroup = -1;
             foreach (var item in otherVotesInSameGroup)
