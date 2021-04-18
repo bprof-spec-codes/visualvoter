@@ -35,12 +35,12 @@ namespace Logic
         {
             try
             {
-                if (string.IsNullOrEmpty(vote.voteGroup)) //If we didn't get a votegroup from the frontend for the submitted vote, we look it up on backend side.
+                if (string.IsNullOrWhiteSpace(vote.voteGroup) || vote.voteGroup.ToLower() == "string") //If we didn't get a votegroup from the frontend for the submitted vote, we look it up on backend side.
                 {
                     var associatedVoteGroup = allVotesLogic.GetOneVote(vote.VoteID).voteGroup;
                     vote.voteGroup = associatedVoteGroup;
                 }
-                if (string.IsNullOrEmpty(vote.submitterName)) // -||-
+                if (string.IsNullOrWhiteSpace(vote.submitterName) || vote.voteGroup.ToLower() == "string") // -||-
                 {
                     vote.submitterName = name;
                 }

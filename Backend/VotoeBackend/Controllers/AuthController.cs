@@ -87,8 +87,9 @@ namespace VotOEApi.Controllers
             return authLogic.GetAllRolesOfUser(user);
         }
 
-        [Route("assignRole")]
+        [Route("assignRole")] //TODO: Authenticate as admin!
         [HttpPost]
+        //[Authorize(Roles = "Admin")]
         public ActionResult assignRole(RoleModel model)
         {
             authLogic.AssignRolesToUser(model.User, model.Roles);
