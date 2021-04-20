@@ -1,7 +1,11 @@
 import axios from "../../axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Feed.scss";
 import VoteResult from "./VoteResult";
+
+import AddIcon from "@material-ui/icons/Add";
+import SearchIcon from "@material-ui/icons/Search";
+import BrokenImageOutlinedIcon from "@material-ui/icons/BrokenImageOutlined";
 
 interface IResult {
   voteID: string;
@@ -15,25 +19,56 @@ interface IResult {
 
 function Feed() {
   const [results, setResults] = useState<IResult[]>([] as IResult[]);
+  const [term, setTerm] = useState("");
 
   useEffect(() => {
     axios
       .get("/allvotes")
       .then((response) => {
         const res = response.data;
-        //console.log(res);
+        console.log(res);
         setResults(res);
         // console.log(results);
       })
       .catch((error) => {
-        // console.log(error.message);
+        console.log(error.message);
       });
   }, []);
 
+  const handleChange = (e: any) => {
+    e.preventDefault();
+
+    setTerm(e.target.value);
+  };
+
   return (
     <div className="feed">
-      {results.map((item) => {
-        return (
+      <div className="feed_top">
+        <div className="feed_left">
+          <span>
+            <AddIcon fontSize="large" style={{ marginTop: "4px" }} />
+          </span>
+          <span>
+            <BrokenImageOutlinedIcon
+              fontSize="large"
+              style={{ marginTop: "4px" }}
+            />
+          </span>
+        </div>
+        <div className="feed_right">
+          <div className="feed_input">
+            <SearchIcon style={{ color: "gray" }} />
+            <input
+              placeholder="Találj meg egy szavazást"
+              onChange={handleChange}
+              type="text"
+            />
+          </div>
+        </div>
+      </div>
+
+      {results.map((item) =>
+        item.voteName.toLocaleUpperCase() === term.toLocaleUpperCase() ? (
           <VoteResult
             key={item.voteID}
             title={item.voteName}
@@ -43,8 +78,18 @@ function Feed() {
             isClosed={item.isClosed}
             isFinished={item.isFinished}
           />
-        );
-      })}
+        ) : (
+          <VoteResult
+            key={item.voteID}
+            title={item.voteName}
+            yesVotes={item.yesVotes}
+            noVotes={item.noVotes}
+            absentionVotes={item.absentionVotes}
+            isClosed={item.isClosed}
+            isFinished={item.isFinished}
+          />
+        )
+      )}
     </div>
   );
 }

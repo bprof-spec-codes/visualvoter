@@ -1,0 +1,41 @@
+@import "../../variables";
+
+.feed_top {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  align-items: center;
+
+  .feed_left {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    > span {
+      height: 45px;
+      width: 45px;
+      align-items: center;
+      text-align: center;
+      border-radius: 100%;
+      box-shadow: 0px 5px 7px -7px rgba(0, 0, 0, 0.75);
+      margin-right: 30px;
+    }
+  }
+
+  .feed_input {
+    display: flex;
+    align-items: center;
+    background-color: $body-bg;
+    box-shadow: 0px 5px 7px -7px rgba(0, 0, 0, 0.75);
+    padding: 10px;
+    margin-left: 10px;
+    border-radius: 999px;
+
+    > input {
+      border: none;
+      background-color: transparent;
+      outline-width: 0;
+    }
+  }
+}
