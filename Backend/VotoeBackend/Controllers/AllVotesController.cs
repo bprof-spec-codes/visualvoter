@@ -111,7 +111,9 @@ namespace VotOEApi.Controllers
         [HttpGet("finish/{id}")]
         public IActionResult FinishAVote(int id)
         {
-            if (this.allVotesLogic.FinishAVote(id)) return Ok();
+            bool winStatus = false;
+            winStatus = allVotesLogic.IsVoteWon(id);
+            if (this.allVotesLogic.FinishAVote(id)) new JsonResult(winStatus);
             return BadRequest();
         }
 
