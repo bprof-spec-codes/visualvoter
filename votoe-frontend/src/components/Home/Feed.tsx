@@ -44,18 +44,7 @@ function Feed() {
   return (
     <div className="feed">
       <div className="feed_top">
-        <div className="feed_left">
-          <span>
-            <AddIcon fontSize="large" style={{ marginTop: "4px" }} />
-          </span>
-          <span>
-            <BrokenImageOutlinedIcon
-              fontSize="large"
-              style={{ marginTop: "4px" }}
-            />
-          </span>
-        </div>
-        <div className="feed_right">
+        <div className="feed_topContainer">
           <div className="feed_input">
             <SearchIcon style={{ color: "gray" }} />
             <input
@@ -66,29 +55,34 @@ function Feed() {
           </div>
         </div>
       </div>
-
-      {results.map((item) =>
-        item.voteName.toLocaleUpperCase() === term.toLocaleUpperCase() ? (
-          <VoteResult
-            key={item.voteID}
-            title={item.voteName}
-            yesVotes={item.yesVotes}
-            noVotes={item.noVotes}
-            absentionVotes={item.absentionVotes}
-            isClosed={item.isClosed}
-            isFinished={item.isFinished}
-          />
-        ) : (
-          <VoteResult
-            key={item.voteID}
-            title={item.voteName}
-            yesVotes={item.yesVotes}
-            noVotes={item.noVotes}
-            absentionVotes={item.absentionVotes}
-            isClosed={item.isClosed}
-            isFinished={item.isFinished}
-          />
+      {results.length > 0 ? (
+        results.map((item) =>
+          item.voteName.toLocaleUpperCase() === term.toLocaleUpperCase() ? (
+            <VoteResult
+              key={item.voteID}
+              title={item.voteName}
+              yesVotes={item.yesVotes}
+              noVotes={item.noVotes}
+              absentionVotes={item.absentionVotes}
+              isClosed={item.isClosed}
+              isFinished={item.isFinished}
+            />
+          ) : (
+            <VoteResult
+              key={item.voteID}
+              title={item.voteName}
+              yesVotes={item.yesVotes}
+              noVotes={item.noVotes}
+              absentionVotes={item.absentionVotes}
+              isClosed={item.isClosed}
+              isFinished={item.isFinished}
+            />
+          )
         )
+      ) : (
+        <div className="feed_noVote">
+          <p>Jelenleg nem található egyetlen szavazás sem</p>
+        </div>
       )}
     </div>
   );

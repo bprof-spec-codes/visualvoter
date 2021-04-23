@@ -88,6 +88,8 @@ const Vote: React.FC<VoteDetails> = ({
         <div className="choose">
           <h1>{vote}</h1>
           <div className="choose_firstRow">
+
+            {/*
             <Button variant="contained" onClick={() => setVote(1)}>
               Nem
             </Button>
@@ -97,6 +99,7 @@ const Vote: React.FC<VoteDetails> = ({
             <Button variant="contained" onClick={() => setVote(0)}>
               Igen
             </Button>
+            */}
           </div>
           <div className="choose_secondRow">
             <Button
