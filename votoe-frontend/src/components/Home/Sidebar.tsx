@@ -77,7 +77,18 @@ function Sidebar() {
         {isLogged.user ? (
           <>
             <div className="sidebar_option">
-              <p>Profile</p>
+              <Link
+                to="/profile"
+                style={{
+                  fontSize: "20px",
+                  fontWeight: 400,
+                  marginLeft: "20px",
+                  textDecoration: "none",
+                  color: "black",
+                }}
+              >
+                <p>Profile</p>
+              </Link>
             </div>
 
             <div className="sidebar_option" onClick={() => setModalOpen(true)}>

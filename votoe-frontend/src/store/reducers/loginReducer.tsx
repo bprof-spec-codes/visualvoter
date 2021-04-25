@@ -1,4 +1,3 @@
-
 export const initialState:IInitState={
     user: null,
 }

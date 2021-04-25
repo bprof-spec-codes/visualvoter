@@ -1,0 +1,49 @@
+@import "../../variables";
+
+.feed {
+  display: flex;
+  flex-direction: column;
+  width:100%;
+  align-items:center;
+
+  .feed_top {
+    display: flex;
+    justify-content: space-between;
+    width: 40vw;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    align-items: center;
+
+    .feed_input {
+      display: flex;
+      align-items: center;
+      background-color: $body-bg;
+      box-shadow: 0px 5px 7px -7px rgba(0, 0, 0, 0.75);
+      padding: 10px;
+      margin-left: 10px;
+      border-radius: 999px;
+
+      > input {
+        border: none;
+        background-color: transparent;
+        outline-width: 0;
+      }
+    }
+  }
+
+  .feed_noVote{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+
+    >p{
+      width: 30vw;
+      margin-left: auto;
+      margin-right: auto;
+      padding-bottom: 10px;
+      color: rgba(105, 105, 105, 0.6);
+      border-bottom: 1px solid rgba(105, 105, 105, 0.2);
+    }
+  }
+}
