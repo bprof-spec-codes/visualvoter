@@ -13,7 +13,7 @@ function App() {
       <div className="app">
         <Switch>
           <Route path="/profile" component={Profile}>
-          <Route path="/profile/:id" component={Profile}></Route>
+          {/* <Route path="/profile/:id" component={Profile}></Route> */}
           </Route>
 
           <Route path="/dashboard" exact component={Dashboard}></Route>
