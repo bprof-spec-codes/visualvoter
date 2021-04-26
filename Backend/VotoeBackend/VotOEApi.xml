@@ -95,7 +95,7 @@
             Check if a vote is won.
             </summary>
             <param name="voteID">The id of the vote to be checked</param>
-            <remarks>Check if at this moment a vote meets every criteria required to be considered winning. This is not final, just the current state. It can change as m ore votes are submitted, if the vote is still ongoing. </remarks>
+            <remarks>Check if at this moment a vote meets every criteria required to be considered winning. This is not final, just the current state. It can change as more votes are submitted, if the vote is still ongoing. </remarks>
             <returns>True if won, false if not</returns>
         </member>
         <member name="T:VotOEApi.Controllers.AuthController">
@@ -197,6 +197,52 @@
             </summary>
             <param name="email">The email of the user</param>
             <returns>Http200 if successful</returns>
+        </member>
+        <member name="T:VotOEApi.Controllers.OneVoteController">
+            <summary>
+            Controller dedicated to management of the individual votes
+            </summary>
+        </member>
+        <member name="M:VotOEApi.Controllers.OneVoteController.#ctor(Logic.IOneVoteLogic,Logic.Class.AuthLogic)">
+            <summary>
+            Creates a new instance of the OneVote controller
+            </summary>
+            <param name="logic">OneVoteLogic object (transient)</param>
+            <param name="authLogic">AuthLogic object (transient)</param>
+        </member>
+        <member name="M:VotOEApi.Controllers.OneVoteController.GetAllOneVotes">
+            <summary>
+            List all the individual submitted votes
+            </summary>
+            <returns>A collection of OneVotes</returns>
+        </member>
+        <member name="M:VotOEApi.Controllers.OneVoteController.GetOneVote(System.Int32)">
+            <summary>
+            Gets a single specified vote
+            </summary>
+            <param name="id">The id of the vote in question</param>
+            <returns>A single OneVote object</returns>
+        </member>
+        <member name="M:VotOEApi.Controllers.OneVoteController.DeleteVote(System.Int32)">
+            <summary>
+            Delete a single vote
+            </summary>
+            <param name="id">The id of the vote to be deleted</param>
+        </member>
+        <member name="M:VotOEApi.Controllers.OneVoteController.SubmitVote(Models.OneVote)">
+            <summary>
+            Submit a new vote
+            </summary>
+            <param name="vote">OneVote object, containing the details of the vote to be submitted</param>
+            <returns>Http200 if successful, 401, if the user doesn't have the roles needed for this vote</returns>
+        </member>
+        <member name="M:VotOEApi.Controllers.OneVoteController.UpdateVote(System.Int32,Models.OneVote)">
+            <summary>
+            Updates a single vote
+            </summary>
+            <param name="oldId">Original id of the vote</param>
+            <param name="vote">OneVote Object, containing the details of the vote to be updated</param>
+            <returns>Http200 if ok, 400 if not</returns>
         </member>
     </members>
 </doc>

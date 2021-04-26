@@ -153,9 +153,9 @@ namespace VotOEApi.Controllers
         /// <returns>Http200 if successful</returns>
         [HttpGet]
         [Route("createRole")]
-        public ActionResult createRole([FromQuery] string RoleName)
+        public async Task<ActionResult> createRole([FromQuery] string RoleName)
         {
-            authLogic.CreateRole(RoleName);
+            await authLogic.CreateRole(RoleName);
             return Ok();
         }
 
