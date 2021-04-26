@@ -34,9 +34,10 @@ namespace VotOEApi.Controllers
         }
 
         /// <summary>
-        /// Gets the list of all past and present votes in the db
+        /// List all voting events
         /// </summary>
         /// <returns>A collection of all the votes</returns>
+        /// <remarks>Lists all the past and present votes</remarks>
         //[Authorize]
         [HttpGet]
         public IEnumerable<AllVotes> GetAllVotes()
@@ -44,18 +45,33 @@ namespace VotOEApi.Controllers
             return this.allVotesLogic.GetAllVotes();
         }
 
+        /// <summary>
+        /// Gets a single AllVotes
+        /// </summary>
+        /// <param name="id">The ID of the AllVotes in question</param>
+        /// <remarks>Returns a single AllVotes, specified by it's ID</remarks>
+        /// <returns></returns>
         [HttpGet("{id:int}")]
         public AllVotes GetOneVote(int id)
         {
             return this.allVotesLogic.GetOneVote(id);
         }
 
+        /// <summary>
+        /// Deletes a single voting event
+        /// </summary>
+        /// <param name="id">The ID of the AllVotes to be deleted</param>
         [HttpDelete("{id}")]
         public void DeleteVote(int id)
         {
             this.allVotesLogic.DeleteVote(id);
         }
 
+        /// <summary>
+        /// Creates a new voting event (AllVotes)
+        /// </summary>
+        /// <param name="vote">AllVotes object, containing the details of the vote to be created</param>
+        /// <returns>Http200 if ok</returns>
         [Authorize(Roles = "Admin,Editor")]
         [HttpPost]
         public ActionResult CreateVote([FromBody] AllVotes vote)
@@ -64,6 +80,11 @@ namespace VotOEApi.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Updates a single voting event
+        /// </summary>
+        /// <param name="oldId">The original id of the vote to be updated</param>
+        /// <param name="vote">AllVotes object, containing the details of the vote to be updated</param>
         [HttpPut("{oldId}")]
         public void UpdateVote(int oldId, [FromBody] AllVotes vote)
         {
@@ -86,6 +107,10 @@ namespace VotOEApi.Controllers
         //    return Ok();
         //}
 
+        /// <summary>
+        /// Returns all the active votes
+        /// </summary>
+        /// <returns>A collection of every active vote</returns>
         [Route("active")]
         [HttpGet]
         public IEnumerable<AllVotes> GetAllActiveVotes()
@@ -94,6 +119,10 @@ namespace VotOEApi.Controllers
             return this.allVotesLogic.GetAllActiveVotes();
         }
 
+        /// <summary>
+        /// Lists all votes avaliable to the logged in user
+        /// </summary>
+        /// <returns>A collection of the voting events that are avaliable to the currently authenticated user</returns>
         [Authorize]
         [Route("usersVotes")]
         [HttpGet]
@@ -111,6 +140,11 @@ namespace VotOEApi.Controllers
             return allVotesLogic.GetAllAvaliableVotes(roles);
         }
 
+        /// <summary>
+        /// Marks a vote as closed
+        /// </summary>
+        /// <param name="id">The id of the vote to be closed</param>
+        /// <returns>HTTP200 if all is good, 400 if not.</returns>
         [Authorize(Roles = "Admin,Editor")]
         [HttpGet("close/{id}")]
         public IActionResult CloseAVote(int id)
@@ -119,6 +153,11 @@ namespace VotOEApi.Controllers
             return BadRequest();
         }
 
+        /// <summary>
+        /// Maks a vote as finished
+        /// </summary>
+        /// <param name="id">The id of the vote to be marked</param>
+        /// <returns>HTTP200 if all is good, 400 if not.</returns>
         [Authorize(Roles = "Admin,Editor")]
         [HttpGet("finish/{id}")]
         public IActionResult FinishAVote(int id)
@@ -129,6 +168,11 @@ namespace VotOEApi.Controllers
             return BadRequest();
         }
 
+        /// <summary>
+        /// Gets all the voting events in the specified group
+        /// </summary>
+        /// <param name="groupName">The name of the group we're looking for</param>
+        /// <returns>A collection of all the voting events matching the criteria</returns>
         [Route("groupVotes")]
         [HttpGet]
         public IActionResult groupVotes(string groupName)
@@ -136,6 +180,11 @@ namespace VotOEApi.Controllers
             return new JsonResult(allVotesLogic.getVotesFromGroup(groupName));
         }
 
+        /// <summary>
+        /// Number of unique users within a vote group
+        /// </summary>
+        /// <param name="groupName">The name of the voteGroup we're looking for</param>
+        /// <returns>A collection of all the voting events matching the criteria</returns>
         [Route("participantCount")]
         [HttpGet]
         public IActionResult participantCount(string groupName)
@@ -143,6 +192,12 @@ namespace VotOEApi.Controllers
             return new JsonResult(allVotesLogic.numberOfGroupParticipants(groupName));
         }
 
+        /// <summary>
+        /// Check if a vote is won.
+        /// </summary>
+        /// <param name="voteID">The id of the vote to be checked</param>
+        /// <remarks>Check if at this moment a vote meets every criteria required to be considered winning. This is not final, just the current state. It can change as m ore votes are submitted, if the vote is still ongoing. </remarks>
+        /// <returns>True if won, false if not</returns>
         [Route("winCheck")]
         [HttpGet]
         public IActionResult winCheck(int voteID)
