@@ -14,12 +14,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -61,6 +63,7 @@ namespace VotoeBackend
                     }
                 };
                 c.AddSecurityDefinition(securityScheme.Reference.Id, securityScheme);
+                c.IncludeXmlComments(XmlCommentsFilePath);
                 c.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
                 {securityScheme, new string[] { }}
@@ -111,6 +114,8 @@ namespace VotoeBackend
                                       builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
                                   });
             });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -148,6 +153,15 @@ namespace VotoeBackend
                 //     name: "default",
                 //     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+        static string XmlCommentsFilePath
+        {
+            get
+            {
+                var basePath = PlatformServices.Default.Application.ApplicationBasePath;
+                var fileName = typeof(Startup).GetTypeInfo().Assembly.GetName().Name + ".xml";
+                return Path.Combine(basePath, fileName);
+            }
         }
     }
 }
