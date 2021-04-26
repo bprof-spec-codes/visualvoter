@@ -196,7 +196,7 @@ namespace VotOEApi.Controllers
         /// Check if a vote is won.
         /// </summary>
         /// <param name="voteID">The id of the vote to be checked</param>
-        /// <remarks>Check if at this moment a vote meets every criteria required to be considered winning. This is not final, just the current state. It can change as m ore votes are submitted, if the vote is still ongoing. </remarks>
+        /// <remarks>Check if at this moment a vote meets every criteria required to be considered winning. This is not final, just the current state. It can change as more votes are submitted, if the vote is still ongoing. </remarks>
         /// <returns>True if won, false if not</returns>
         [Route("winCheck")]
         [HttpGet]
