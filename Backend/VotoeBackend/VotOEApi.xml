@@ -4,5 +4,22 @@
         <name>VotOEApi</name>
     </assembly>
     <members>
+        <member name="T:VotOEApi.Controllers.AllVotesController">
+            <summary>
+            Controller for managing the votes
+            </summary>
+        </member>
+        <member name="M:VotOEApi.Controllers.AllVotesController.#ctor(Logic.IAllVotesLogic)">
+            <summary>
+            Creates a new instance of the AllVotes Controller
+            </summary>
+            <param name="logic">AllVotes logic object (transient)</param>
+        </member>
+        <member name="M:VotOEApi.Controllers.AllVotesController.GetAllVotes">
+            <summary>
+            Gets the list of all past and present votes in the db
+            </summary>
+            <returns>A collection of all the votes</returns>
+        </member>
     </members>
 </doc>

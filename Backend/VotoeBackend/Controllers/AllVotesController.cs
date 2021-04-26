@@ -15,16 +15,28 @@ using Microsoft.AspNetCore.Identity;
 
 namespace VotOEApi.Controllers
 {
+    /// <summary>
+    /// Controller for managing the votes
+    /// </summary>
     [Route("[controller]")]
     [ApiController]
+    
     public class AllVotesController : ControllerBase
     {
         private IAllVotesLogic allVotesLogic;
+        /// <summary>
+        /// Creates a new instance of the AllVotes Controller
+        /// </summary>
+        /// <param name="logic">AllVotes logic object (transient)</param>
         public AllVotesController(IAllVotesLogic logic)
         {
             this.allVotesLogic = logic;
         }
 
+        /// <summary>
+        /// Gets the list of all past and present votes in the db
+        /// </summary>
+        /// <returns>A collection of all the votes</returns>
         //[Authorize]
         [HttpGet]
         public IEnumerable<AllVotes> GetAllVotes()

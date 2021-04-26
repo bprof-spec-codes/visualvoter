@@ -147,5 +147,10 @@
             Indicates if the logged in user is admin or not. 
             </summary>
         </member>
+        <member name="P:Models.TokenModel.isEditor">
+            <summary>
+            Indicates if the logged in user is admin or not. 
+            </summary>
+        </member>
     </members>
 </doc>
