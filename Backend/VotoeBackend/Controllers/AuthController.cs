@@ -6,6 +6,7 @@ using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace VotOEApi.Controllers
@@ -18,14 +19,16 @@ namespace VotOEApi.Controllers
     public class AuthController : Controller
     {
         AuthLogic authLogic;
+        RoleSwitchLogic roleSwitchLogic;
 
         /// <summary>
         /// Creates a new instance of AuthController
         /// </summary>
         /// <param name="authLogic">AuthLogic object (transient)</param>
-        public AuthController(AuthLogic authLogic)
+        public AuthController(AuthLogic authLogic, RoleSwitchLogic roleSwitchLogic)
         {
             this.authLogic = authLogic;
+            this.roleSwitchLogic = roleSwitchLogic;
         }
 
         /// <summary>
@@ -204,6 +207,29 @@ namespace VotOEApi.Controllers
             authLogic.AssignRolesToUser(user, new List<string> { "Admin" });
 
             return Ok();
+        }
+
+        [HttpGet("requestNewRole")]
+        [Authorize]
+        public  ActionResult RequestNewRole([FromQuery] string roleName)
+        {
+            if(this.roleSwitchLogic.RequestNewRole(roleName, this.User.FindFirstValue(ClaimTypes.NameIdentifier))) return Ok();
+            return BadRequest();
+        }
+
+
+        [HttpPost]
+        [Route("requestNewRole")]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> RequestNewRoleAsync([FromBody] int roleSwitchID, [FromBody] int choice)
+        {
+            if (choice == 1){ this.roleSwitchLogic.Delete(roleSwitchID); return Ok(); }
+            if (choice == 0) {
+                var roleSwitch = this.roleSwitchLogic.GetOne(roleSwitchID);
+                await this.authLogic.SwitchRoleOfUser(roleSwitch.UserName, roleSwitch.RoleName);
+                return Ok(); 
+            }
+            return BadRequest();
         }
     }
 }
