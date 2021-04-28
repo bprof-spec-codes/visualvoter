@@ -1,4 +1,5 @@
-﻿using Logic.Class;
+﻿using Logic;
+using Logic.Class;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -19,13 +20,13 @@ namespace VotOEApi.Controllers
     public class AuthController : Controller
     {
         AuthLogic authLogic;
-        RoleSwitchLogic roleSwitchLogic;
+        IRoleSwitchLogic roleSwitchLogic;
 
         /// <summary>
         /// Creates a new instance of AuthController
         /// </summary>
         /// <param name="authLogic">AuthLogic object (transient)</param>
-        public AuthController(AuthLogic authLogic, RoleSwitchLogic roleSwitchLogic)
+        public AuthController(AuthLogic authLogic, IRoleSwitchLogic roleSwitchLogic)
         {
             this.authLogic = authLogic;
             this.roleSwitchLogic = roleSwitchLogic;
@@ -230,6 +231,13 @@ namespace VotOEApi.Controllers
                 return Ok(); 
             }
             return BadRequest();
+        }
+
+        [HttpGet("roleRequests")]
+        [Authorize(Roles = "Admin")]
+        public IEnumerable<RoleSwitch> GetAllRoleSwitchRequests()
+        {
+            return this.roleSwitchLogic.GetAllRoleSwitchRequests();
         }
     }
 }

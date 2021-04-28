@@ -2,6 +2,7 @@
 using Repository;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Logic.Class
@@ -26,6 +27,11 @@ namespace Logic.Class
             {
                 return false;
             }
+        }
+
+        public IQueryable<RoleSwitch> GetAllRoleSwitchRequests()
+        {
+            return this.roleSwitchRepository.GetAll();
         }
 
         public RoleSwitch GetOne(int id)
