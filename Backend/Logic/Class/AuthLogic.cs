@@ -265,5 +265,24 @@ namespace Logic.Class
                 return "Fail";
             }
         }
+
+        ///<inheritdoc/>
+        public async Task<bool> SwitchRoleOfUser(string userName, string newRole)
+        {
+            try
+            {
+                var user = this.GetOneUser(null, userName);
+                foreach (var role in this.GetAllRolesOfUser(user))
+                {
+                    await this.RemoveUserFromRole(user.UserName, role);
+                }
+                await this.userManager.AddToRoleAsync(user, newRole);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
     }
 }
