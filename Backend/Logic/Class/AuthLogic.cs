@@ -266,6 +266,7 @@ namespace Logic.Class
             }
         }
 
+        ///<inheritdoc/>
         public async Task<bool> SwitchRoleOfUser(string userName, string newRole)
         {
             try

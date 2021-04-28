@@ -26,6 +26,7 @@ namespace VotOEApi.Controllers
         /// Creates a new instance of AuthController
         /// </summary>
         /// <param name="authLogic">AuthLogic object (transient)</param>
+        /// <param name="roleSwitchLogic">roleSwitchLogic object (transient)</param>
         public AuthController(AuthLogic authLogic, IRoleSwitchLogic roleSwitchLogic)
         {
             this.authLogic = authLogic;
@@ -210,6 +211,11 @@ namespace VotOEApi.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Request to be put into another role
+        /// </summary>
+        /// <param name="roleName">The name of the role a user wants to be in.</param>
+        /// <returns>Ok if the request was ok, badrequest if something else.</returns>
         [HttpGet("requestNewRole")]
         [Authorize]
         public  ActionResult RequestNewRole([FromQuery] string roleName)
@@ -218,7 +224,12 @@ namespace VotOEApi.Controllers
             return BadRequest();
         }
 
-
+        /// <summary>
+        /// Endoint made for admins to accept or decline role switch requests made by the users.
+        /// </summary>
+        /// <param name="roleSwitchID">The unique id of the request</param>
+        /// <param name="choice">0 for yes, 1 for no</param>
+        /// <returns>Ok if the request was ok, badrequest if something else.</returns>
         [HttpPost]
         [Route("requestNewRole")]
         [Authorize(Roles = "Admin")]
@@ -234,6 +245,10 @@ namespace VotOEApi.Controllers
             return BadRequest();
         }
 
+        /// <summary>
+        /// Gets all the requests made by the users.
+        /// </summary>
+        /// <returns>Collection of roleSwitch objects.</returns>
         [HttpGet("roleRequests")]
         [Authorize(Roles = "Admin")]
         public IEnumerable<RoleSwitch> GetAllRoleSwitchRequests()
