@@ -222,12 +222,13 @@ namespace VotOEApi.Controllers
         [HttpPost]
         [Route("requestNewRole")]
         [Authorize(Roles = "Admin")]
-        public async Task<ActionResult> RequestNewRoleAsync([FromBody] int roleSwitchID, [FromBody] int choice)
+        public async Task<ActionResult> RequestNewRoleAsync([FromQuery] int roleSwitchID, [FromQuery] int choice)
         {
             if (choice == 1){ this.roleSwitchLogic.Delete(roleSwitchID); return Ok(); }
             if (choice == 0) {
                 var roleSwitch = this.roleSwitchLogic.GetOne(roleSwitchID);
                 await this.authLogic.SwitchRoleOfUser(roleSwitch.UserName, roleSwitch.RoleName);
+                this.roleSwitchLogic.Delete(roleSwitchID);
                 return Ok(); 
             }
             return BadRequest();
