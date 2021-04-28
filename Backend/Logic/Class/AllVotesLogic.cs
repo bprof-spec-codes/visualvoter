@@ -16,7 +16,9 @@ namespace Logic
         /// Repository for the allVotes table
         /// </summary>
         public IAllVotesRepository allVotesRepo;
-
+        /// <summary>
+        /// Repository for the oneVote table
+        /// </summary>
         public IOneVoteRepository oneVoteRepository;
 
         /// <summary>

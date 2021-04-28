@@ -42,6 +42,7 @@ namespace VotoeBackend
             services.AddControllers();
             services.AddTransient<IOneVoteLogic>(x => new OneVoteLogic(Configuration["DBPassword"]));
             services.AddTransient<IAllVotesLogic>(x => new AllVotesLogic(Configuration["DBPassword"]));
+            services.AddTransient<IRoleSwitchLogic>(x => new RoleSwitchLogic(Configuration["DBPassword"]));
             services.AddTransient<AuthLogic, AuthLogic>();
             services.AddSwaggerGen(c =>
             {

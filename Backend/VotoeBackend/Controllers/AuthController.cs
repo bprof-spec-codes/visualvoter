@@ -1,4 +1,5 @@
-﻿using Logic.Class;
+﻿using Logic;
+using Logic.Class;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -6,6 +7,7 @@ using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace VotOEApi.Controllers
@@ -18,14 +20,17 @@ namespace VotOEApi.Controllers
     public class AuthController : Controller
     {
         AuthLogic authLogic;
+        IRoleSwitchLogic roleSwitchLogic;
 
         /// <summary>
         /// Creates a new instance of AuthController
         /// </summary>
         /// <param name="authLogic">AuthLogic object (transient)</param>
-        public AuthController(AuthLogic authLogic)
+        /// <param name="roleSwitchLogic">roleSwitchLogic object (transient)</param>
+        public AuthController(AuthLogic authLogic, IRoleSwitchLogic roleSwitchLogic)
         {
             this.authLogic = authLogic;
+            this.roleSwitchLogic = roleSwitchLogic;
         }
 
         /// <summary>
@@ -204,6 +209,51 @@ namespace VotOEApi.Controllers
             authLogic.AssignRolesToUser(user, new List<string> { "Admin" });
 
             return Ok();
+        }
+
+        /// <summary>
+        /// Request to be put into another role
+        /// </summary>
+        /// <param name="roleName">The name of the role a user wants to be in.</param>
+        /// <returns>Ok if the request was ok, badrequest if something else.</returns>
+        [HttpGet("requestNewRole")]
+        [Authorize]
+        public  ActionResult RequestNewRole([FromQuery] string roleName)
+        {
+            if(this.roleSwitchLogic.RequestNewRole(roleName, this.User.FindFirstValue(ClaimTypes.NameIdentifier))) return Ok();
+            return BadRequest();
+        }
+
+        /// <summary>
+        /// Endoint made for admins to accept or decline role switch requests made by the users.
+        /// </summary>
+        /// <param name="roleSwitchID">The unique id of the request</param>
+        /// <param name="choice">0 for yes, 1 for no</param>
+        /// <returns>Ok if the request was ok, badrequest if something else.</returns>
+        [HttpPost]
+        [Route("requestNewRole")]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> RequestNewRoleAsync([FromQuery] int roleSwitchID, [FromQuery] int choice)
+        {
+            if (choice == 1){ this.roleSwitchLogic.Delete(roleSwitchID); return Ok(); }
+            if (choice == 0) {
+                var roleSwitch = this.roleSwitchLogic.GetOne(roleSwitchID);
+                await this.authLogic.SwitchRoleOfUser(roleSwitch.UserName, roleSwitch.RoleName);
+                this.roleSwitchLogic.Delete(roleSwitchID);
+                return Ok(); 
+            }
+            return BadRequest();
+        }
+
+        /// <summary>
+        /// Gets all the requests made by the users.
+        /// </summary>
+        /// <returns>Collection of roleSwitch objects.</returns>
+        [HttpGet("roleRequests")]
+        [Authorize(Roles = "Admin")]
+        public IEnumerable<RoleSwitch> GetAllRoleSwitchRequests()
+        {
+            return this.roleSwitchLogic.GetAllRoleSwitchRequests();
         }
     }
 }
