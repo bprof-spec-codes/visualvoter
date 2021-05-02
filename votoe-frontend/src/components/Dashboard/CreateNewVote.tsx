@@ -12,7 +12,10 @@ function CreateNewVote() {
   const [hokCheckBox, setHokCheckBox] = useState(false);
   const [chancelleryCheckBox, setChancelleryCheckBox] = useState(false);
   const [everyoneCheckBox, setEveryoneCheckBox] = useState(false);
-  const [voteName, setVoteName] = useState("");
+  const [voteName, setVoteName] = useState<string>("");
+
+  const [voteGroup, setVoteGroup] = useState<string>("");
+
   const [step, setStep] = useState(1);
   const [requiredRole, setRequiredRole] = useState<any>();
 
@@ -50,6 +53,7 @@ function CreateNewVote() {
   const createHandler = () => {
     const data = {
       VoteName: voteName,
+      VoteGroup: voteGroup,
       RequiredRole: requiredRole,
     };
     axios
@@ -165,6 +169,18 @@ function CreateNewVote() {
                   style={{ width: "80%", marginBottom: "20px" }}
                 />
               </div>
+
+              <div className="container_textfield">
+                <TextField
+                  label="Szavazás csoportja(opcionális)"
+                  value={voteGroup}
+                  onChange={(e) => {
+                    setVoteGroup(e.target.value);
+                  }}
+                  style={{ width: "80%", marginBottom: "20px" }}
+                />
+              </div>
+
               <div className="create_button">
                 <Button onClick={createHandler} style={{ fontSize: "large" }}>
                   Create

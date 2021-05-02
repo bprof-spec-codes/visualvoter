@@ -8,10 +8,11 @@ import {
     Button,
   FormControl,
   FormHelperText,
-  InputLabel,
   MenuItem,
   Select,
 } from "@material-ui/core";
+import axios from "../../axios";
+import { store } from "react-notifications-component";
 
 function Profile() {
   const [role, setRole] = useState("");
@@ -20,6 +21,48 @@ function Profile() {
   useEffect(() => {
     console.log(isLogged);
   }, []);
+
+  const headers = {
+    Authorization: "Bearer " + isLogged.user?.token,
+  };
+
+  const sendRequest=()=>{
+    axios.get(`/Auth/requestNewRole?roleName=${role}`, { headers: headers })
+    .then(response=>{
+      console.log(response);
+
+      store.addNotification({
+        title: "Siker!",
+        message: "Sikeresen leadtad a kérelmed az új role-ra!",
+        type: "success",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 5000,
+          onScreen: true,
+        },
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+
+      store.addNotification({
+        title: "Hiba!",
+        message: "Hiba történt, kérjük keresd fel a supportot!",
+        type: "danger",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 5000,
+          onScreen: true,
+        },
+      });
+    })
+  }
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setRole(event.target.value as string);
@@ -36,7 +79,7 @@ function Profile() {
             size="500"
             name={isLogged.user?.Email}
           />
-          <h2>{isLogged.user?.Email} Igen</h2>
+          <h2>{isLogged.user?.Email}</h2>
         </div>
 
         <div className="profile_right">
@@ -47,21 +90,22 @@ function Profile() {
           )}
 
           <h3>Ha nem megfelelő a jelenlegi role-od igényelj másikat!</h3>
-          <FormControl>
-            <InputLabel id="demo-simple-select-helper-label">{role}</InputLabel>
+          <FormControl style={{marginTop:"15px"}}>
+            {/* <InputLabel id="demo-simple-select-helper-label">{role}</InputLabel> */}
             <Select
               labelId="demo-simple-select-helper-label"
               id="demo-simple-select-helper"
               value={role}
               onChange={handleChange}
             >
-              <MenuItem value="hallgato">Hallgató</MenuItem>
-              <MenuItem value="tanár">Tanár</MenuItem>
+              <MenuItem value="Hallgató">Hallgató</MenuItem>
+              <MenuItem value="Hök">Hök</MenuItem>
+              <MenuItem value="Szenátus">Szenátus</MenuItem>
             </Select>
             <FormHelperText>
               Válasz egy role-t és ha adminjaink megerősítik megkapod!
             </FormHelperText>
-            <Button>Küldés</Button>
+            <Button onClick={sendRequest}>Küldés</Button>
           </FormControl>
         </div>
       </div>

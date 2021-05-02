@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from '../Header';
+import ActiveRequests from './ActiveRequests';
 import CreateNewVote from './CreateNewVote';
 import './Dashboard.scss';
 
@@ -9,8 +10,9 @@ function Dashboard() {
             <Header />
             <div className="dashboard_container">
                 {/*<Sidebar />*/}
+                <ActiveRequests />
                 <CreateNewVote />
-                {/* ActiveVotes */}
+                
                 {/* Stats */}
             </div>
         </div>
