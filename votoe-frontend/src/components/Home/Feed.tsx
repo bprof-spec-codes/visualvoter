@@ -1,5 +1,5 @@
 import axios from "../../axios";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import "./Feed.scss";
 import VoteResult from "./VoteResult";
 
@@ -18,7 +18,7 @@ interface IResult {
 }
 
 function Feed() {
-  const [results, setResults] = useState<IResult[]>([] as IResult[]);
+  const [results, setResults] = useState([] as IResult[]);
   const [term, setTerm] = useState("");
 
   useEffect(() => {
@@ -35,11 +35,53 @@ function Feed() {
       });
   }, []);
 
+  useEffect(() => {
+    renderResults();
+  },[term])
+
   const handleChange = (e: any) => {
     e.preventDefault();
 
     setTerm(e.target.value);
   };
+
+  const renderResults=()=>{
+    const resVotes=results.filter(r=>r.voteName.toUpperCase()===term.toUpperCase())
+
+    return(
+      <>
+      {results ?
+      resVotes.length > 0 ? (resVotes.map(item=>(
+        <VoteResult
+        key={item.voteID}
+        title={item.voteName}
+        yesVotes={item.yesVotes}
+        noVotes={item.noVotes}
+        absentionVotes={item.absentionVotes}
+        isClosed={item.isClosed}
+        isFinished={item.isFinished}
+      />
+      ))) : (
+        results.map((item)=>(
+          <VoteResult
+          key={item.voteID}
+          title={item.voteName}
+          yesVotes={item.yesVotes}
+          noVotes={item.noVotes}
+          absentionVotes={item.absentionVotes}
+          isClosed={item.isClosed}
+          isFinished={item.isFinished}
+          />
+        ))
+      )
+       : (
+        <div className="feed_noVote">
+          <p>Jelenleg nem található egyetlen szavazás sem</p>
+        </div>
+      )}
+      </>
+    );
+  }
 
   return (
     <div className="feed">
@@ -55,35 +97,7 @@ function Feed() {
           </div>
         </div>
       </div>
-      {results.length > 0 ? (
-        results.map((item) =>
-          item.voteName.toLocaleUpperCase() === term.toLocaleUpperCase() ? (
-            <VoteResult
-              key={item.voteID}
-              title={item.voteName}
-              yesVotes={item.yesVotes}
-              noVotes={item.noVotes}
-              absentionVotes={item.absentionVotes}
-              isClosed={item.isClosed}
-              isFinished={item.isFinished}
-            />
-          ) : (
-            <VoteResult
-              key={item.voteID}
-              title={item.voteName}
-              yesVotes={item.yesVotes}
-              noVotes={item.noVotes}
-              absentionVotes={item.absentionVotes}
-              isClosed={item.isClosed}
-              isFinished={item.isFinished}
-            />
-          )
-        )
-      ) : (
-        <div className="feed_noVote">
-          <p>Jelenleg nem található egyetlen szavazás sem</p>
-        </div>
-      )}
+      {renderResults()}
     </div>
   );
 }
