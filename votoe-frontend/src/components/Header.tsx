@@ -232,7 +232,7 @@ function Header() {
               }}
             >
               <h1>Sign Out</h1>
-              <div className="modal_close" onClick={() => setModalOpen(false)}>
+              <div className="modal_close" onClick={() => setModalSignOutOpen(false)}>
                 <IconButton>
                   <CloseOutlinedIcon
                     fontSize="large"
