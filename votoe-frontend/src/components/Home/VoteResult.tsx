@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./VoteResult.scss";
 import HOKLogo from "../../assets/img/nikhok_logo.jpg";
 import CheckBoxOutlinedIcon from "@material-ui/icons/CheckBoxOutlined";
@@ -23,6 +23,13 @@ const VoteResult: React.FC<IVoteResult> = ({
   isClosed,
   isFinished,
 }) => {
+  const [allVotes, setAllVotes] = useState<number>(0);
+
+  useEffect(()=>{
+    const newAllVotes = allVotes + yesVotes + noVotes + absentionVotes; 
+    setAllVotes(newAllVotes);
+  },[])
+
   return (
     <div className="voteResult">
       <div className="voteResult_container">
@@ -44,7 +51,7 @@ const VoteResult: React.FC<IVoteResult> = ({
                 <span
                   className="option_votes"
                   style={{
-                    width: `${yesVotes * 10}%`,
+                    width: `${allVotes/yesVotes}%`,
                     maxWidth: "100%",
                     background: "#1d2a4d",
                   }}
@@ -65,7 +72,7 @@ const VoteResult: React.FC<IVoteResult> = ({
                 <span
                   className="option_votes"
                   style={{
-                    width: `${noVotes * 100}%`,
+                    width: `${allVotes/noVotes}%`,
                     maxWidth: "100%",
                     background: "#1d2a4d",
                   }}
@@ -86,7 +93,7 @@ const VoteResult: React.FC<IVoteResult> = ({
                 <span
                   className="option_votes"
                   style={{
-                    width: `${absentionVotes * 10}%`,
+                    width: `${allVotes/absentionVotes}%`,
                     maxWidth: "100%",
                     background: "#1d2a4d",
                   }}
