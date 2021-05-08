@@ -34,10 +34,10 @@ namespace Data
             if (!optionsBuilder.IsConfigured)
             {
                 //Eredeti db
-                //var builder = new SqlConnectionStringBuilder("server=95.111.254.24;database=projektmunka;user=projektmunka");
+                var builder = new SqlConnectionStringBuilder("server=95.111.254.24;database=projektmunka;user=projektmunka");
 
                 //Teszt db
-                var builder = new SqlConnectionStringBuilder("server=95.111.254.24;database=projektmunka_teszt;user=projektmunka");
+                //var builder = new SqlConnectionStringBuilder("server=95.111.254.24;database=projektmunka_teszt;user=projektmunka");
                builder.Password = ConnectionStrinPassword;
                 
                 //Localdb
@@ -64,7 +64,8 @@ namespace Data
         //public virtual DbSet<Models.Users> Users { get; set; } // Deprecated
         public virtual DbSet<Models.OneVote> OneVote { get; set; }
         public virtual DbSet<Models.AllVotes> AllVotes { get; set; }
+        public virtual DbSet<Models.RoleSwitch> RoleSwitch { get; set; }
         //public virtual DbSet<Models.VotingRight> VotingRight { get; set; } //Deprecated
-       // public virtual DbSet<Models.UserType> UserType { get; set; } //Deprecated
+        // public virtual DbSet<Models.UserType> UserType { get; set; } //Deprecated
     }
 }

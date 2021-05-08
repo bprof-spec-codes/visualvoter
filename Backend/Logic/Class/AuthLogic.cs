@@ -12,24 +12,31 @@ using System.Threading.Tasks;
 
 namespace Logic.Class
 {
+    ///<inheritdoc/>
     public class AuthLogic : IAuthLogic
     {
         UserManager<IdentityUser> userManager;
         RoleManager<IdentityRole> roleManager;
         private static Random random = new Random();
 
+        /// <summary>
+        /// Creates an instance of the AuthLogic
+        /// </summary>
+        /// <param name="userManager">AspNetCore.Identity UserManager</param>
+        /// <param name="roleManager">AspNetCore.Identity RoleManager</param>
         public AuthLogic(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
             this.roleManager = roleManager;
-            
+
         }
 
-
+        ///<inheritdoc/>
         public IQueryable<IdentityUser> GetAllUsers()
         {
             return userManager.Users;
         }
+        ///<inheritdoc/>
         public IdentityUser GetOneUser(string id, string email)
         {
             if (id != null)
@@ -45,12 +52,13 @@ namespace Logic.Class
                 throw new ArgumentException();
             }
         }
+        ///<inheritdoc/>
         public async Task<string> UpdateUser(string oldId, IdentityUser newUser)
         {
             await userManager.UpdateAsync(newUser);
             return "Success";
         }
-
+        ///<inheritdoc/>
         public async Task<string> DeleteUser(string userId)
         {
             try
@@ -64,6 +72,7 @@ namespace Logic.Class
                 return "Fail";
             }
         }
+        ///<inheritdoc/>
         public async Task<string> DeleteUser(IdentityUser inUser)
         {
             try
@@ -77,7 +86,7 @@ namespace Logic.Class
             }
 
         }
-
+        ///<inheritdoc/>
         public async Task<string> CreateUser_debug(Login model)
         {
             var user = new IdentityUser
@@ -89,12 +98,12 @@ namespace Logic.Class
             var result = await userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
-               await userManager.AddToRoleAsync(user, "Hallgató");
+                await userManager.AddToRoleAsync(user, "Hallgató");
                 return "OK";
             }
             return "NOT OK";
         }
-
+        ///<inheritdoc/>
         public async Task<TokenModel> LoginUser(Login model)
         {
             var user = await userManager.FindByNameAsync(model.Email);
@@ -111,7 +120,7 @@ namespace Logic.Class
 
 
                 var roles = await userManager.GetRolesAsync(user);
-
+                ;
                 claims.AddRange(roles.Select(role => new Claim(ClaimsIdentity.DefaultRoleClaimType, role)));
 
 
@@ -125,21 +134,34 @@ namespace Logic.Class
                   expires: DateTime.Now.AddMinutes(60),
                   signingCredentials: new SigningCredentials(signinKey, SecurityAlgorithms.HmacSha256)
                 );
+                bool adminState = false;
+                if (roles.Contains("Admin"))
+                {
+                    adminState = true;
+                }
+
+                bool editorState = false;
+                if (roles.Contains("Editor"))
+                {
+                    editorState = true;
+                }
                 return new TokenModel
                 {
                     Token = new JwtSecurityTokenHandler().WriteToken(token),
-                    ExpirationDate = token.ValidTo
+                    ExpirationDate = token.ValidTo,
+                    isAdmin = adminState,
+                    isEditor = editorState
                 };
             }
             throw new ArgumentException("Login failed");
         }
-
+        ///<inheritdoc/>
         public IEnumerable<IdentityRole> GetAllRoles()
         {
             return this.roleManager.Roles.Where(x => !x.Name.Contains("VOTECREATEDROLE")).ToList();
             //return roleManager.Roles.ToList();
         }
-
+        ///<inheritdoc/>
         public bool HasRole(IdentityUser user, string role)
         {
             if (userManager.IsInRoleAsync(user, role).Result)
@@ -148,30 +170,38 @@ namespace Logic.Class
             }
             return false;
         }
-
+        ///<inheritdoc/>
         public async Task<bool> HasRoleByName(string userName, string role)
         {
             var user = await this.userManager.FindByNameAsync(userName);
-            if (userManager.IsInRoleAsync(user, role).Result)
+            if (userManager.IsInRoleAsync(user, role).Result || userManager.IsInRoleAsync(user, "Admin").Result)
             {
                 return true;
             }
             return false;
         }
-
+        ///<inheritdoc/>
         public IEnumerable<string> GetAllRolesOfUser(IdentityUser user)
         {
             return userManager.GetRolesAsync(user).Result.ToList();
         }
-
+        ///<inheritdoc/>
         public bool AssignRolesToUser(IdentityUser user, List<string> roles)
         {
-            var selectedUser = GetOneUser(user.Id, null);
+            IdentityUser selectedUser;
+            if (!string.IsNullOrWhiteSpace(user.Id) && user.Id.ToLower() != "string")
+            {
+                selectedUser = GetOneUser(user.Id, null);
+            }
+            else
+            {
+                selectedUser = GetOneUser(null, user.Email);
+            }
             //userManager.AddToRolesAsync(user, roles).Wait();
             userManager.AddToRolesAsync(selectedUser, roles).Wait();
             return true;
         }
-
+        ///<inheritdoc/>
         public async Task<bool> CreateRole(string name)
         {
             var query = await this.roleManager.FindByNameAsync(name);
@@ -183,7 +213,7 @@ namespace Logic.Class
             roleManager.CreateAsync(new IdentityRole { Id = Guid.NewGuid().ToString(), Name = name, NormalizedName = name.ToUpper() }).Wait();
             return true;
         }
-
+        ///<inheritdoc/>
         public async Task<string> RoleCreationForNewVote(IList<string> roles)
         {
             try
@@ -207,7 +237,7 @@ namespace Logic.Class
                 return "Fail";
             }
         }
-
+        ///<inheritdoc/>
         public async Task<List<IdentityUser>> GetAllUsersOfRole(string roleId)
         {
             var users = await this.userManager.GetUsersInRoleAsync(roleId);
@@ -220,7 +250,7 @@ namespace Logic.Class
             return new string(Enumerable.Repeat(chars, length)
               .Select(s => s[random.Next(s.Length)]).ToArray());
         }
-
+        ///<inheritdoc/>
         public async Task<string> RemoveUserFromRole(string userName, string requiredRole)
         {
             try
@@ -233,6 +263,25 @@ namespace Logic.Class
             catch (Exception)
             {
                 return "Fail";
+            }
+        }
+
+        ///<inheritdoc/>
+        public async Task<bool> SwitchRoleOfUser(string userName, string newRole)
+        {
+            try
+            {
+                var user = this.GetOneUser(null, userName);
+                foreach (var role in this.GetAllRolesOfUser(user))
+                {
+                    await this.RemoveUserFromRole(user.UserName, role);
+                }
+                await this.userManager.AddToRoleAsync(user, newRole);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
     }

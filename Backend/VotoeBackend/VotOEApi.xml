@@ -1,0 +1,248 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VotOEApi</name>
+    </assembly>
+    <members>
+        <member name="T:VotOEApi.Controllers.AllVotesController">
+            <summary>
+            Controller for managing the votes
+            </summary>
+        </member>
+        <member name="M:VotOEApi.Controllers.AllVotesController.#ctor(Logic.IAllVotesLogic)">
+            <summary>
+            Creates a new instance of the AllVotes Controller
+            </summary>
+            <param name="logic">AllVotes logic object (transient)</param>
+        </member>
+        <member name="M:VotOEApi.Controllers.AllVotesController.GetAllVotes">
+            <summary>
+            List all voting events
+            </summary>
+            <returns>A collection of all the votes</returns>
+            <remarks>Lists all the past and present votes</remarks>
+        </member>
+        <member name="M:VotOEApi.Controllers.AllVotesController.GetOneVote(System.Int32)">
+            <summary>
+            Gets a single AllVotes
+            </summary>
+            <param name="id">The ID of the AllVotes in question</param>
+            <remarks>Returns a single AllVotes, specified by it's ID</remarks>
+            <returns></returns>
+        </member>
+        <member name="M:VotOEApi.Controllers.AllVotesController.DeleteVote(System.Int32)">
+            <summary>
+            Deletes a single voting event
+            </summary>
+            <param name="id">The ID of the AllVotes to be deleted</param>
+        </member>
+        <member name="M:VotOEApi.Controllers.AllVotesController.CreateVote(Models.AllVotes)">
+            <summary>
+            Creates a new voting event (AllVotes)
+            </summary>
+            <param name="vote">AllVotes object, containing the details of the vote to be created</param>
+            <returns>Http200 if ok</returns>
+        </member>
+        <member name="M:VotOEApi.Controllers.AllVotesController.UpdateVote(System.Int32,Models.AllVotes)">
+            <summary>
+            Updates a single voting event
+            </summary>
+            <param name="oldId">The original id of the vote to be updated</param>
+            <param name="vote">AllVotes object, containing the details of the vote to be updated</param>
+        </member>
+        <member name="M:VotOEApi.Controllers.AllVotesController.GetAllActiveVotes">
+            <summary>
+            Returns all the active votes
+            </summary>
+            <returns>A collection of every active vote</returns>
+        </member>
+        <member name="M:VotOEApi.Controllers.AllVotesController.GetAllUserAccessibleVotes">
+            <summary>
+            Lists all votes avaliable to the logged in user
+            </summary>
+            <returns>A collection of the voting events that are avaliable to the currently authenticated user</returns>
+        </member>
+        <member name="M:VotOEApi.Controllers.AllVotesController.CloseAVote(System.Int32)">
+            <summary>
+            Marks a vote as closed
+            </summary>
+            <param name="id">The id of the vote to be closed</param>
+            <returns>HTTP200 if all is good, 400 if not.</returns>
+        </member>
+        <member name="M:VotOEApi.Controllers.AllVotesController.FinishAVote(System.Int32)">
+            <summary>
+            Maks a vote as finished
+            </summary>
+            <param name="id">The id of the vote to be marked</param>
+            <returns>HTTP200 if all is good, 400 if not.</returns>
+        </member>
+        <member name="M:VotOEApi.Controllers.AllVotesController.groupVotes(System.String)">
+            <summary>
+            Gets all the voting events in the specified group
+            </summary>
+            <param name="groupName">The name of the group we're looking for</param>
+            <returns>A collection of all the voting events matching the criteria</returns>
+        </member>
+        <member name="M:VotOEApi.Controllers.AllVotesController.participantCount(System.String)">
+            <summary>
+            Number of unique users within a vote group
+            </summary>
+            <param name="groupName">The name of the voteGroup we're looking for</param>
+            <returns>A collection of all the voting events matching the criteria</returns>
+        </member>
+        <member name="M:VotOEApi.Controllers.AllVotesController.winCheck(System.Int32)">
+            <summary>
+            Check if a vote is won.
+            </summary>
+            <param name="voteID">The id of the vote to be checked</param>
+            <remarks>Check if at this moment a vote meets every criteria required to be considered winning. This is not final, just the current state. It can change as more votes are submitted, if the vote is still ongoing. </remarks>
+            <returns>True if won, false if not</returns>
+        </member>
+        <member name="T:VotOEApi.Controllers.AuthController">
+            <summary>
+            Controller dedicated to authentication + role management
+            </summary>
+        </member>
+        <member name="M:VotOEApi.Controllers.AuthController.#ctor(Logic.Class.AuthLogic)">
+            <summary>
+            Creates a new instance of AuthController
+            </summary>
+            <param name="authLogic">AuthLogic object (transient)</param>
+        </member>
+        <member name="M:VotOEApi.Controllers.AuthController.CreateUser(Models.Login)">
+            <summary>
+            Create a new user
+            </summary>
+            <param name="model">Login model, containing the details of the user to be created.</param>
+            <returns>Http200 if ok</returns>
+        </member>
+        <member name="M:VotOEApi.Controllers.AuthController.GetAllUsers">
+            <summary>
+            List all the users
+            </summary>
+            <returns>A collection of all the users</returns>
+        </member>
+        <member name="M:VotOEApi.Controllers.AuthController.GetUser(System.String)">
+            <summary>
+            Get a single user
+            </summary>
+            <param name="id">The id of the user</param>
+            <returns>A single user</returns>
+        </member>
+        <member name="M:VotOEApi.Controllers.AuthController.DeleteUser(System.String)">
+            <summary>
+            Delete a single user
+            </summary>
+            <param name="id">Id of the user to be deleted</param>
+        </member>
+        <member name="M:VotOEApi.Controllers.AuthController.UpdateUser(System.String,Microsoft.AspNetCore.Identity.IdentityUser)">
+            <summary>
+            Updates a single user
+            </summary>
+            <param name="oldId">The initial id of the user to be updated</param>
+            <param name="user">IdentityUser model, containing the details of the user to be updated</param>
+        </member>
+        <member name="M:VotOEApi.Controllers.AuthController.Login(Models.Login)">
+            <summary>
+            Login
+            </summary>
+            <remarks>Attempts to log in the user, and gives him a TokenModel if successful. </remarks>
+            <param name="model">LoginModel, containing the details of the user logging in</param>
+            <returns>A TokenModel if successful, BadRequest if not</returns>
+        </member>
+        <member name="M:VotOEApi.Controllers.AuthController.getAllUserRoles">
+            <summary>
+            List all the roles
+            </summary>
+            <returns>A collection of all the roles</returns>
+        </member>
+        <member name="M:VotOEApi.Controllers.AuthController.getAllRolesOfUser(Microsoft.AspNetCore.Identity.IdentityUser)">
+            <summary>
+            List the roles of a user
+            </summary>
+            <param name="user">User object, containing the details of the user in question</param>
+            <returns>A collection of all the roles attached to the user</returns>
+        </member>
+        <member name="M:VotOEApi.Controllers.AuthController.assignRole(Models.RoleModel)">
+            <summary>
+            Assign one or more roles to a user.
+            </summary>
+            <param name="model">RoleModel, containing a usermodel, and a string list of all the roles to be added</param>
+            <returns>Http200 if ok</returns>
+        </member>
+        <member name="M:VotOEApi.Controllers.AuthController.createRole(System.String)">
+            <summary>
+            Create a new role
+            </summary>
+            <param name="RoleName">The name of the new role</param>
+            <returns>Http200 if successful</returns>
+        </member>
+        <member name="M:VotOEApi.Controllers.AuthController.CreateRoleForVoteAsync(System.Collections.Generic.List{System.String})">
+            <summary>
+            Auto-generate role
+            </summary>
+            <param name="id"></param>
+            <remarks>Auto-generate a new role, used during vote creation. Each new vote has an associated "requiredRole" field, containing the role name generated here. Users in the posession of this role can participate in the vote.</remarks>
+            <returns>The name of the new auto-generated role, or BadRequest if it failed</returns>
+        </member>
+        <member name="M:VotOEApi.Controllers.AuthController.makeTestRoleModelJson">
+            <summary>
+            Debug RoleModel generation
+            </summary>
+            <returns>A RoleModel with some sample data</returns>
+        </member>
+        <member name="M:VotOEApi.Controllers.AuthController.makeUserAdmin(System.String)">
+            <summary>
+            Make a user Admin
+            </summary>
+            <param name="email">The email of the user</param>
+            <returns>Http200 if successful</returns>
+        </member>
+        <member name="T:VotOEApi.Controllers.OneVoteController">
+            <summary>
+            Controller dedicated to management of the individual votes
+            </summary>
+        </member>
+        <member name="M:VotOEApi.Controllers.OneVoteController.#ctor(Logic.IOneVoteLogic,Logic.Class.AuthLogic)">
+            <summary>
+            Creates a new instance of the OneVote controller
+            </summary>
+            <param name="logic">OneVoteLogic object (transient)</param>
+            <param name="authLogic">AuthLogic object (transient)</param>
+        </member>
+        <member name="M:VotOEApi.Controllers.OneVoteController.GetAllOneVotes">
+            <summary>
+            List all the individual submitted votes
+            </summary>
+            <returns>A collection of OneVotes</returns>
+        </member>
+        <member name="M:VotOEApi.Controllers.OneVoteController.GetOneVote(System.Int32)">
+            <summary>
+            Gets a single specified vote
+            </summary>
+            <param name="id">The id of the vote in question</param>
+            <returns>A single OneVote object</returns>
+        </member>
+        <member name="M:VotOEApi.Controllers.OneVoteController.DeleteVote(System.Int32)">
+            <summary>
+            Delete a single vote
+            </summary>
+            <param name="id">The id of the vote to be deleted</param>
+        </member>
+        <member name="M:VotOEApi.Controllers.OneVoteController.SubmitVote(Models.OneVote)">
+            <summary>
+            Submit a new vote
+            </summary>
+            <param name="vote">OneVote object, containing the details of the vote to be submitted</param>
+            <returns>Http200 if successful, 401, if the user doesn't have the roles needed for this vote</returns>
+        </member>
+        <member name="M:VotOEApi.Controllers.OneVoteController.UpdateVote(System.Int32,Models.OneVote)">
+            <summary>
+            Updates a single vote
+            </summary>
+            <param name="oldId">Original id of the vote</param>
+            <param name="vote">OneVote Object, containing the details of the vote to be updated</param>
+            <returns>Http200 if ok, 400 if not</returns>
+        </member>
+    </members>
+</doc>

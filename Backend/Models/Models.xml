@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Models</name>
+    </assembly>
+    <members>
+        <member name="T:Models.AllVotes">
+            <summary>
+            Model outlining the structure of an AllVotes object
+            </summary>
+        </member>
+        <member name="P:Models.AllVotes.VoteID">
+            <summary>
+            Unique id for this voting "session"
+            </summary>
+            
+        </member>
+        <member name="P:Models.AllVotes.VoteName">
+            <summary>
+            User readable name of the vote
+            </summary>
+        </member>
+        <member name="P:Models.AllVotes.IsClosed">
+            <summary>
+            Used to check if this specific vote is closed
+            </summary>
+        </member>
+        <member name="P:Models.AllVotes.IsFinished">
+            <summary>
+            Used to check if this specific vote is finished
+            </summary>
+        </member>
+        <member name="P:Models.AllVotes.YesVotes">
+            <summary>
+            Number of 'yes' choices for this vote
+            </summary>
+        </member>
+        <member name="P:Models.AllVotes.NoVotes">
+            <summary>
+            Number of 'no' choices for this vote
+            </summary>
+        </member>
+        <member name="P:Models.AllVotes.RequiredRole">
+            <summary>
+            User is only allowed to participate in this specific vote, if it has the role found here associated with it
+            </summary>
+        </member>
+        <member name="P:Models.AllVotes.AbsentionVotes">
+            <summary>
+            Number of 'absention' choices for this vote
+            </summary>
+        </member>
+        <member name="P:Models.AllVotes.OneVote">
+            <summary>
+            Virtal, EF related prop containing all the associated votes (OneVotes)
+            </summary>
+        </member>
+        <member name="P:Models.AllVotes.voteGroup">
+            <summary>
+            Identifies which voting group does this current vote belongs to.
+            </summary>
+        </member>
+        <member name="T:Models.Login">
+            <summary>
+            Model used during user logins
+            </summary>
+        </member>
+        <member name="P:Models.Login.Email">
+            <summary>
+            The email address of the user
+            </summary>
+        </member>
+        <member name="P:Models.Login.Password">
+            <summary>
+            Password of the user
+            </summary>
+        </member>
+        <member name="T:Models.OneVote">
+            <summary>
+            Model outlining the structure of a OneVote object
+            </summary>
+        </member>
+        <member name="P:Models.OneVote.OneVoteID">
+            <summary>
+            Unique id for each specific vote
+            </summary>
+            
+        </member>
+        <member name="P:Models.OneVote.VoteID">
+            <summary>
+            Gets or sets which voting event does this specific vote belong to.
+            </summary>
+        </member>
+        <member name="P:Models.OneVote.voteGroup">
+            <summary>
+            Marks which vote group does this specific vote belongs to
+            </summary>
+        </member>
+        <member name="P:Models.OneVote.submitterName">
+            <summary>
+            Email address of the user who submitted the vote.
+            </summary>
+        </member>
+        <member name="P:Models.OneVote.Choice">
+            <summary>
+            (Nullable bool!)
+            Gets or sets what this user's choice was. true = yes; false = no, NULL = absention (vagy tartózkodott, fene se tudja hogy van árgyélusul)
+            </summary>
+        </member>
+        <member name="P:Models.OneVote.AllVotes">
+            <summary>
+            Virtual EF related prop, containing the allVotes associated with this OneVote
+            </summary>
+        </member>
+        <member name="T:Models.RoleModel">
+            <summary>
+            A model used to describe whta roles does a specific user have
+            </summary>
+        </member>
+        <member name="P:Models.RoleModel.User">
+            <summary>
+            IdentityUser object
+            </summary>
+        </member>
+        <member name="P:Models.RoleModel.Roles">
+            <summary>
+            A collection of the roles that belong to the user
+            </summary>
+        </member>
+        <member name="T:Models.TokenModel">
+            <summary>
+            A model used during the login process, containing the token granted after a successful login, and it's expiration date
+            </summary>
+        </member>
+        <member name="P:Models.TokenModel.Token">
+            <summary>
+            JWT token granted to the user
+            </summary>
+        </member>
+        <member name="P:Models.TokenModel.ExpirationDate">
+            <summary>
+            Expiration date of the token
+            </summary>
+        </member>
+        <member name="P:Models.TokenModel.isAdmin">
+            <summary>
+            Indicates if the logged in user is admin or not. 
+            </summary>
+        </member>
+        <member name="P:Models.TokenModel.isEditor">
+            <summary>
+            Indicates if the logged in user is admin or not. 
+            </summary>
+        </member>
+    </members>
+</doc>

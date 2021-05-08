@@ -1,0 +1,428 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Logic</name>
+    </assembly>
+    <members>
+        <member name="T:Logic.AllVotesLogic">
+            <inheritdoc/>
+        </member>
+        <member name="F:Logic.AllVotesLogic.allVotesRepo">
+            <summary>
+            Repository for the allVotes table
+            </summary>
+        </member>
+        <member name="M:Logic.AllVotesLogic.#ctor(System.String)">
+            <summary>
+            Creates an instance of the AllVotesLogic
+            </summary>
+            <param name="dbPassword">Database password string</param>
+        </member>
+        <member name="M:Logic.AllVotesLogic.CreateVote(Models.AllVotes)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Logic.AllVotesLogic.DeleteVote(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Logic.AllVotesLogic.GetAllVotes">
+            <inheritdoc/>
+        </member>
+        <member name="M:Logic.AllVotesLogic.GetOneVote(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Logic.AllVotesLogic.UpdateVote(System.Int32,Models.AllVotes)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Logic.AllVotesLogic.GetAllActiveVotes">
+            <inheritdoc/>
+        </member>
+        <member name="M:Logic.AllVotesLogic.GetAllAvaliableVotes(System.Collections.Generic.List{System.String})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Logic.AllVotesLogic.CloseAVote(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Logic.AllVotesLogic.FinishAVote(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Logic.AllVotesLogic.getVotesFromGroup(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Logic.AllVotesLogic.numberOfGroupParticipants(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Logic.AllVotesLogic.numberOfVotesInGroup(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Logic.AllVotesLogic.IsVoteWon(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Logic.Class.AuthLogic">
+            <inheritdoc/>
+        </member>
+        <member name="M:Logic.Class.AuthLogic.#ctor(Microsoft.AspNetCore.Identity.UserManager{Microsoft.AspNetCore.Identity.IdentityUser},Microsoft.AspNetCore.Identity.RoleManager{Microsoft.AspNetCore.Identity.IdentityRole})">
+            <summary>
+            Creates an instance of the AuthLogic
+            </summary>
+            <param name="userManager">AspNetCore.Identity UserManager</param>
+            <param name="roleManager">AspNetCore.Identity RoleManager</param>
+        </member>
+        <member name="M:Logic.Class.AuthLogic.GetAllUsers">
+            <inheritdoc/>
+        </member>
+        <member name="M:Logic.Class.AuthLogic.GetOneUser(System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Logic.Class.AuthLogic.UpdateUser(System.String,Microsoft.AspNetCore.Identity.IdentityUser)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Logic.Class.AuthLogic.DeleteUser(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Logic.Class.AuthLogic.DeleteUser(Microsoft.AspNetCore.Identity.IdentityUser)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Logic.Class.AuthLogic.CreateUser_debug(Models.Login)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Logic.Class.AuthLogic.LoginUser(Models.Login)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Logic.Class.AuthLogic.GetAllRoles">
+            <inheritdoc/>
+        </member>
+        <member name="M:Logic.Class.AuthLogic.HasRole(Microsoft.AspNetCore.Identity.IdentityUser,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Logic.Class.AuthLogic.HasRoleByName(System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Logic.Class.AuthLogic.GetAllRolesOfUser(Microsoft.AspNetCore.Identity.IdentityUser)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Logic.Class.AuthLogic.AssignRolesToUser(Microsoft.AspNetCore.Identity.IdentityUser,System.Collections.Generic.List{System.String})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Logic.Class.AuthLogic.CreateRole(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Logic.Class.AuthLogic.RoleCreationForNewVote(System.Collections.Generic.IList{System.String})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Logic.Class.AuthLogic.GetAllUsersOfRole(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Logic.Class.AuthLogic.RemoveUserFromRole(System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Logic.OneVoteLogic">
+            <inheritdoc/>
+        </member>
+        <member name="F:Logic.OneVoteLogic.oneVoteRepo">
+            <summary>
+            Repository for the oneVote table
+            </summary>
+        </member>
+        <member name="F:Logic.OneVoteLogic.allVotesLogic">
+            <summary>
+            Repository for the AllVotes table
+            </summary>
+        </member>
+        <member name="M:Logic.OneVoteLogic.#ctor(System.String)">
+            <summary>
+            Creates a new instance of the oneVote logic.
+            </summary>
+            <param name="dbPassword">The password used for connecting to the db</param>
+        </member>
+        <member name="M:Logic.OneVoteLogic.CreateOneVote(Models.OneVote,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Logic.OneVoteLogic.DeleteOneVote(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Logic.OneVoteLogic.GetAllOneVote">
+            <inheritdoc/>
+        </member>
+        <member name="M:Logic.OneVoteLogic.GetOneVote(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Logic.OneVoteLogic.UpdateOneVote(System.Int32,Models.OneVote)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Logic.OneVoteLogic.getAssociatedVote(Models.OneVote)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Logic.OneVoteLogic.canVote(Microsoft.AspNetCore.Identity.IdentityUser,Models.OneVote)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Logic.OneVoteLogic.AddUsersChoiceToAllVotes(Models.OneVote)">
+            <summary>
+            Increments the associated values in the AllVotes entry, based on what this OneVote has voted for.
+            </summary>
+            <param name="vote">The OneVote object to be used to update the values in the AllVotes entry that belongs to it</param>
+        </member>
+        <member name="T:Logic.IAllVotesLogic">
+            <summary>
+            Logic for handling the main voting events
+            </summary>
+        </member>
+        <member name="M:Logic.IAllVotesLogic.GetOneVote(System.Int32)">
+            <summary>
+            Returns a single specified "voting event"
+            </summary>
+            <param name="voteId">The id of the vote to return</param>
+            <returns>One AllVotes entry</returns>
+        </member>
+        <member name="M:Logic.IAllVotesLogic.GetAllVotes">
+            <summary>
+            Returns all the "voting events"
+            </summary>
+            <returns>All the AllVotes in the db</returns>
+        </member>
+        <member name="M:Logic.IAllVotesLogic.CreateVote(Models.AllVotes)">
+            <summary>
+            Method for creating a new voting event
+            </summary>
+            <param name="vote">The AllVotes object to create</param>
+            <returns>True if successful, false if not</returns>
+        </member>
+        <member name="M:Logic.IAllVotesLogic.DeleteVote(System.Int32)">
+            <summary>
+            Deletes a voting event
+            </summary>
+            <param name="voteId">ID of the voting event to delete</param>
+            <returns>True if successful, false if not</returns>
+        </member>
+        <member name="M:Logic.IAllVotesLogic.UpdateVote(System.Int32,Models.AllVotes)">
+            <summary>
+            Updates a voting event
+            </summary>
+            <param name="oldId">Previous id of the voting event</param>
+            <param name="newVote">AllVotes object, to be updated</param>
+            <returns>True if successful, false if not</returns>
+        </member>
+        <member name="M:Logic.IAllVotesLogic.GetAllActiveVotes">
+            <summary>
+            Creates a list of all the votes that are currently active.
+            </summary>
+            <returns>Collection of all the active voting events</returns>
+        </member>
+        <member name="M:Logic.IAllVotesLogic.GetAllAvaliableVotes(System.Collections.Generic.List{System.String})">
+            <summary>
+            Returns a list of all the votes that can be voted on by the list of roles provided as a parameter.
+            </summary>
+            <param name="roles">List of roles to be checked</param>
+            <returns>List of all the votes that meet the criteria</returns>
+        </member>
+        <member name="M:Logic.IAllVotesLogic.CloseAVote(System.Int32)">
+            <summary>
+            Marks a specified vote as closed
+            </summary>
+            <param name="id">The id of the vote to be closed</param>
+            <returns>True if successful, false if not</returns>
+        </member>
+        <member name="M:Logic.IAllVotesLogic.FinishAVote(System.Int32)">
+            <summary>
+            Marks a specified vote as finished
+            </summary>
+            <param name="id">Id of the vote to be marked as finished</param>
+            <returns>True if successful, false if not</returns>
+        </member>
+        <member name="M:Logic.IAllVotesLogic.getVotesFromGroup(System.String)">
+            <summary>
+            Gets all the allvotes, which has the voteGroup property set to the one provided in the input parameter
+            </summary>
+            <param name="input">voteGroup id to look for</param>
+            <returns>A collection of allvotes that match the criteria</returns>
+        </member>
+        <member name="M:Logic.IAllVotesLogic.numberOfGroupParticipants(System.String)">
+            <summary>
+            Returns the number of users, who participated in a specific vote group. (One user submitting multiple votes within the same group only counts as one)
+            </summary>
+            <param name="groupName">Name of the vote group we're looking for</param>
+            <returns>The number of unique voters in the group, who participated by submittint at least 1 vote</returns>
+        </member>
+        <member name="M:Logic.IAllVotesLogic.numberOfVotesInGroup(System.String)">
+            <summary>
+            Counts the number of votes submitted within one vote group.
+            </summary>
+            <param name="groupName">The name of the group we're looking for</param>
+            <returns>The number of votes submitted within a group</returns>
+        </member>
+        <member name="M:Logic.IAllVotesLogic.IsVoteWon(System.Int32)">
+            <summary>
+            Checks if a vote would be considered as won at the moment. (According to the .pdf, a vote is won, when 1.) It has the most yes votes in it's voting group, AND 2.) 2/3 of the voters, who submitted a vote to this, or any other candidate in the same voting group, voted 'Yes' to this candidate.)
+            </summary>
+        </member>
+        <member name="T:Logic.Interface.IAuthLogic">
+            <summary>
+            Logic for auth related functionality
+            </summary>
+        </member>
+        <member name="M:Logic.Interface.IAuthLogic.GetOneUser(System.String,System.String)">
+            <summary>
+            Returns a single user
+            </summary>
+            <param name="userId">Id of the user</param>
+            <param name="email">Email address of the user</param>
+            <returns>A single IdentityUser object</returns>
+        </member>
+        <member name="M:Logic.Interface.IAuthLogic.GetAllUsers">
+            <summary>
+            Gets all the users
+            </summary>
+            <returns>A collection of all the suers</returns>
+        </member>
+        <member name="M:Logic.Interface.IAuthLogic.CreateUser_debug(Models.Login)">
+            <summary>
+            DEBUG ONLY
+            Creates a single user, used only for debugging, as user registration is not part of our project.
+            </summary>
+            <param name="login">Login object, containing the login detals of the user to be created</param>
+            <returns>'Ok', if the method successfully completed</returns>
+        </member>
+        <member name="M:Logic.Interface.IAuthLogic.DeleteUser(System.String)">
+            <summary>
+            Deletes a single user
+            </summary>
+            <param name="userId">ID of the user to be deleted</param>
+            <returns>'Ok', if the method successfully completed</returns>
+        </member>
+        <member name="M:Logic.Interface.IAuthLogic.DeleteUser(Microsoft.AspNetCore.Identity.IdentityUser)">
+            <summary>
+            Deletes a single user
+            </summary>
+            <param name="inUser">IdentityUser object of the user to deleted</param>
+            <returns>"Ok", if the method successfully completed</returns>
+        </member>
+        <member name="M:Logic.Interface.IAuthLogic.UpdateUser(System.String,Microsoft.AspNetCore.Identity.IdentityUser)">
+            <summary>
+            Updates the specified user
+            </summary>
+            <param name="oldId">The original id of the user to be updated</param>
+            <param name="newUser">IdentityUser object, with the updated fields</param>
+            <returns>"Ok", if the method successfully completed</returns>
+        </member>
+        <member name="M:Logic.Interface.IAuthLogic.LoginUser(Models.Login)">
+            <summary>
+            Method used to verify a login. 
+            </summary>
+            <param name="login">Login object, containing the login details</param>
+            <returns>A TokenModel in case of a successful login, containing the JWT token of the logged in user</returns>
+        </member>
+        <member name="M:Logic.Interface.IAuthLogic.GetAllRoles">
+            <summary>
+            Returns all the roles which have been auto-generated upon a vote creation
+            </summary>
+            <returns>A collection of IdentityRoles</returns>
+        </member>
+        <member name="M:Logic.Interface.IAuthLogic.HasRole(Microsoft.AspNetCore.Identity.IdentityUser,System.String)">
+            <summary>
+            Check if a specified user has the role provided in the parameter.
+            </summary>
+            <param name="user">The user to be checked</param>
+            <param name="role">Name of the role to be checked</param>
+            <returns>True, if the user has the role, false if not</returns>
+        </member>
+        <member name="M:Logic.Interface.IAuthLogic.GetAllRolesOfUser(Microsoft.AspNetCore.Identity.IdentityUser)">
+            <summary>
+            Gets all the roles a specified user has
+            </summary>
+            <param name="user">IdentityUser object, to be checked</param>
+            <returns>A collection of roles that the user has</returns>
+        </member>
+        <member name="M:Logic.Interface.IAuthLogic.AssignRolesToUser(Microsoft.AspNetCore.Identity.IdentityUser,System.Collections.Generic.List{System.String})">
+            <summary>
+            Used for assigning multiple roles to a single user
+            </summary>
+            <param name="user">The user to used</param>
+            <param name="roles">Collection of toles that are to be assigned to the user</param>
+            <returns>True, if it was successful</returns>
+        </member>
+        <member name="M:Logic.Interface.IAuthLogic.CreateRole(System.String)">
+            <summary>
+            Creates a role if it doesn't exist yet
+            </summary>
+            <param name="name">The name of the role to be created</param>
+            <returns>True, if it was successful</returns>
+        </member>
+        <member name="M:Logic.Interface.IAuthLogic.RoleCreationForNewVote(System.Collections.Generic.IList{System.String})">
+            <summary>
+            Creates a new role for a newly created vote, then assigns it to every user, who has the roles that were provided in the parameter
+            </summary>
+            <param name="roles">The holders of these roles will be assigned the newly created role</param>
+            <returns>The name of the newly created role</returns>
+        </member>
+        <member name="M:Logic.Interface.IAuthLogic.GetAllUsersOfRole(System.String)">
+            <summary>
+            Gets all the users that have the role specified in parameter
+            </summary>
+            <param name="roleId">The id of the role to be searched</param>
+            <returns>Collection of users that match the criteria</returns>
+        </member>
+        <member name="M:Logic.Interface.IAuthLogic.HasRoleByName(System.String,System.String)">
+            <summary>
+            Checks if a user has a specified ole
+            </summary>
+            <param name="userName">username of the user to be checked</param>
+            <param name="role">The role we're looking for</param>
+            <returns>True, if the user has the role, false if not</returns>
+        </member>
+        <member name="T:Logic.IOneVoteLogic">
+            <summary>
+            Logic for managing single votes
+            </summary>
+        </member>
+        <member name="M:Logic.IOneVoteLogic.GetOneVote(System.Int32)">
+            <summary>
+            returns a single specified vote
+            </summary>
+            <param name="userId">Id of the vote to be returned</param>
+            <returns>A single OneVote object</returns>
+        </member>
+        <member name="M:Logic.IOneVoteLogic.GetAllOneVote">
+            <summary>
+            Gets all the single votes that have been submitted
+            </summary>
+            <returns>A collection of all the OneVotes</returns>
+        </member>
+        <member name="M:Logic.IOneVoteLogic.CreateOneVote(Models.OneVote,System.String)">
+            <summary>
+            Submits a new vote
+            </summary>
+            <param name="vote">OneVote object, containing the details of the vote to be submitted</param>
+            <param name="name">Username of the user</param>
+            <returns>True if successful, false if not</returns>
+        </member>
+        <member name="M:Logic.IOneVoteLogic.DeleteOneVote(System.Int32)">
+            <summary>
+            Deletes a specified vote
+            </summary>
+            <param name="voteId">Id of the vote to be deleted</param>
+            <returns>True if successful, false if not</returns>
+        </member>
+        <member name="M:Logic.IOneVoteLogic.UpdateOneVote(System.Int32,Models.OneVote)">
+            <summary>
+            Updates a specified vote
+            </summary>
+            <param name="oldId">Original id of the vote to be updated</param>
+            <param name="newVote">OneVote object, with the already updated details</param>
+            <returns>True if successful, false if not</returns>
+        </member>
+        <member name="M:Logic.IOneVoteLogic.canVote(Microsoft.AspNetCore.Identity.IdentityUser,Models.OneVote)">
+            <summary>
+            TODO PLACEHOLDER
+            </summary>
+            <param name="user">PLACEHOLDER</param>
+            <param name="vote">PLACEHOLDER</param>
+            <returns>True if can vote, false if not?</returns>
+        </member>
+        <member name="M:Logic.IOneVoteLogic.getAssociatedVote(Models.OneVote)">
+            <summary>
+            Gets the AllVotes "voting event" associated with a specific vote
+            </summary>
+            <param name="input">OneVote object, to be checked</param>
+            <returns>The associated AllVotes object</returns>
+        </member>
+    </members>
+</doc>

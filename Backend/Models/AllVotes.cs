@@ -6,6 +6,9 @@ using System.Text.Json.Serialization;
 
 namespace Models
 {
+    /// <summary>
+    /// Model outlining the structure of an AllVotes object
+    /// </summary>
     public class AllVotes
     {
         /// <summary>
@@ -19,11 +22,6 @@ namespace Models
         /// User readable name of the vote
         /// </summary>
         public string VoteName { get; set; }
-
-        /// <summary>
-        /// When will the current vote expire
-        /// </summary>
-        //public DateTime ExpirationDate { get; set; }
 
         /// <summary>
         /// Used to check if this specific vote is closed
@@ -53,7 +51,15 @@ namespace Models
         /// Number of 'absention' choices for this vote
         /// </summary>
         public int AbsentionVotes { get; set; }
+        /// <summary>
+        /// Virtal, EF related prop containing all the associated votes (OneVotes)
+        /// </summary>
         [JsonIgnore]
         public virtual ICollection<OneVote> OneVote { get; set; }
+
+        /// <summary>
+        /// Identifies which voting group does this current vote belongs to.
+        /// </summary>
+        public string voteGroup { get; set; }
     }
 }
