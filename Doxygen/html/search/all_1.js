@@ -1,0 +1,13 @@
+var searchData=
+[
+  ['canvote_13',['canVote',['../class_logic_1_1_one_vote_logic.html#a5e87bcdc4488c8fe44ed4ace8f46d847',1,'Logic.OneVoteLogic.canVote()'],['../interface_logic_1_1_i_one_vote_logic.html#aa16b8dec23176139ee922969de857e90',1,'Logic.IOneVoteLogic.canVote()']]],
+  ['choice_14',['Choice',['../class_models_1_1_one_vote.html#a05ab27ed2eaf9b120e78715f9732255c',1,'Models::OneVote']]],
+  ['closeavote_15',['CloseAVote',['../class_logic_1_1_all_votes_logic.html#a22ac80f5ffb4d91e115ffce67bc2c35d',1,'Logic.AllVotesLogic.CloseAVote()'],['../interface_logic_1_1_i_all_votes_logic.html#a16e8bbb08d07cf0f670bab8e3ec050c6',1,'Logic.IAllVotesLogic.CloseAVote()'],['../class_vot_o_e_api_1_1_controllers_1_1_all_votes_controller.html#a39690994ddd3ddbf6421e0cd5f4097dd',1,'VotOEApi.Controllers.AllVotesController.CloseAVote()']]],
+  ['createonevote_16',['CreateOneVote',['../class_logic_1_1_one_vote_logic.html#ac8e9356f7ef2e8bc550adbf8fd4fbd62',1,'Logic.OneVoteLogic.CreateOneVote()'],['../interface_logic_1_1_i_one_vote_logic.html#ab74bc4eb3734af80402c0141d756906a',1,'Logic.IOneVoteLogic.CreateOneVote()']]],
+  ['createrole_17',['CreateRole',['../class_logic_1_1_class_1_1_auth_logic.html#a44a63fdcc75229c2a126d5e21377fa19',1,'Logic.Class.AuthLogic.CreateRole()'],['../interface_logic_1_1_interface_1_1_i_auth_logic.html#a6e838edfc087b68cdc247fdb9d056346',1,'Logic.Interface.IAuthLogic.CreateRole()']]],
+  ['createrole_18',['createRole',['../class_vot_o_e_api_1_1_controllers_1_1_auth_controller.html#aaa8d632305ef38d9788b5c607a6002ce',1,'VotOEApi::Controllers::AuthController']]],
+  ['createroleforvoteasync_19',['CreateRoleForVoteAsync',['../class_vot_o_e_api_1_1_controllers_1_1_auth_controller.html#a00e3056e276b831d88e4e7207376caf8',1,'VotOEApi::Controllers::AuthController']]],
+  ['createuser_20',['CreateUser',['../class_vot_o_e_api_1_1_controllers_1_1_auth_controller.html#aeacbc9ff43adf7d536391e9d198b1b9b',1,'VotOEApi::Controllers::AuthController']]],
+  ['createuser_5fdebug_21',['CreateUser_debug',['../class_logic_1_1_class_1_1_auth_logic.html#a641bde5c5300c3979738190e6b221c7c',1,'Logic.Class.AuthLogic.CreateUser_debug()'],['../interface_logic_1_1_interface_1_1_i_auth_logic.html#a6a5a21ae3585581a380966e7a7073031',1,'Logic.Interface.IAuthLogic.CreateUser_debug()']]],
+  ['createvote_22',['CreateVote',['../class_logic_1_1_all_votes_logic.html#aa965ae7e5991162f83e36298bc6fff41',1,'Logic.AllVotesLogic.CreateVote()'],['../interface_logic_1_1_i_all_votes_logic.html#a104996be97f8910e23c84e6751ad0189',1,'Logic.IAllVotesLogic.CreateVote()'],['../class_vot_o_e_api_1_1_controllers_1_1_all_votes_controller.html#abbd02089dd2c2eeb1e05b285ca6dd47d',1,'VotOEApi.Controllers.AllVotesController.CreateVote()']]]
+];
