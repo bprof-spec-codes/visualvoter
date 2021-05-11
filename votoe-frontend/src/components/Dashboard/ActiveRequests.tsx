@@ -56,8 +56,9 @@ function ActiveRequests() {
 
   const requestAccept = (index: number) => {
     console.log(requests);
+
     axios
-      .post(`/Auth/requestNewRole?roleSwitchID=${requests[index].oneRoleSwitchID}&choice=${requestStatus[index] ? 0 : 1}`, { headers: headers })
+      .post(`/Auth/requestNewRole?roleSwitchID=${requests[index].oneRoleSwitchID}&choice=${requestStatus[index] ? 0 : 1}`, {}, { headers: headers })
       .then((res) => {
         console.log(res);
 
@@ -77,7 +78,7 @@ function ActiveRequests() {
 
   const requestReject = (index: number) => {
     axios
-      .post(`/Auth/requestNewRole?roleSwitchID=${requests[index].oneRoleSwitchID}&choice=${requestStatus[index] ? 0 : 1}`, { headers: headers })
+      .post(`/Auth/requestNewRole?roleSwitchID=${requests[index].oneRoleSwitchID}&choice=${requestStatus[index] ? 0 : 1}`, {}, { headers: headers })
       .then((res) => {
         console.log(res);
 
