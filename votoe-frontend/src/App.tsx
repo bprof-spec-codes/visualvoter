@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Dashboard from "./components/Dashboard/Dashboard";
 import VoteHere from "./components/Vote/VoteHere";
 import Profile from "./components/Profile/Profile";
+import Registration from "./components/Registration/Registration";
 
 function App() {
 
@@ -12,6 +13,8 @@ function App() {
     <Router>
       <div className="app">
         <Switch>
+          <Route path="/registration" component={Registration}></Route>
+
           <Route path="/profile" component={Profile}>
           {/* <Route path="/profile/:id" component={Profile}></Route> */}
           </Route>

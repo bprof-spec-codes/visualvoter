@@ -183,13 +183,26 @@ function Header() {
                 {showError && (
                   <p className="error_message">Hibás email vagy jelszó</p>
                 )}
-                <div className="form_buttons" style={{ marginTop: 30 }}>
+                <div
+                  className="form_buttons"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    marginTop: 30,
+                  }}
+                >
                   <Button
                     onClick={loginHandler}
                     style={{ fontSize: "large", padding: 15, width: 100 }}
                   >
                     Send
                   </Button>
+                  <Link to="/registration" style={{color: "black"}}>
+                    <p style={{ marginRight: "100px", cursor: "pointer" }}>
+                      Ha nincs fiókod regisztrálj be
+                    </p>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -232,7 +245,10 @@ function Header() {
               }}
             >
               <h1>Sign Out</h1>
-              <div className="modal_close" onClick={() => setModalSignOutOpen(false)}>
+              <div
+                className="modal_close"
+                onClick={() => setModalSignOutOpen(false)}
+              >
                 <IconButton>
                   <CloseOutlinedIcon
                     fontSize="large"
