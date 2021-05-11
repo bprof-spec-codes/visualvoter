@@ -91,22 +91,6 @@ namespace VotOEApi.Controllers
             this.allVotesLogic.UpdateVote(oldId, vote);
         }
 
-
-        //[Route("create")]
-        //[HttpPost]
-        //public ActionResult CreateNewVote([FromBody] AllVotes thisVote)
-        //{
-        //    //var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        //    if (this.User.IsInRole(voteCreation.RequiredRole))
-        //    {
-        //        this.allVotesLogic.CreateVote(voteCreation);
-        //        return Ok();
-        //    }
-        //    return Unauthorized();
-        //    this.allVotesLogic.CreateVote(thisVote);
-        //    return Ok();
-        //}
-
         /// <summary>
         /// Returns all the active votes
         /// </summary>
@@ -131,12 +115,6 @@ namespace VotOEApi.Controllers
             var roles = ((ClaimsIdentity)User.Identity).Claims
                 .Where(c => c.Type == ClaimTypes.Role)
                 .Select(c => c.Value).ToList();
-
-            //var userIdentity = (ClaimsIdentity)User.Identity;
-            //var claims = userIdentity.Claims;
-            //var roleClaimType = userIdentity.RoleClaimType;
-            //var roles = claims.Where(c => c.Type == ClaimTypes.Role).ToList();
-
             return allVotesLogic.GetAllAvaliableVotes(roles);
         }
 

@@ -33,17 +33,12 @@ namespace Logic
         ///<inheritdoc/>
         public bool CreateVote(AllVotes vote)
         {
-            //this.allVotesRepo.Add(vote);
-
             this.allVotesRepo.Add(vote);
             return true;
-
         }
         ///<inheritdoc/>
         public bool DeleteVote(int voteId)
         {
-
-            //this.allVotesRepo.Delete(voteId);
             try
             {
                 this.allVotesRepo.Delete(voteId);
@@ -67,7 +62,6 @@ namespace Logic
         ///<inheritdoc/>
         public bool UpdateVote(int oldId, AllVotes newVote)
         {
-            //this.allVotesRepo.Update(oldId, newVote);
             try
             {
                 this.allVotesRepo.Update(oldId, newVote);

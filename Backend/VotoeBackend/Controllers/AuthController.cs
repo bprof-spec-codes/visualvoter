@@ -177,7 +177,6 @@ namespace VotOEApi.Controllers
             string generatedroleName = await this.authLogic.RoleCreationForNewVote(id);
             if (generatedroleName != null) return new JsonResult(generatedroleName);
             return BadRequest();
-            
         }
         /// <summary>
         /// Debug RoleModel generation
@@ -207,7 +206,6 @@ namespace VotOEApi.Controllers
         {
             var user = authLogic.GetOneUser(null, email);
             authLogic.AssignRolesToUser(user, new List<string> { "Admin" });
-
             return Ok();
         }
 

@@ -57,7 +57,6 @@ namespace Logic
         ///<inheritdoc/>
         public bool DeleteOneVote(int voteId)
         {
-            //this.oneVoteRepo.Delete(voteId);
             try
             {
                 this.oneVoteRepo.Delete(voteId);
@@ -81,7 +80,6 @@ namespace Logic
         ///<inheritdoc/>
         public bool UpdateOneVote(int oldId, OneVote newVote)
         {
-            //this.oneVoteRepo.Update(oldId, newVote);
             try
             {
                 this.oneVoteRepo.Update(oldId, newVote);
@@ -93,13 +91,6 @@ namespace Logic
             }
         }
 
-        /*private bool GetUsersVoteHistory(int userID, int voteID)
-        {
-            var query = from x in oneVoteRepo.GetAll()
-                        where x.UserID == userID && x.VoteID == voteID
-                        select x;
-            return query.Count() == 0;
-        }*/
         ///<inheritdoc/>
         public AllVotes getAssociatedVote(OneVote input)
         {

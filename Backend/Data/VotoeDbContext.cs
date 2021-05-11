@@ -33,19 +33,9 @@ namespace Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                //Eredeti db
                 var builder = new SqlConnectionStringBuilder("server=95.111.254.24;database=projektmunka;user=projektmunka");
-
-                //Teszt db
-                //var builder = new SqlConnectionStringBuilder("server=95.111.254.24;database=projektmunka_teszt;user=projektmunka");
-               builder.Password = ConnectionStrinPassword;
-                
-                //Localdb
-                //var builder = new SqlConnectionStringBuilder(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=VotOEDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-
-                
+                builder.Password = ConnectionStrinPassword;
                 optionsBuilder.UseSqlServer(builder.ConnectionString);
-                //optionsBuilder.EnableSensitiveDataLogging();
             }
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -61,11 +51,8 @@ namespace Data
                 new { Id = "0d301757-99d2-4253-aac2-39e298dd0ab7", Name = "Hallgató", NormalizedName = "HALLGATÓ" }
             );
         }
-        //public virtual DbSet<Models.Users> Users { get; set; } // Deprecated
         public virtual DbSet<Models.OneVote> OneVote { get; set; }
         public virtual DbSet<Models.AllVotes> AllVotes { get; set; }
         public virtual DbSet<Models.RoleSwitch> RoleSwitch { get; set; }
-        //public virtual DbSet<Models.VotingRight> VotingRight { get; set; } //Deprecated
-        // public virtual DbSet<Models.UserType> UserType { get; set; } //Deprecated
     }
 }

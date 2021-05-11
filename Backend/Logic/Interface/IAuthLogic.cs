@@ -120,6 +120,5 @@ namespace Logic.Interface
         /// <param name="role">The role we're looking for</param>
         /// <returns>True, if the user has the role, false if not</returns>
         Task<bool> HasRoleByName(string userName, string role);
-        //public void RemoveUserFromRole(string userName, string requiredRole);
     }
 }
