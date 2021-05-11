@@ -7,7 +7,7 @@ import CheckOutlinedIcon from "@material-ui/icons/CheckOutlined";
 import { IconButton } from "@material-ui/core";
 
 interface IRequest {
-  oneRoleSwitchId: number;
+  oneRoleSwitchID: number;
   roleName: string;
   userName: string;
 }
@@ -18,10 +18,6 @@ function ActiveRequests() {
   const [requestStatus, setRequestStatus] = useState<boolean[]>([]);
 
   const isLogged = useSelector((state: any) => state.isLogged);
-
-  const headers = {
-    Authorization: "Bearer " + isLogged.user?.token,
-  };
 
   useEffect(() => {
     let newIsChecked = [...isChecked];
@@ -54,26 +50,49 @@ function ActiveRequests() {
       });
   }, []);
 
+  const headers = {
+    Authorization: "Bearer " + isLogged.user?.token,
+  };
+
   const requestAccept = (index: number) => {
-    let newIsChecked = [...isChecked];
-    let newRequestStatus = [...requestStatus];
+    console.log(requests);
+    axios
+      .post(`/Auth/requestNewRole?roleSwitchID=${requests[index].oneRoleSwitchID}&choice=${requestStatus[index] ? 0 : 1}`, { headers: headers })
+      .then((res) => {
+        console.log(res);
 
-    newIsChecked[index] = true;
-    newRequestStatus[index] = true;
+        let newIsChecked = [...isChecked];
+        let newRequestStatus = [...requestStatus];
 
-    setIsChecked(newIsChecked);
-    setRequestStatus(newRequestStatus);
+        newIsChecked[index] = true;
+        newRequestStatus[index] = true;
+
+        setIsChecked(newIsChecked);
+        setRequestStatus(newRequestStatus);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   };
 
   const requestReject = (index: number) => {
-    let newIsChecked = [...isChecked];
-    let newRequestStatus = [...requestStatus];
+    axios
+      .post(`/Auth/requestNewRole?roleSwitchID=${requests[index].oneRoleSwitchID}&choice=${requestStatus[index] ? 0 : 1}`, { headers: headers })
+      .then((res) => {
+        console.log(res);
 
-    newIsChecked[index] = true;
-    newRequestStatus[index] = false;
+        let newIsChecked = [...isChecked];
+        let newRequestStatus = [...requestStatus];
 
-    setIsChecked(newIsChecked);
-    setRequestStatus(newRequestStatus);
+        newIsChecked[index] = true;
+        newRequestStatus[index] = false;
+
+        setIsChecked(newIsChecked);
+        setRequestStatus(newRequestStatus);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   };
 
   return (
@@ -83,25 +102,26 @@ function ActiveRequests() {
 
         {requests &&
           requests.map((q, qKey) => (
-            <div
-              key={qKey}
-              className={`request ${
-                isChecked[qKey] ? (requestStatus[qKey] ? "right" : "left") : ""
-              }`}
-            >
-              {!isChecked[qKey] && (
-                <IconButton>
-                  <CheckOutlinedIcon onClick={() => requestAccept(qKey)} />
-                </IconButton>
-              )}
-              <div className="request_content">
-                <h5>{q.userName}</h5>
-                <p>{q.roleName}</p>
-              </div>
-              {!isChecked[qKey] && (
-                <IconButton>
-                  <CloseOutlinedIcon onClick={() => requestReject(qKey)} />
-                </IconButton>
+            <div key={qKey} className="request">
+              {!isChecked[qKey] ? (
+                <>
+                  <IconButton>
+                    <CheckOutlinedIcon onClick={() => requestAccept(qKey)} />
+                  </IconButton>
+
+                  <div className="request_content">
+                    <h5>{q.userName}</h5>
+                    <p>{q.roleName}</p>
+                  </div>
+
+                  <IconButton>
+                    <CloseOutlinedIcon onClick={() => requestReject(qKey)} />
+                  </IconButton>
+                </>
+              ) : (
+                <div className="request_content">
+                  <p>A kérelem elbírálásra került!</p>
+                </div>
               )}
             </div>
           ))}
