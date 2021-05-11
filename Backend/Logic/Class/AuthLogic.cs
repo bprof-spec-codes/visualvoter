@@ -28,7 +28,6 @@ namespace Logic.Class
         {
             this.userManager = userManager;
             this.roleManager = roleManager;
-
         }
 
         ///<inheritdoc/>
@@ -159,7 +158,6 @@ namespace Logic.Class
         public IEnumerable<IdentityRole> GetAllRoles()
         {
             return this.roleManager.Roles.Where(x => !x.Name.Contains("VOTECREATEDROLE")).ToList();
-            //return roleManager.Roles.ToList();
         }
         ///<inheritdoc/>
         public bool HasRole(IdentityUser user, string role)
@@ -197,7 +195,6 @@ namespace Logic.Class
             {
                 selectedUser = GetOneUser(null, user.Email);
             }
-            //userManager.AddToRolesAsync(user, roles).Wait();
             userManager.AddToRolesAsync(selectedUser, roles).Wait();
             return true;
         }
@@ -205,7 +202,6 @@ namespace Logic.Class
         public async Task<bool> CreateRole(string name)
         {
             var query = await this.roleManager.FindByNameAsync(name);
-            //var query = roleManager.Roles.Where(x => x.NormalizedName == name.ToUpper()).SingleOrDefault();
             if (query != null)
             {
                 return false;
@@ -256,7 +252,6 @@ namespace Logic.Class
             try
             {
                 var user = await this.userManager.FindByNameAsync(userName);
-                //var user = this.userManager.Users.Where(user => user.UserName == userName).SingleOrDefault();
                 await this.userManager.RemoveFromRoleAsync(user, requiredRole);
                 return "Success";
             }
