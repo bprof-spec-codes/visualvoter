@@ -28,9 +28,10 @@
       border: $base-border;
       border-radius: 20px;
       margin-bottom: 15px;
-
       align-items: center;
       text-align: center;
+
+      position: relative;
 
       .request_content {
         width: 100%;
@@ -38,22 +39,4 @@
       }
     }
   }
-}
-
-.right{
-  content: "";
-  z-index: -1;
-  background: green;
-
-  transition: transform 1000ms ease-in-out;
-  transform: scaleX(0);
-  transform-origin: left;
-}
-
-.right:focus{
-  transform: scaleX(1);
-}
-
-.right {
-  z-index: 1;
 }
