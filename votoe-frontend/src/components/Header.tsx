@@ -39,8 +39,6 @@ function Header() {
     axios
       .put("/auth", data)
       .then((response) => {
-        console.log(response);
-
         const dataForVote = {
           ...data,
           token: response.data.token,
@@ -68,10 +66,7 @@ function Header() {
         </div>
 
         <div className="header_middle">
-          <div
-            className="header_option header_option--active"
-            style={{ marginLeft: "20%" }}
-          >
+          <div className="header_option" style={{ marginRight: "10vw" }}>
             <IconButton>
               <Link to="/" style={{ textDecoration: "none", color: "black" }}>
                 <HomeOutlinedIcon fontSize="large" />
@@ -79,28 +74,16 @@ function Header() {
             </IconButton>
           </div>
 
-          <>
-            <div className="header_option">
-              <IconButton>
-                <Link
-                  to="/vote"
-                  style={{ textDecoration: "none", color: "black" }}
-                >
-                  <HowToVoteOutlinedIcon fontSize="large" />
-                </Link>
-              </IconButton>
-            </div>
-            <div className="header_option" style={{ marginRight: "20%" }}>
-              <IconButton>
-                <Link
-                  to="/dashboard"
-                  style={{ textDecoration: "none", color: "black" }}
-                >
-                  <AccountBoxOutlinedIcon fontSize="large" />
-                </Link>
-              </IconButton>
-            </div>
-          </>
+          <div className="header_option">
+            <IconButton>
+              <Link
+                to="/dashboard"
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                <AccountBoxOutlinedIcon fontSize="large" />
+              </Link>
+            </IconButton>
+          </div>
         </div>
 
         <div className="header_modal">
@@ -116,7 +99,7 @@ function Header() {
               },
               content: {
                 width: 500,
-                height: 350,
+                height: 400,
                 borderRadius: 20,
                 position: "absolute",
                 top: "28%",
@@ -138,7 +121,7 @@ function Header() {
                 marginBottom: 50,
               }}
             >
-              <h1>Sign In</h1>
+              <h1>Bejelentkezés</h1>
               <div className="modal_close" onClick={() => setModalOpen(false)}>
                 <IconButton>
                   <CloseOutlinedIcon
@@ -167,13 +150,13 @@ function Header() {
                 <TextField
                   label="Email"
                   variant="standard"
-                  helperText="Use your student email (tesztx@stud.uni-obuda.hu)"
+                  helperText="Használd a diák emailedet (tesztx@stud.uni-obuda.hu)"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   style={{ width: "80%", marginBottom: 30 }}
                 ></TextField>
                 <TextField
-                  label="Password"
+                  label="Jelszó"
                   variant="standard"
                   type="password"
                   value={password}
@@ -194,11 +177,11 @@ function Header() {
                 >
                   <Button
                     onClick={loginHandler}
-                    style={{ fontSize: "large", padding: 15, width: 100 }}
+                    style={{ fontSize: "large", padding: 15, width: 200 }}
                   >
-                    Send
+                    Bejelentkezés
                   </Button>
-                  <Link to="/registration" style={{color: "black"}}>
+                  <Link to="/registration" style={{ color: "black" }}>
                     <p style={{ marginRight: "100px", cursor: "pointer" }}>
                       Ha nincs fiókod regisztrálj be
                     </p>
@@ -244,7 +227,7 @@ function Header() {
                 marginBottom: 50,
               }}
             >
-              <h1>Sign Out</h1>
+              <h1>Kijelentkezés</h1>
               <div
                 className="modal_close"
                 onClick={() => setModalSignOutOpen(false)}
@@ -278,7 +261,7 @@ function Header() {
                     onClick={signoutHandler}
                     style={{ fontSize: "large", padding: 15, width: "100%" }}
                   >
-                    Sign Out
+                    Kijelentkezés
                   </Button>
                 </div>
               </div>

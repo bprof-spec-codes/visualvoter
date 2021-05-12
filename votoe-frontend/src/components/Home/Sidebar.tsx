@@ -30,7 +30,6 @@ function Sidebar() {
       .get("/allvotes/active")
       .then((response) => {
         setActiveVotes(response.data);
-        console.log(response.data);
       })
       .catch((error) => {
         console.log(error.message);
@@ -57,12 +56,11 @@ function Sidebar() {
               color: "black",
             }}
           >
-            <p style={{ fontSize: "large", fontWeight: 500 }}>
+            <p
+              style={{ fontSize: "large", fontWeight: 500, marginLeft: "10px" }}
+            >
               {activeVotes[i].voteName}
             </p>{" "}
-            <IconButton>
-              <CloseOutlinedIcon />
-            </IconButton>{" "}
           </div>
         </Link>
       );
@@ -73,7 +71,7 @@ function Sidebar() {
   return (
     <div className="sidebar">
       <div className="sidebar_container">
-        <h1>Options</h1>
+        <h1>Opciók</h1>
         {isLogged.user ? (
           <>
             <div className="sidebar_option">
@@ -87,22 +85,18 @@ function Sidebar() {
                   color: "black",
                 }}
               >
-                <p>Profile</p>
+                <p>Profil</p>
               </Link>
             </div>
 
             <div className="sidebar_option" onClick={() => setModalOpen(true)}>
-              <p>Invites</p>
+              <p>Szavazások</p>
               <label>{activeVotes?.length}</label>
-            </div>
-
-            <div className="sidebar_option">
-              <p>News</p>
             </div>
           </>
         ) : (
           <div className="sidebar_option">
-            <p>Sign in first</p>
+            <p>Előbb jelentkezz be</p>
           </div>
         )}
       </div>

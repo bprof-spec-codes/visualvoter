@@ -13,9 +13,7 @@ function CreateNewVote() {
   const [chancelleryCheckBox, setChancelleryCheckBox] = useState(false);
   const [everyoneCheckBox, setEveryoneCheckBox] = useState(false);
   const [voteName, setVoteName] = useState<string>("");
-
   const [voteGroup, setVoteGroup] = useState<string>("");
-
   const [step, setStep] = useState(1);
   const [requiredRole, setRequiredRole] = useState<any>();
 
@@ -40,7 +38,6 @@ function CreateNewVote() {
     axios
       .post("/auth/createRoleForVote", data)
       .then((response) => {
-        console.log(response);
         const res = response.data;
         setRequiredRole(res);
         setStep(step + 1);
@@ -59,7 +56,6 @@ function CreateNewVote() {
     axios
       .post("/allvotes", data, { headers: headers })
       .then((response) => {
-        console.log(response.data);
         store.addNotification({
           title: "Siker!",
           message: "Sikeresen létrehoztál egy szavazást!",
@@ -102,7 +98,7 @@ function CreateNewVote() {
         <div className="createNewVote">
           <div className="createNewVote_container">
             <div className="container_top">
-              <h1>Create New</h1>
+              <h1>Hozz létre egy szavazást</h1>
             </div>
             <div className="container_content">
               <div className="checkbox_item">
@@ -144,7 +140,7 @@ function CreateNewVote() {
                     marginTop: "10vh",
                   }}
                 >
-                  Next
+                  Tovább
                 </Button>
               </div>
             </div>
@@ -156,7 +152,7 @@ function CreateNewVote() {
         <div className="createNewVote">
           <div className="createNewVote_container">
             <div className="container_top">
-              <h1>Create New</h1>
+              <h1>Hozz létre egy szavazást</h1>
             </div>
             <div className="container_content">
               <div className="container_textfield">
@@ -183,7 +179,7 @@ function CreateNewVote() {
 
               <div className="create_button">
                 <Button onClick={createHandler} style={{ fontSize: "large" }}>
-                  Create
+                  Létrehozás
                 </Button>
               </div>
             </div>
@@ -191,60 +187,6 @@ function CreateNewVote() {
         </div>
       );
   }
-
-  /*
-  return (
-    <div className="createNewVote">
-      <div className="createNewVote_container">
-        <div className="container_top">
-          <h1>Create New</h1>
-        </div>
-        <div className="container_content">
-          <div className="container_textfield">
-            <TextField
-              label="A szavazás neve"
-              style={{ width: "80%", marginBottom: "20px" }}
-            />
-          </div>
-
-          <div className="checkbox_item">
-            <Checkbox
-              checked={hokCheckBox}
-              color="primary"
-              inputProps={{ "aria-label": "secondary checkbox" }}
-              onChange={() => setHokCheckBox(!hokCheckBox)}
-            />
-            <p>Hök</p>
-          </div>
-
-          <div className="checkbox_item">
-            <Checkbox
-              checked={chancelleryCheckBox}
-              color="primary"
-              inputProps={{ "aria-label": "secondary checkbox" }}
-              onChange={() => setChancelleryCheckBox(!chancelleryCheckBox)}
-            />
-            <p>Szenátus</p>
-          </div>
-
-          <div className="checkbox_item">
-            <Checkbox
-              checked={everyoneCheckBox}
-              color="primary"
-              inputProps={{ "aria-label": "secondary checkbox" }}
-              onChange={() => setEveryoneCheckBox(!everyoneCheckBox)}
-            />
-            <p>Hallgató</p>
-          </div>
-
-          <div className="create_button">
-            <Button style={{ fontSize: "large" }}>Create New</Button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-  */
 }
 
 export default CreateNewVote;

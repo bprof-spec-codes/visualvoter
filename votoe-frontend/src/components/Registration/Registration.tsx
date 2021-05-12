@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import "./Registration.scss";
 import { useDispatch } from "react-redux";
 import { login } from "../../store/actions";
+import Header from "../Header";
+import CopyrightIcon from "@material-ui/icons/Copyright";
 
 function Registration() {
   const [email, setEmail] = useState<string>("");
@@ -21,8 +23,6 @@ function Registration() {
     axios
       .post("/auth", data)
       .then((response) => {
-        console.log(response);
-
         const dataForVote = {
           ...data,
           token: response.data.token,
@@ -37,31 +37,46 @@ function Registration() {
 
   return (
     <div className="registration">
+      <Header />
       <div className="registration_container">
         <div className="registration_content">
-          <TextField
-            label="Email"
-            variant="standard"
-            // helperText="Use your student email (tesztx@stud.uni-obuda.hu)"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            style={{ width: "80%", marginBottom: 30 }}
-          ></TextField>
-          <TextField
-            label="Password"
-            variant="standard"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            style={{ width: "80%" }}
-          ></TextField>
+          <div className="registration_textfields">
+            <TextField
+              label="Email"
+              variant="standard"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              style={{ width: "80%", marginBottom: 30 }}
+            ></TextField>
+            <TextField
+              label="Password"
+              variant="standard"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              style={{ width: "80%" }}
+            ></TextField>
+          </div>
 
           <Button
             onClick={loginHandler}
-            style={{ fontSize: "large", padding: 15, width: 100 }}
+            style={{
+              fontSize: "large",
+              padding: 15,
+              width: 100,
+              marginTop: "50px",
+              marginRight: "auto",
+              marginLeft: "auto",
+            }}
           >
             Send
           </Button>
+
+          <div className="terms">
+            <p>
+              Votoe.hu 2021 <CopyrightIcon style={{ fontWeight: 100 }} />
+            </p>
+          </div>
         </div>
       </div>
     </div>
