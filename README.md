@@ -6,7 +6,7 @@
 - [Csapatbeosztás](#csapatbeosztás)
 - [User Manual](#user-manual)
 	 - [Telepítés / Üzemeltetés](#telepítés--üzemeltetés)
-	 - [Használat](#használat)
+	 - [Login Credentials](#login-credentials)
 	 - [API funkciólista](#api-funkciólista)
 	 - [UI felületek rövid ismertetése](#ui-felületek-rövid-ismertetése)
 - [Probléma Jegyzőkönyv](#probléma-jegyzőkönyv)
@@ -26,7 +26,7 @@
 ## User Manual:
 - ### Telepítés / Üzemeltetés:
 	 - 
-- ### Használat:
+- ### Login Credentials:
 	 - Alapvető user <> pass kombinációk:
 		 - Admin Felhasználói Fiók:
 			 -  E-mail-cím: admin@votoe.hu
