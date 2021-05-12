@@ -162,6 +162,7 @@ namespace VotOEApi.Controllers
         /// <returns>Http200 if successful</returns>
         [HttpGet]
         [Route("createRole")]
+        [Authorize(Roles = "Admin,Editor")]
         public async Task<ActionResult> createRole([FromQuery] string RoleName)
         {
             await authLogic.CreateRole(RoleName);
@@ -176,6 +177,7 @@ namespace VotOEApi.Controllers
         /// <returns>The name of the new auto-generated role, or BadRequest if it failed</returns>
         [HttpPost]
         [Route("createRoleForVote")]
+        [Authorize(Roles = "Admin,Editor")]
         public async Task<ActionResult> CreateRoleForVoteAsync([FromBody] List<string> id)
         {
             string generatedroleName = await this.authLogic.RoleCreationForNewVote(id);
