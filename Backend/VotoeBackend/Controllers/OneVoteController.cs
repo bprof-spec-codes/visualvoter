@@ -60,6 +60,7 @@ namespace VotOEApi.Controllers
         /// </summary>
         /// <param name="id">The id of the vote to be deleted</param>
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin,Editor")]
         public void DeleteVote(int id)
         {
             this.oneVoteLogic.DeleteOneVote(id);
@@ -76,7 +77,7 @@ namespace VotOEApi.Controllers
         {
             var associatedVote = this.oneVoteLogic.getAssociatedVote(vote);
             var userName = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (await this.authLogic.HasRoleByName(userName,associatedVote.RequiredRole))
+            if (await this.authLogic.HasRoleByName(userName, associatedVote.RequiredRole))
             {
                 this.oneVoteLogic.CreateOneVote(vote, userName);
                 await this.authLogic.RemoveUserFromRole(userName, associatedVote.RequiredRole);
@@ -92,6 +93,7 @@ namespace VotOEApi.Controllers
         /// <param name="vote">OneVote Object, containing the details of the vote to be updated</param>
         /// <returns>Http200 if ok, 400 if not</returns>
         [HttpPut("{oldId}")]
+        [Authorize(Roles = "Admin,Editor")]
         public IActionResult UpdateVote(int oldId, [FromBody] OneVote vote)
         {
             if (this.oneVoteLogic.UpdateOneVote(oldId, vote)) return Ok();

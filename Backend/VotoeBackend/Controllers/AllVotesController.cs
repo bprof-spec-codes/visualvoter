@@ -20,7 +20,7 @@ namespace VotOEApi.Controllers
     /// </summary>
     [Route("[controller]")]
     [ApiController]
-    
+
     public class AllVotesController : ControllerBase
     {
         private IAllVotesLogic allVotesLogic;
@@ -62,6 +62,7 @@ namespace VotOEApi.Controllers
         /// </summary>
         /// <param name="id">The ID of the AllVotes to be deleted</param>
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin,Editor")]
         public void DeleteVote(int id)
         {
             this.allVotesLogic.DeleteVote(id);
@@ -86,6 +87,7 @@ namespace VotOEApi.Controllers
         /// <param name="oldId">The original id of the vote to be updated</param>
         /// <param name="vote">AllVotes object, containing the details of the vote to be updated</param>
         [HttpPut("{oldId}")]
+        [Authorize(Roles = "Admin,Editor")]
         public void UpdateVote(int oldId, [FromBody] AllVotes vote)
         {
             this.allVotesLogic.UpdateVote(oldId, vote);

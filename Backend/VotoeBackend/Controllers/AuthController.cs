@@ -50,6 +50,7 @@ namespace VotOEApi.Controllers
         /// </summary>
         /// <returns>A collection of all the users</returns>
         [HttpGet]
+        [Authorize(Roles = "Admin,Editor")]
         public IEnumerable<IdentityUser> GetAllUsers()
         {
             return authLogic.GetAllUsers();
@@ -62,7 +63,8 @@ namespace VotOEApi.Controllers
         /// <returns>A single user</returns>
         [HttpGet]
         [Route("getOne")]
-        public IdentityUser GetUser([FromQuery]string id)
+        [Authorize(Roles = "Admin,Editor")]
+        public IdentityUser GetUser([FromQuery] string id)
         {
             if (id.Contains('@'))
             {
@@ -70,7 +72,7 @@ namespace VotOEApi.Controllers
             }
             else
             {
-               return this.authLogic.GetOneUser(id, null);
+                return this.authLogic.GetOneUser(id, null);
             }
         }
 
@@ -79,6 +81,7 @@ namespace VotOEApi.Controllers
         /// </summary>
         /// <param name="id">Id of the user to be deleted</param>
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin,Editor")]
         public async void DeleteUser(string id)
         {
             await this.authLogic.DeleteUser(id);
@@ -90,6 +93,7 @@ namespace VotOEApi.Controllers
         /// <param name="oldId">The initial id of the user to be updated</param>
         /// <param name="user">IdentityUser model, containing the details of the user to be updated</param>
         [HttpPut("{oldId}")]
+        [Authorize(Roles = "Admin,Editor")]
         public async void UpdateUser(string oldId, [FromBody] IdentityUser user)
         {
             await this.authLogic.UpdateUser(oldId, user);
@@ -144,7 +148,7 @@ namespace VotOEApi.Controllers
         /// <returns>Http200 if ok</returns>
         [Route("assignRole")] //TODO: Authenticate as admin!
         [HttpPost]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public ActionResult assignRole(RoleModel model)
         {
             authLogic.AssignRolesToUser(model.User, model.Roles);
@@ -216,9 +220,9 @@ namespace VotOEApi.Controllers
         /// <returns>Ok if the request was ok, badrequest if something else.</returns>
         [HttpGet("requestNewRole")]
         [Authorize]
-        public  ActionResult RequestNewRole([FromQuery] string roleName)
+        public ActionResult RequestNewRole([FromQuery] string roleName)
         {
-            if(this.roleSwitchLogic.RequestNewRole(roleName, this.User.FindFirstValue(ClaimTypes.NameIdentifier))) return Ok();
+            if (this.roleSwitchLogic.RequestNewRole(roleName, this.User.FindFirstValue(ClaimTypes.NameIdentifier))) return Ok();
             return BadRequest();
         }
 
@@ -233,12 +237,13 @@ namespace VotOEApi.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> RequestNewRoleAsync([FromQuery] int roleSwitchID, [FromQuery] int choice)
         {
-            if (choice == 1){ this.roleSwitchLogic.Delete(roleSwitchID); return Ok(); }
-            if (choice == 0) {
+            if (choice == 1) { this.roleSwitchLogic.Delete(roleSwitchID); return Ok(); }
+            if (choice == 0)
+            {
                 var roleSwitch = this.roleSwitchLogic.GetOne(roleSwitchID);
                 await this.authLogic.SwitchRoleOfUser(roleSwitch.UserName, roleSwitch.RoleName);
                 this.roleSwitchLogic.Delete(roleSwitchID);
-                return Ok(); 
+                return Ok();
             }
             return BadRequest();
         }
