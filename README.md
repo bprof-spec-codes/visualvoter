@@ -31,6 +31,7 @@
 	 Az volt a legegyszerűbb megoldás hogy a tokenben amit visszaküldünk backendről belehelyezünk egy **IsEditor** és egy **IsAdmin** propertyt, aminek a segítségével frontenden egy egyszerű if statementel megoldható.
 
 <br/>
+
 - ### **Probléma #2:**
 	 
 - ### **Megoldás #2:**
