@@ -43,8 +43,10 @@
 
 #### Főoldal
 ![](https://i.imgur.com/Uwhf4Ym.png)
- #### Bejelentkezés
+#### Bejelentkezés
 ![](https://i.imgur.com/TWPCA53.png)
+#### Regisztráció
+![](https://i.imgur.com/XAjMDrp.png)
 #### Bejelentkezett Felhasználó Főoldala
 ![](https://i.imgur.com/omLiKqM.png)
 #### Aktív Szavazások Megtekintése 
@@ -55,6 +57,8 @@
 ![](https://i.imgur.com/Wa6uiDZ.png)
 #### Profil Menu / Role Kérés
 ![](https://i.imgur.com/ztaVexA.png)
+#### Kijelentkezés akármikor lehetséges
+![](https://i.imgur.com/VIoIKbm.png)
 
 <br/>
  
