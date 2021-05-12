@@ -17,10 +17,46 @@
 	 - 
 - ### Használat:
 	 - Alapvető user <> pass kombinációk:
-	 - API funkciólista:
-	 - UI felületek rövid ismertetése:
-	 
-<br/>	
+		 - Admin Felhasználói Fiók:
+			 -  E-mail-cím: admin@votoe.hu
+			 -  Jelszó: jelszo
+
+		 - Tesztelésre Használt Felhasználói Fiókok:
+			 - Test1:
+				 -  E-mail-cím: test1@stud.uni-obuda.hu
+				 -  Jelszó: string
+
+			- Test2:
+				 -  E-mail-cím: test2@stud.uni-obuda.hu
+				 -  Jelszó: string
+				 
+			 - Test3:
+				 -  E-mail-cím: test3@stud.uni-obuda.hu
+				 -  Jelszó: string
+<br/>
+
+### API funkciólista:
+ 
+<br/>
+ 
+### UI felületek rövid ismertetése:
+
+#### Főoldal
+![](https://i.imgur.com/Uwhf4Ym.png)
+ #### Bejelentkezés
+![](https://i.imgur.com/TWPCA53.png)
+#### Bejelentkezett Felhasználó Főoldala
+![](https://i.imgur.com/omLiKqM.png)
+#### Aktív Szavazások Megtekintése 
+![](https://i.imgur.com/y3PCNRu.png)
+#### Szavazásra Szavazás
+![](https://i.imgur.com/ZtnWvNs.png)
+#### Admin Felület
+![](https://i.imgur.com/Wa6uiDZ.png)
+#### Profil Menu / Role Kérés
+![](https://i.imgur.com/ztaVexA.png)
+
+<br/>
  
 ## Probléma Jegyzőkönyv:
 - ### **Probléma #1:**
@@ -29,7 +65,6 @@
 - ### **Megoldás #1:**
 	 Amikor belépünk a weboldalon egy felhasználóba akkor a Backend visszaküld egy tokent.
 	 Az volt a legegyszerűbb megoldás hogy a tokenben amit visszaküldünk backendről belehelyezünk egy **IsEditor** és egy **IsAdmin** propertyt, aminek a segítségével frontenden egy egyszerű if statementel megoldható.
-
 <br/>
 
 - ### **Probléma #2:**
