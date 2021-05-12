@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import "./Profile.scss";
 import Avatar from "react-avatar";
-import HokLogo from "../../assets/img/nikhok_logo.jpg";
+import OeLogo from "../../assets/img/oeLogo.png";
 import Header from "../Header";
 import {
     Button,
@@ -18,9 +18,6 @@ function Profile() {
   const [role, setRole] = useState("");
 
   const isLogged = useSelector((state: any) => state.isLogged);
-  useEffect(() => {
-    console.log(isLogged);
-  }, []);
 
   const headers = {
     Authorization: "Bearer " + isLogged.user?.token,
@@ -29,8 +26,6 @@ function Profile() {
   const sendRequest=()=>{
     axios.get(`/Auth/requestNewRole?roleName=${role}`, { headers: headers })
     .then(response=>{
-      console.log(response);
-
       store.addNotification({
         title: "Siker!",
         message: "Sikeresen leadtad a kérelmed az új role-ra!",
@@ -75,7 +70,7 @@ function Profile() {
         <div className="profile_left">
           <Avatar
             round={true}
-            src={HokLogo}
+            src={OeLogo}
             size="500"
             name={isLogged.user?.Email}
           />
@@ -84,14 +79,13 @@ function Profile() {
 
         <div className="profile_right">
           {isLogged.user?.Email ? (
-            <h1>{isLogged.user.Email}</h1>
+            <h1>Szia {isLogged.user.Email}!</h1>
           ) : (
             <h1>Kérjük jelentkezz be!</h1>
           )}
 
           <h3>Ha nem megfelelő a jelenlegi role-od igényelj másikat!</h3>
           <FormControl style={{marginTop:"15px"}}>
-            {/* <InputLabel id="demo-simple-select-helper-label">{role}</InputLabel> */}
             <Select
               labelId="demo-simple-select-helper-label"
               id="demo-simple-select-helper"

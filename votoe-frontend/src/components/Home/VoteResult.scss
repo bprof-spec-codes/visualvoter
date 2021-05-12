@@ -22,7 +22,7 @@
       color: white;
       padding: 15px;
       word-wrap: break-word;
-      border-bottom: 8px solid black;
+      border-bottom: 8px solid $body-bg;
       border-radius: 20px 20px 0 0;
 
       .top_text {
@@ -43,7 +43,7 @@
     .voteResult_img {
       width: 150px;
       height: 150px;
-      border: 8px solid black;
+      border: 8px solid $body-bg;
       border-radius: 100%;
 
       position: absolute;

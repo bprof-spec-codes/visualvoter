@@ -28,21 +28,12 @@ function ActiveRequests() {
 
     setIsChecked(newIsChecked);
     setRequestStatus(newRequestStatus);
-
-    console.log(isChecked);
-    console.log(requestStatus);
   }, [requests]);
-
-  useEffect(() => {
-    console.log(isChecked);
-    console.log(requestStatus);
-  }, [isChecked, requestStatus]);
 
   useEffect(() => {
     axios
       .get("/Auth/roleRequests", { headers: headers })
       .then((res) => {
-        console.log(res);
         setRequests(res.data);
       })
       .catch((err) => {
@@ -55,13 +46,9 @@ function ActiveRequests() {
   };
 
   const requestAccept = (index: number) => {
-    console.log(requests);
-
     axios
       .post(`/Auth/requestNewRole?roleSwitchID=${requests[index].oneRoleSwitchID}&choice=${requestStatus[index] ? 0 : 1}`, {}, { headers: headers })
       .then((res) => {
-        console.log(res);
-
         let newIsChecked = [...isChecked];
         let newRequestStatus = [...requestStatus];
 
@@ -80,8 +67,6 @@ function ActiveRequests() {
     axios
       .post(`/Auth/requestNewRole?roleSwitchID=${requests[index].oneRoleSwitchID}&choice=${requestStatus[index] ? 0 : 1}`, {}, { headers: headers })
       .then((res) => {
-        console.log(res);
-
         let newIsChecked = [...isChecked];
         let newRequestStatus = [...requestStatus];
 
