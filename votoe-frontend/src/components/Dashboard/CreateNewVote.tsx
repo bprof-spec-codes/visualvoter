@@ -36,7 +36,7 @@ function CreateNewVote() {
     chancelleryCheckBox && data.push("Szenátus");
     everyoneCheckBox && data.push("Hallgató");
     axios
-      .post("/auth/createRoleForVote", data)
+      .post("/auth/createRoleForVote", data , { headers: headers})
       .then((response) => {
         const res = response.data;
         setRequiredRole(res);
