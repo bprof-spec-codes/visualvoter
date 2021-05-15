@@ -1,5 +1,6 @@
 
 
+
 # VotÓE &nbsp;&nbsp; - &nbsp;&nbsp;[![N|Solid](https://i.imgur.com/DF1phUJ.png)](https://votoe.hu)
 
 ### Team Visualvoter
@@ -32,19 +33,16 @@
 		 - Admin Felhasználói Fiók:
 			 -  E-mail-cím: admin@votoe.hu
 			 -  Jelszó: jelszo
-
-<br/>
-
-		 - Tesztelésre Használt Felhasználói Fiókok:
-			 - Test1:
-				 -  E-mail-cím: test1@stud.uni-obuda.hu
-				 -  Jelszó: string
-			- Test2:
-				 -  E-mail-cím: test2@stud.uni-obuda.hu
-				 -  Jelszó: string
-			 - Test3:
-				 -  E-mail-cím: test3@stud.uni-obuda.hu
-				 -  Jelszó: string
+	 - Tesztelésre Használt Felhasználói Fiókok:
+		 - Test1:
+			-  E-mail-cím: test1@stud.uni-obuda.hu
+			-  Jelszó: string
+		- Test2:
+			-  E-mail-cím: test2@stud.uni-obuda.hu
+			-  Jelszó: string
+		- Test3:
+			-  E-mail-cím: test3@stud.uni-obuda.hu
+			-  Jelszó: string
 
 <br/>
 
