@@ -34,6 +34,7 @@
 			 -  Jelszó: jelszo
 
 <br/>
+
 		 - Tesztelésre Használt Felhasználói Fiókok:
 			 - Test1:
 				 -  E-mail-cím: test1@stud.uni-obuda.hu
@@ -44,6 +45,7 @@
 			 - Test3:
 				 -  E-mail-cím: test3@stud.uni-obuda.hu
 				 -  Jelszó: string
+
 <br/>
 
 - ### API funkciólista:
@@ -60,7 +62,9 @@
 	- [GET]​/AllVotes​/winCheck?voteID=123:  Egy bool értéket küldd vissza, az alapján hogy a megadott szavazást valaki megnyerte vagy nem. A szavazást ID alapján keressük meg.
 	- [POST]/AllVotes: Hozzád egy új szavazást az adatbázisba.
 	- [PUT]​/AllVotes​/{oldId}: Frissít egy szavazást ID alapján.
+
 <br/>
+
 - Auth API:
 	- [DELETE​]/Auth​/{id}: Töröl egy felhasználói fiókot ID alapján.
 	- [GET​]/Auth: Visszaküldi az összes felhasználót.
@@ -78,13 +82,16 @@
 	- [POST​]/Auth​/userRoles: Visszaküldi az összes role-t amivel a felhasználó rendelkezik.
 	- [PUT​]/Auth: Felhasználó belépése.
 	- [PUT​]/Auth​/{oldId}: Frissít egy felhasználót ID alapján.
+
 <br/>
+
 - OneVote API:
 	- DELETE​/OneVote​/{id}: Kitöröl egy szavazatot ID alapján.
 	- GET​/OneVote:  Visszaküldi az összes szavazatot.
 	- GET​/OneVote​/{id}: Visszaküld egy szavazatot ID alapján.
 	- POST​/OneVote: Berak egy szavazatot.
 	- PUT​/OneVote​/{oldId}: Frissít egy szavazot ID alapján.
+
 <br/>
 
 ### UI felületek rövid ismertetése:
