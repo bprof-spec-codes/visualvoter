@@ -1,9 +1,11 @@
 
 
 
+
 # VotÓE &nbsp;&nbsp; - &nbsp;&nbsp;[![N|Solid](https://i.imgur.com/DF1phUJ.png)](https://votoe.hu)
 
 ### Team Visualvoter
+Kihostolt weboldunk: https://votoe.hu/
 
 ## Tartalomjegyzék:
 - [Csapatbeosztás](#csapatbeosztás)
@@ -27,7 +29,20 @@
 
 ## User Manual:
 - ### Telepítés / Üzemeltetés:
-	 - 
+	 - Frontend(React)
+		 - Első lépésként Reacthez szükségünk lesz a node.js és npm-hez.
+		 - https://nodejs.org/en/ itt le lehet tölteni, nem kell semmit se csinálni telepítés közbe csak végig kattintani.
+		 ![](https://i.imgur.com/kXtiGLu.png)
+		 - Miután letöltöttük a node.js-t navigáljunk el az alábbi directory-be
+		 ![](https://i.imgur.com/PZkFlL6.png)
+		 - Inditsuk el a CMD-t úgy hogy "cmd "-t írunk a directory path elejére
+		 ![](https://i.imgur.com/wzErTNO.png)
+		 - Első indításkor "npm install" kell beírnunk
+		 ![](https://i.imgur.com/nVdqlpm.png)
+		 - Utána csak "npm start" ra lesz szuksegunk az app elindításához
+		 ![](https://i.imgur.com/hKCLKyC.png)
+	 - Backend
+		 -
 - ### Login Credentials:
 	 - Alapvető user <> pass kombinációk:
 		 - Admin Felhasználói Fiók:
