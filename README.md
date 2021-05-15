@@ -1,4 +1,5 @@
 
+
 # VotÓE &nbsp;&nbsp; - &nbsp;&nbsp;[![N|Solid](https://i.imgur.com/DF1phUJ.png)](https://votoe.hu)
 
 ### Team Visualvoter
@@ -12,6 +13,7 @@
 	 - [UI felületek rövid ismertetése](#ui-felületek-rövid-ismertetése)
 - [Probléma Jegyzőkönyv](#probléma-jegyzőkönyv)
 <br/>
+
 ## Csapatbeosztás:
 - ### Team Leader:
      - Tuba Márk
@@ -21,6 +23,7 @@
     - Pap Tamás
     - Luxeder Zoltán
 <br/>
+
 ## User Manual:
 - ### Telepítés / Üzemeltetés:
 	 - 
@@ -29,6 +32,7 @@
 		 - Admin Felhasználói Fiók:
 			 -  E-mail-cím: admin@votoe.hu
 			 -  Jelszó: jelszo
+
 <br/>
 		 - Tesztelésre Használt Felhasználói Fiókok:
 			 - Test1:
@@ -41,6 +45,7 @@
 				 -  E-mail-cím: test3@stud.uni-obuda.hu
 				 -  Jelszó: string
 <br/>
+
 - ### API funkciólista:
 - Allvotes API:
 	- [DELETE]​/AllVotes​/{id}: Kitöröl az adatbázisből egy szavazást ID alapján.
@@ -81,6 +86,7 @@
 	- POST​/OneVote: Berak egy szavazatot.
 	- PUT​/OneVote​/{oldId}: Frissít egy szavazot ID alapján.
 <br/>
+
 ### UI felületek rövid ismertetése:
 #### Főoldal
 ![](https://i.imgur.com/Uwhf4Ym.png)
