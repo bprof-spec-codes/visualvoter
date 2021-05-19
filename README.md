@@ -178,5 +178,5 @@ Kihostolt weboldalunk: https://votoe.hu/
 <br/>
 
 - ### **Probléma #5:**
-	 
-- ### **Megoldás #5:**
+	 Kezdetben frontenden Context API volt Redux helyett, relatív hasonló dolgokra lehet őket használni.
+	 De rengeteg probléma volt a Context API és a typescript miatt úgy hogy a fejlesztés közbe át lett váltva. 
