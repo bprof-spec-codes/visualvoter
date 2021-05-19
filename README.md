@@ -49,6 +49,8 @@ Kihostolt weboldalunk: https://votoe.hu/
 			 ![](https://i.imgur.com/pjFzVAB.png)
 			 - A 36.sorban a VotoeDbContext.cs fájlban.
 			 ![](https://i.imgur.com/X9gTaOp.png)
+		<br/>
+		
 		 - Backend API Endpoint beüzemeltetés:
 			 - Navigálj az alábbi directoryba.
 			 ![](https://i.imgur.com/WnYNOhM.png)
