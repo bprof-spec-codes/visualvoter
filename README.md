@@ -45,6 +45,10 @@ Kihostolt weboldalunk: https://votoe.hu/
 			 ![](https://i.imgur.com/nBP2CMt.png)
 			 - Menjünk el a 73.sorig a connectionStringhez és írjuk át a saját szerverünkre.
 			 ![](https://i.imgur.com/nJdVk25.png)
+			 - Ezt még egy helyen kell átírni, navigáljunk ide.
+			 ![](https://i.imgur.com/pjFzVAB.png)
+			 - A 36.sorban a VotoeDbContext.cs fájlban.
+			 ![](https://i.imgur.com/X9gTaOp.png)
 		 - Backend API Endpoint beüzemeltetés:
 			 - Navigálj az alábbi directoryba.
 			 ![](https://i.imgur.com/WnYNOhM.png)
